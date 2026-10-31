@@ -8,9 +8,10 @@
   "id": "com.yallafelfel.app",
   "icons": [
     {
-      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/favicon.ico",
+      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/icon.png",
       "sizes": "512x512",
-      "type": "image/x-icon"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
