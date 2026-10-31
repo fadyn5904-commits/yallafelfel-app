@@ -2,10 +2,9 @@ name: Build Flutter APK
 
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -31,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Upgrade Android Project
+        run: flutter create . --platforms=android
 
       - name: Build APK
         run: flutter build apk --release
