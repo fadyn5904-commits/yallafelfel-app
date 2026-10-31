@@ -5,5 +5,12 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff5722",
-  "id": "com.yallafelfel-app"
+  "id": "com.yallafelfel.app",
+  "icons": [
+    {
+      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/favicon.ico",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
