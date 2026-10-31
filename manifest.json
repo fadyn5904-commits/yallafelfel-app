@@ -10,7 +10,8 @@
     {
       "src": "https://fadyn5804-commits.github.io/yallafelfel-app/favicon.ico",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/x-icon",
+      "purpose": "any maskable"
     }
   ]
 }
