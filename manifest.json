@@ -3,13 +3,20 @@
   "short_name": "يلا فلفل",
   "start_url": "https://fadyn5804-commits.github.io/yallafelfel-app/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff5722",
+  "background_color": "#030712",
+  "theme_color": "#f59e0b",
   "id": "com.yallafelfel.app",
+  "description": "تطبيق أهالي المنيا ومراكزها للرحلات والتوصيل",
   "icons": [
     {
       "src": "https://fadyn5804-commits.github.io/yallafelfel-app/icon.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/icon.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     }
