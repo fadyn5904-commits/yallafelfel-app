@@ -1,8 +1,7 @@
 {
   "name": "يلا فلفل",
   "short_name": "يلا فلفل",
-  "start_url": "./",
-  
+  "start_url": "/yalla-felfel-app/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff5722",
