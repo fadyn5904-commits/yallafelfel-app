@@ -3,8 +3,6 @@ name: Build Flutter APK
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -25,14 +23,8 @@ jobs:
           flutter-version: '3.19.x'
           channel: 'stable'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Upgrade Android Project
-        run: flutter create . --platforms=android
 
       - name: Build APK
         run: flutter build apk --release
