@@ -9,8 +9,8 @@
   "icons": [
     {
       "src": "https://fadyn5804-commits.github.io/yallafelfel-app/favicon.ico",
-      "sizes": "192x192",
-      "type": "image/png"
+      "sizes": "512x512",
+      "type": "image/x-icon"
     }
   ]
 }
