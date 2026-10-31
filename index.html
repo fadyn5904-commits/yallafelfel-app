@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head><link rel="manifest" href="manifest.json">
-  
+<head>
+  <link rel="manifest" href="manifest.json">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>يلا فلفل - Yalla Felfel</title>
@@ -60,14 +60,13 @@
       </div>
       <div>
         <label class="text-sm text-gray-300 font-bold block mb-1">اختر نوع وسيلة التوصيل للتسجيل:</label>
-        <select id="reg-vehicle-type" onchange="updateRegDocuments()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-bold">
+        <select id="reg-vehicle-type" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-bold">
           <option value="car">🚗 عربية (سيارة) - 6ج/كم</option>
           <option value="moto">🛵 دراجة نارية (موتوسيكل) - 4ج/كم</option>
           <option value="tuk-tuk">🛺 توكتوك - 4ج/كم</option>
           <option value="bicycle">🚲 دراجة هوائية (عجلة) - 3ج/كم</option>
         </select>
       </div>
-      <div class="bg-gray-800/60 p-3.5 rounded-xl border border-gray-700 space-y-2.5 text-sm" id="dynamic-docs-box"></div>
       <button onclick="registerCaptain()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3.5 rounded-xl text-sm transition shadow flex items-center justify-center space-x-2 space-x-reverse">
         <i class="fa-brands fa-whatsapp text-lg ml-1"></i>
         <span>إرسال طلب الانضمام للأدمن عبر واتساب ⏳</span>
@@ -99,7 +98,6 @@
         <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-green-500 ml-1.5 animate-pulse"></span>
         <span id="status-text">متصل</span>
       </button>
-      <button onclick="toggleMode()" id="mode-btn" class="bg-amber-500/10 border border-amber-500 text-amber-400 px-3 py-2 rounded-xl text-xs font-bold transition hover:bg-amber-500 hover:text-gray-950 shadow">الكابتن</button>
     </div>
   </div>
 </header>
@@ -117,9 +115,6 @@
     <a href="#" onclick="toggleSidebar(); switchTab('home');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-house w-6 text-amber-400 text-base"></i> الرئيسية وطلب رحلة</a>
     <a href="#" onclick="toggleSidebar(); switchTab('orders');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-list-check w-6 text-amber-400 text-base"></i> سجل الطلبات والرحلات</a>
     <a href="#" onclick="toggleSidebar(); switchTab('wallet');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-wallet w-6 text-amber-400 text-base"></i> محفظة الكاش والأرباح</a>
-    <a href="#" onclick="toggleSidebar(); switchTab('profile');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-user w-6 text-amber-400 text-base"></i> ملف الكابتن والتقييمات</a>
-    <a href="https://chat.whatsapp.com/K97dyonCjWMAdLmphuDfEf?s=cl&p=a&iam=2" target="_blank" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-emerald-900/30 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-600 hover:text-white transition font-bold"><i class="fa-brands fa-whatsapp w-6 text-base"></i> جروب واتساب الكباتن</a>
-    <a href="#" onclick="toggleSidebar(); openSupport();" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-blue-900/30 border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white transition font-bold"><i class="fa-solid fa-headset w-6 text-base"></i> خدمة العملاء والدعم الفني 🎧</a>
   </div>
   <div class="border-t border-gray-800 pt-3 text-center"><span class="text-xs text-gray-500">يلا فلفل - النسخة الشاملة لمحافظة المنيا 🛵</span></div>
 </div>
@@ -127,7 +122,6 @@
 
 <!-- Main Container -->
 <main class="max-w-md w-full mx-auto p-4 flex-grow space-y-4">
-  
   <!-- Home Tab -->
   <div id="tab-home" class="space-y-4 view-section">
     <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4">
@@ -146,69 +140,14 @@
         </div>
       </div>
 
-      <div class="bg-gray-800 p-3 rounded-xl border border-blue-500/30 flex items-center justify-between">
-        <div class="flex items-center space-x-3 space-x-reverse">
-          <i class="fa-solid fa-location-crosshairs text-blue-400 text-lg animate-pulse"></i>
-          <div>
-            <span class="text-[10px] text-gray-400 block">مكان الانطلاق الحالي:</span>
-            <span id="gps-status" class="text-xs font-bold text-blue-300">المنيا (المركز الرئيسي)</span>
-          </div>
-        </div>
-        <button onclick="getGPSLocation()" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition">GPS</button>
-      </div>
-
       <div class="space-y-2">
         <label class="text-sm text-amber-300 font-bold block">🎯 اختر وجهة الوصول أو اكتبها:</label>
-        <select id="dropoff-location" onchange="handleLocationChange()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-amber-500 text-sm font-bold">
-          <optgroup label="📍 مركز ومدينة المنيا">
-            <option value="المنيا - المحطة وقرية سمالوط" data-km="3">ميدان المحطة والمدينة الرئيسية (~3 كم)</option>
-            <option value="المنيا - جامعة المنيا / الشلبي" data-km="5">جامعة المنيا ومنطقة الشلبي (~5 كم)</option>
-            <option value="المنيا - قرية طحا الأعمدة" data-km="12">قرية طحا الأعمدة (~12 كم)</option>
-            <option value="المنيا - قرية نزلة حسين" data-km="8">قرية نزلة حسين (~8 كم)</option>
-            <option value="المنيا - قرية تلة" data-km="10">قرية تلة (~10 كم)</option>
-            <option value="المنيا - قرية البرجاية" data-km="7">قرية البرجاية (~7 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مركز ومدينة ملوي (قاعدتك الأساسية)">
-            <option value="ملوي - المدينة ومحطة القطار" data-km="15">مدينة ملوي ومحطة القطار (~15 كم)</option>
-            <option value="ملوي - قرية الروضة" data-km="24">قرية الروضة (~24 كم)</option>
-            <option value="ملوي - قرية المعصرة" data-km="20">قرية المعصرة (~20 كم)</option>
-            <option value="ملوي - قرية تونا الجبل" data-km="30">قرية تونا الجبل (~30 كم)</option>
-            <option value="ملوي - قرية أبشادات" data-km="22">قرية أبشادات (~22 كم)</option>
-            <option value="ملوي - قرية البرشا" data-km="22">قرية البرشا (~22 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مركز ومدينة ديرمواس">
-            <option value="ديرمواس - المدينة الرئيسية" data-km="25">مدينة ديرمواس الرئيسية (~25 كم)</option>
-            <option value="ديرمواس - قرية بني حرام" data-km="32">قرية بني حرام (~32 كم)</option>
-            <option value="ديرمواس - قرية تل بني عمران" data-km="28">قرية تل بني عمران (~28 كم)</option>
-            <option value="ديرمواس - قرية نزلة البدرمان" data-km="30">قرية نزلة البدرمان (~30 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مركز ومدينة أبوقرقاص">
-            <option value="أبوقرقاص - المدينة الرئيسية" data-km="12">مدينة أبوقرقاص الرئيسية (~12 كم)</option>
-            <option value="أبوقرقاص - قرية بني عبيد" data-km="18">قرية بني عبيد (~18 كم)</option>
-            <option value="أبوقرقاص - قرية أبيوها" data-km="15">قرية أبيوها (~15 كم)</option>
-            <option value="أبوقرقاص - قرية نزلة اسمنت" data-km="16">قرية نزلة اسمنت (~16 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مركز ومدينة سمالوط">
-            <option value="سمالوط - المدينة الرئيسية" data-km="22">مدينة سمالوط الرئيسية (~22 كم)</option>
-            <option value="سمالوط - قرية ديروط سمالوط" data-km="28">قرية ديروط (~28 كم)</option>
-            <option value="سمالوط - قرية قلوصنا" data-km="26">قرية قلوصنا (~26 كم)</option>
-            <option value="سمالوط - قرية البازات" data-km="30">قرية البازات (~30 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مراكز شمال المنيا (بني مزار، مغاغة، العدوة)">
-            <option value="بني مزار - المدينة وقراها" data-km="40">مدينة بني مزار الرئيسية (~40 كم)</option>
-            <option value="مغاغة - المدينة وقراها" data-km="55">مدينة مغاغة الرئيسية (~55 كم)</option>
-            <option value="العدوة - المدينة وقراها" data-km="65">مدينة العدوة الرئيسية (~65 كم)</option>
-          </optgroup>
-          <option value="other">✏️ مكان أو قرية أخرى غير موجودة (اكتبها يدوياً)...</option>
+        <select id="dropoff-location" onchange="updatePrice()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-amber-500 text-sm font-bold">
+          <option value="3">المنيا - المحطة وقرية سمالوط (~3 كم)</option>
+          <option value="5">المنيا - جامعة المنيا / الشلبي (~5 كم)</option>
+          <option value="15">ملوي - المدينة ومحطة القطار (~15 كم)</option>
+          <option value="25">ديرمواس - المدينة الرئيسية (~25 كم)</option>
         </select>
-      </div>
-
-      <div id="custom-location-box" class="hidden space-y-2">
-        <label class="text-xs text-amber-400 font-bold block">اكتب اسم القرية أو المركز أو الشارع غير الموجود:</label>
-        <div class="flex space-x-2 space-x-reverse">
-          <input type="text" id="custom-place-name" placeholder="اكتب اسم المكان هنا..." class="w-2/3 p-3 bg-gray-800 border border-gray-700 rounded-xl text-xs text-white">
-          <input type="number" id="custom-place-km" placeholder="المسافة (كم)" value="10" oninput="updatePrice()" class="w-1/3 p-3 bg-gray-800 border border-gray-700 rounded-xl text-xs text-white">
-        </div>
       </div>
 
       <div class="bg-gray-800 p-4 rounded-xl border border-amber-500/30 text-center">
@@ -218,33 +157,19 @@
 
       <button onclick="publishOrder()" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-gray-950 font-black p-4 rounded-xl shadow-lg hover:from-amber-400 hover:to-amber-500 transition text-base">🚀 نشر الطلب في التطبيق</button>
     </div>
-
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-3">
-      <div class="flex justify-between items-center">
-        <h3 class="text-sm font-bold text-amber-400 flex items-center"><i class="fa-solid fa-bell ml-2 text-amber-400"></i> مركز التنبيهات والإشعارات</h3>
-        <span class="bg-amber-500 text-gray-950 text-xs font-black px-2.5 py-0.5 rounded-full">نشط</span>
-      </div>
-      <div id="notifications-box" class="space-y-2">
-        <div class="bg-gray-800 p-3 rounded-xl border-r-4 border-amber-500 text-sm">
-          <p class="font-bold text-white">🔥 تطبيق يلا فلفل: جاهز ومحدث بالكامل!</p>
-          <span class="text-xs text-gray-400">عربية (6ج/كم) وموتوسيكل وتوكتوك وعجلة.</span>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Orders Tab -->
   <div id="tab-orders" class="hidden space-y-4 view-section">
     <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-3">
       <h2 class="text-xl font-bold text-amber-400">📋 سجل الطلبات والرحلات</h2>
-      <p class="text-sm text-gray-400">الرحلات النشطة والسابقة بمراكز المنيا</p>
       <div id="client-orders-list" class="space-y-3">
         <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 text-sm space-y-2">
           <div class="flex justify-between text-gray-400">
             <span>📍 من: المنيا</span>
-            <span id="order-listed-price" class="text-green-400 font-bold text-base">18 ج.م</span>
+            <span class="text-green-400 font-bold text-base">18 ج.م</span>
           </div>
-          <div id="order-listed-dest" class="font-bold text-white text-base">🎯 إلى: المحطة وقرية سمالوط</div>
+          <div class="font-bold text-white text-base">🎯 إلى: المحطة وقرية سمالوط</div>
           <span class="inline-block bg-amber-500/20 text-amber-400 px-2.5 py-1 rounded text-xs font-bold">حالة الطلب: جاري البحث عن كابتن...</span>
         </div>
       </div>
@@ -253,14 +178,103 @@
 
   <!-- Wallet Tab -->
   <div id="tab-wallet" class="hidden space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4">
-      <div class="text-center">
-        <div class="bg-amber-500/15 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 text-2xl"><i class="fa-solid fa-wallet"></i></div>
-        <h2 class="text-xl font-bold text-amber-400">محفظة الكابتن</h2>
-        <p class="text-sm text-gray-400">إدارة الأرباح والشحن عبر الكاش</p>
-      </div>
+    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4 text-center">
+      <h2 class="text-xl font-bold text-amber-400">محفظة الكابتن</h2>
       <div class="bg-gray-800 p-4 rounded-xl border border-amber-500/30 text-center">
         <span class="text-sm text-gray-400 block">الرصيد المتاح حالياً:</span>
         <div id="wallet-balance" class="text-4xl font-black text-green-400 mt-1">1,450 ج.م</div>
       </div>
-      <div class="bg
+    </div>
+  </div>
+</main>
+
+<script>
+  let selectedRate = 6;
+
+  // إخفاء Splash Screen تلقائياً عند تحميل الصفحة
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const splash = document.getElementById('splash-screen');
+      const auth = document.getElementById('auth-screen');
+      if (splash) {
+        splash.style.opacity = '0';
+        setTimeout(() => splash.style.display = 'none', 700);
+      }
+      if (auth) {
+        auth.classList.remove('hidden');
+        setTimeout(() => auth.classList.remove('opacity-0'), 50);
+      }
+    }, 1500);
+  });
+
+  function switchAuthTab(tab) {
+    if (tab === 'client') {
+      document.getElementById('form-client').classList.remove('hidden');
+      document.getElementById('form-captain').classList.add('hidden');
+      document.getElementById('btn-tab-client').className = 'bg-amber-500 text-gray-950 py-2.5 rounded-lg text-sm font-bold transition';
+      document.getElementById('btn-tab-captain').className = 'text-gray-300 py-2.5 rounded-lg text-sm font-bold transition';
+    } else {
+      document.getElementById('form-client').classList.add('hidden');
+      document.getElementById('form-captain').classList.remove('hidden');
+      document.getElementById('btn-tab-captain').className = 'bg-amber-500 text-gray-950 py-2.5 rounded-lg text-sm font-bold transition';
+      document.getElementById('btn-tab-client').className = 'text-gray-300 py-2.5 rounded-lg text-sm font-bold transition';
+    }
+  }
+
+  function loginClient() {
+    const name = document.getElementById('client-name').value || 'عميل';
+    document.getElementById('user-welcome').innerText = 'أهلاً بك، ' + name + ' 🛵';
+    const auth = document.getElementById('auth-screen');
+    auth.classList.add('opacity-0');
+    setTimeout(() => auth.classList.add('hidden'), 500);
+  }
+
+  function registerCaptain() {
+    document.getElementById('form-captain').classList.add('hidden');
+    document.getElementById('pending-msg').classList.remove('hidden');
+  }
+
+  function simulateAdminApproval() {
+    loginClient();
+  }
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar-drawer');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    sidebar.classList.toggle('translate-x-full');
+    backdrop.classList.toggle('hidden');
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab-' + tab).classList.remove('hidden');
+  }
+
+  function setVehicleType(type) {
+    const btns = ['car', 'moto', 'tuk', 'bicycle'];
+    btns.forEach(b => {
+      document.getElementById('btn-' + b).className = 'text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse';
+    });
+    
+    if (type === 'car') { selectedRate = 6; document.getElementById('btn-car').className = 'bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse'; }
+    if (type === 'moto') { selectedRate = 4; document.getElementById('btn-moto').className = 'bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse'; }
+    if (type === 'tuk-tuk') { selectedRate = 4; document.getElementById('btn-tuk').className = 'bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse'; }
+    if (type === 'bicycle') { selectedRate = 3; document.getElementById('btn-bicycle').className = 'bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse'; }
+    
+    updatePrice();
+  }
+
+  function updatePrice() {
+    const km = parseFloat(document.getElementById('dropoff-location').value) || 3;
+    const price = km * selectedRate;
+    document.getElementById('price-display').innerText = price + ' ج.م';
+  }
+
+  function publishOrder() {
+    alert('تم نشر الطلب بنجاح في تطبيق يلا فلفل! 🚀');
+    switchTab('orders');
+  }
+</script>
+
+</body>
+</html>
