@@ -1,14 +1,10 @@
-
 {
-  لون_الخلفية: #030712
-  "dir": "ltr",
-  "عرض": "مستقل"،
-  "الاسم": "الفضاء"،
-  "التوجّه": "أي"،
-  "نِطَاق": "/"،
-  "short_name": "يلا بيبر",
-  "start_url": "/",
+  "name": "يلا فلفل",
+  "short_name": "يلا فلفل",
+  "start_url": "https://fadyn5804-commits.github.io/yallafelfel-app/",
+  "display": "standalone",
+  "background_color": "#030712",
   "theme_color": "#f59e0b",
   "id": "com.yallafelfel.app",
-  "description": "تطبيق أهليمنيا ومراكزها للرحلات والتوصيل"
+  "description": "تطبيق أهالي المنيا ومراكزها للرحلات والتوصيل"
 }
