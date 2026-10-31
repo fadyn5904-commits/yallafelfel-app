@@ -9,13 +9,13 @@
   "description": "تطبيق أهالي المنيا ومراكزها للرحلات والتوصيل",
   "icons": [
     {
-      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/icon.png",
+      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/launchercion-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/icon.png",
+      "src": "https://fadyn5804-commits.github.io/yallafelfel-app/launchercion-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
