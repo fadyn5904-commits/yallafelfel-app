@@ -218,7 +218,7 @@
         </div>
     </div>
 
-    <!-- قسم الماركت -->
+    <!-- قسم الماركت (محدث بالكامل بالخانات الجديدة) -->
     <div id="tab-market" class="view-section hidden">
         <div style="text-align: center; margin-bottom: 15px;">
             <h1 class="brand-logo" style="font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 2px;">YALLA FELFEL</h1>
@@ -228,9 +228,14 @@
         <div class="card" style="border: 2px solid rgba(245, 158, 11, 0.4);">
             <div style="text-align: right; margin-bottom: 12px;">
                 <label style="font-size: 14px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 6px;">✍️ اكتب طلبات السوبر ماركت أو الأدوية أو الخضار بالتفصيل:</label>
-                <p style="color: #9ca3af; font-size: 11px; margin-bottom: 10px;">اكتب كل اللي محتاجه، والكابتن هيجيبهولك لحد باب البيت مع حساب سعر التوصيل المناسب.</p>
+                <p style="color: #9ca3af; font-size: 11px; margin-bottom: 10px;">اكتب كل اللي محتاجه، والكابتن هيجيبهولك لحد باب البيت.</p>
+                <textarea id="custom-market-order" placeholder="مثال: عاوز 2 زجاجة مياه كبيرة، كيلو طماطم، ودواء من الصيدلية..." class="fancy-input" style="height: 90px; resize: none; margin-bottom: 12px;"></textarea>
                 
-                <textarea id="custom-market-order" placeholder="مثال: عاوز 2 زجاجة مياه كبيرة، كيلو طماطم، ودواء من الصيدلية..." class="fancy-input" style="height: 110px; resize: none;"></textarea>
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان توصيل الطلب:</label>
+                <input type="text" id="market-delivery-location" placeholder="اكتب العنوان أو الشارع أو المنطقة بالتفصيل..." class="fancy-input" style="margin-bottom: 12px;">
+
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">💰 سعر المشوار المقترح (ج.م):</label>
+                <input type="number" id="market-trip-price" placeholder="مثال: 30" class="fancy-input" style="margin-bottom: 5px;">
             </div>
 
             <button onclick="publishMarketOrder()" class="btn" style="background: #f59e0b; color: #030712; font-size: 16px; padding: 14px;">نشر طلب الماركت ضمن الطلبات 🚀🛒</button>
@@ -439,6 +444,9 @@
 
         function publishMarketOrder() {
             const orderText = document.getElementById('custom-market-order').value;
+            const deliveryLoc = document.getElementById('market-delivery-location').value || 'عنوان تفصيلي مع العميل';
+            const tripPrice = document.getElementById('market-trip-price').value || '30';
+
             if(!orderText.trim()) {
                 alert('الرجاء كتابة الطلبات المطلوبة في خانة الماركت أولاً!');
                 return;
@@ -446,12 +454,14 @@
 
             const orderCardHtml = `
                 <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
-                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">🛒 طلب ماركت من العميل: ${clientGlobalName}</p>
+                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">🛒 طلب ماركت حر من: ${clientGlobalName}</p>
                     <p style="font-size:13px; color:#fff; background:#030712; padding:8px; border-radius:6px; margin:6px 0;"><strong>تفاصيل الطلبات:</strong><br>${orderText}</p>
+                    <p style="font-size:13px; margin:4px 0;"><strong>📍 مكان التوصيل:</strong> ${deliveryLoc}</p>
+                    <p style="font-size:13px; margin:4px 0;"><strong>💰 سعر المشوار:</strong> <span style="color:#6ee7b7; font-weight:bold;">${tripPrice} ج.م</span></p>
                     
                     <div style="display: flex; gap: 8px; margin-top: 12px;">
                         <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
-                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام طلب الماركت الخاص بك 🛒')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
+                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام طلب الماركت الخاص بك 🛒 بسعر مشوار: ' + tripPrice + 'ج.م')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
                     </div>
                 </div>
             `;
@@ -465,12 +475,14 @@
                     <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
                         <p style="color:#f59e0b; font-weight:bold;">🛒 طلب ماركت حر</p>
                         <p style="font-size:13px; margin:6px 0;"><strong>الطلبات:</strong> ${orderText}</p>
+                        <p style="font-size:13px; margin:4px 0;"><strong>📍 التوصيل إلى:</strong> ${deliveryLoc}</p>
+                        <p style="font-size:13px; margin:4px 0;"><strong>💰 سعر المشوار:</strong> <span style="color:#f59e0b;">${tripPrice} ج.م</span></p>
                         <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
                     </div>
                 `;
             }
 
-            alert('🚀 تم نشر طلب الماركت بنجاح ضمن قائمة الطلبات ورادار الكباتن!');
+            alert('🚀 تم نشر طلب الماركت بنجاح مع تحديد مكان التوصيل وسعر المشوار!');
             switchTab('orders');
         }
 
@@ -507,7 +519,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.5</p><p>📍 نطاق العمل: المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.6</p><p>📍 نطاق العمل: المنيا وقراها</p></div>`;
             }
         }
 
