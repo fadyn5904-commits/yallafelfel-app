@@ -42,10 +42,10 @@
                 <div id="btn-tab-captain" class="auth-tab inactive" onclick="switchAuthTab('captain')">تسجيل كابتن</div>
             </div>
 
-            <!-- نموذج العميل (الاسم ورقم التليفون الأساسي) -->
+            <!-- نموذج العميل -->
             <div id="form-client" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
-                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم (مثال: فلفل)..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
                 <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px;">
@@ -53,7 +53,7 @@
                 <button onclick="loginClient()" class="btn">دخول التطبيق 🚀</button>
             </div>
 
-            <!-- نموذج الكابتن مع رفع المستندات والصور -->
+            <!-- نموذج الكابتن -->
             <div id="form-captain" class="hidden" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
                 <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
@@ -75,7 +75,7 @@
                 </label>
 
                 <label class="file-label">
-                    🛵 رفع <b>صورة المركبة (مكنة/عربية/توكتوك/عجلة)</b>
+                    🛵 رفع <b>صورة المركبة</b>
                     <input type="file" id="vehicle-img" accept="image/*" style="display: none;">
                 </label>
 
@@ -95,13 +95,13 @@
             <span class="badge">متصل 🟢</span>
             <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
         </div>
-        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك، Felfel 🛵</span></span>
+        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك 🛵</span></span>
     </div>
 
     <!-- قسم الرئيسية (العميل) -->
     <div id="tab-home" class="view-section">
         <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل ملوي وقراها</h1>
-        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: -5px;">عربية (6ج) | مكنة وتوكتوك (4ج) | عجلة (3ج)</p>
+        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: -5px;">عربية (10ج/كم) | مكنة (7ج/كم) | توكتوك (6ج/كم) | عجلة (4ج/كم)</p>
         
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold;">🚗 اختر نوع وسيلة التوصيل:</p>
@@ -112,16 +112,21 @@
                 <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">عجلة</button>
             </div>
 
-            <p style="margin-bottom: 8px; font-weight: bold;">📍 اختر وجهة الوصول أو اكتبها:</p>
-            <select id="dropoff-location" onchange="updatePrice()" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
-                <option value="3">ملوي - المحطة وقرية سمالوط (~3 كم)</option>
-                <option value="6">ملوي - العقر والمنشية (~6 كم)</option>
-                <option value="10">ملوي - القوصية ودير مواس (~10 كم)</option>
-            </select>
+            <!-- مكان الانطلاق والوصول اليدوي -->
+            <div class="space-y-2" style="margin-bottom: 15px; text-align: right;">
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل:</label>
+                <input type="text" id="pickup-location" placeholder="اكتب مكان الانطلاق أو الشارع بالتفصيل..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 10px;">
+
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول والمسافة:</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 2; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
+                    <input type="number" id="custom-place-km" placeholder="المسافة (كم)" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
+                </div>
+            </div>
 
             <div style="background: #030712; border: 1px solid #374151; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
-                <span style="font-size: 13px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب وسيلة التوصيل:</span>
-                <div id="price-display" style="font-size: 24px; color: #f59e0b; font-weight: bold; margin-top: 5px;">18 ج.م</div>
+                <span style="font-size: 13px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب المسافة والوسيلة:</span>
+                <div id="price-display" style="font-size: 24px; color: #f59e0b; font-weight: bold; margin-top: 5px;">50 ج.م</div>
             </div>
 
             <button onclick="publishOrder()" class="btn">نشر الطلب في التطبيق 🚀</button>
@@ -161,8 +166,8 @@
     <div id="tab-account" class="view-section hidden">
         <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">👤 حسابي</h1>
         <div class="card" style="text-align: right;" id="account-details">
-            <p><strong>الاسم:</strong> فادي (فلفل)</p>
-            <p><strong>الهاتف:</strong> 01000000000</p>
+            <p><strong>الاسم:</strong> زائر</p>
+            <p><strong>الهاتف:</strong> غير محدد</p>
             <p><strong>المدينة:</strong> ملوي - المنيا</p>
         </div>
     </div>
@@ -188,7 +193,7 @@
     </div>
 
     <script>
-        let selectedRate = 6;
+        let selectedRate = 10; 
         let vehicleName = 'عربية';
 
         window.addEventListener('load', () => {
@@ -202,7 +207,8 @@
                 if (auth) {
                     auth.classList.remove('hidden');
                 }
-            }, 1500);
+                updatePrice();
+            }, 500);
         });
 
         function switchAuthTab(tab) {
@@ -220,8 +226,8 @@
         }
 
         function loginClient() {
-            const name = document.getElementById('client-name').value || 'فلفل';
-            const phone = document.getElementById('client-phone').value || '01000000000';
+            const name = document.getElementById('client-name').value || 'عميل';
+            const phone = document.getElementById('client-phone').value || 'غير محدد';
             
             document.getElementById('user-welcome').innerText = `أهلاً بك، ${name} 🛵`;
             document.getElementById('account-details').innerHTML = `
@@ -231,8 +237,10 @@
             `;
 
             const auth = document.getElementById('auth-screen');
-            auth.style.opacity = '0';
-            setTimeout(() => auth.classList.add('hidden'), 500);
+            if (auth) {
+                auth.style.opacity = '0';
+                setTimeout(() => auth.classList.add('hidden'), 500);
+            }
         }
 
         function sendCaptainRequestToWhatsApp() {
@@ -249,8 +257,7 @@
                 return;
             }
 
-            // استبدل الرقم ده برقم واتسابك الحقيقي (مثلاً 201xxxxxxxxx)
-            const myWhatsAppNumber = "201000000000"; 
+            const myWhatsAppNumber = "201156605200"; 
             
             let message = `مرحباً إدارة يلا فلفل ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n\n`;
             
@@ -310,35 +317,36 @@
                 activeBtn.style.color = '#030712';
             }
 
-            if (type === 'car') { selectedRate = 6; vehicleName = 'عربية'; }
-            if (type === 'moto') { selectedRate = 4; vehicleName = 'مكنة'; }
-            if (type === 'tuk') { selectedRate = 4; vehicleName = 'توكتوك'; }
-            if (type === 'bicycle') { selectedRate = 3; vehicleName = 'عجلة'; }
+            if (type === 'car') { selectedRate = 10; vehicleName = 'عربية'; }
+            else if (type === 'moto') { selectedRate = 7; vehicleName = 'موتوسيكل'; }
+            else if (type === 'tuk') { selectedRate = 6; vehicleName = 'توكتوك'; }
+            else if (type === 'bicycle') { selectedRate = 4; vehicleName = 'عجلة'; }
 
             updatePrice();
         }
 
         function updatePrice() {
-            const select = document.getElementById('dropoff-location');
-            if(!select) return;
-            const km = parseFloat(select.value) || 3;
+            const kmInput = document.getElementById('custom-place-km');
+            if(!kmInput) return;
+            const km = parseFloat(kmInput.value) || 0;
             const price = km * selectedRate;
             const priceEl = document.getElementById('price-display');
             if(priceEl) priceEl.innerText = price + ' ج.م';
         }
 
         function publishOrder() {
-            const select = document.getElementById('dropoff-location');
-            const dest = select ? select.options[select.selectedIndex].text : 'ملوي';
+            const pickup = document.getElementById('pickup-location').value || 'غير محدد';
+            const dest = document.getElementById('custom-place-name').value || 'وجهة مخصصة';
             const priceEl = document.getElementById('price-display');
-            const price = priceEl ? priceEl.innerText : '18 ج.م';
+            const price = priceEl ? priceEl.innerText : '0 ج.م';
 
             const capList = document.getElementById('captain-orders-list');
             if(capList) {
                 capList.innerHTML = `
                     <div style="background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; text-align:right;">
                         <p><strong>الوسيلة:</strong> ${vehicleName}</p>
-                        <p><strong>الوجهة:</strong> ${dest}</p>
+                        <p><strong>من:</strong> ${pickup}</p>
+                        <p><strong>إلى:</strong> ${dest}</p>
                         <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
                         <button onclick="alert('تم قبول الرحلة بنجاح!')" class="btn" style="margin-top:8px; padding:8px;">قبول الرحلة 🎯</button>
                     </div>
@@ -346,6 +354,18 @@
             }
             alert('🚀 تم نشر طلبك بنجاح!');
             switchTab('orders');
+            
+            const clientOrdersList = document.getElementById('client-orders-list');
+            if(clientOrdersList) {
+                clientOrdersList.innerHTML = `
+                    <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
+                        <p><strong>الوسيلة:</strong> ${vehicleName}</p>
+                        <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
+                        <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: جاري البحث عن كابتن...</p>
+                    </div>
+                `;
+            }
         }
     </script>
 </body>
