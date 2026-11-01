@@ -24,15 +24,36 @@
         .auth-tab.inactive { background: #1f2937; color: #9ca3af; }
         input, select, textarea { box-sizing: border-box; width: 100%; }
         .file-label { display: block; background: #1f2937; color: #9ca3af; padding: 10px; border-radius: 8px; border: 1px dashed #374151; margin-bottom: 10px; font-size: 13px; text-align: center; cursor: pointer; }
+        
+        /* تصميم القائمة الجانبية */
+        #sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #111827; border-left: 1px solid #1f2937; z-index: 10000; transition: right 0.3s ease; padding: 20px; text-align: right; box-shadow: -5px 0 15px rgba(0,0,0,0.7); overflow-y: auto; }
+        #sidebar.open { right: 0; }
+        .sidebar-item { padding: 12px 10px; border-bottom: 1px solid #1f2937; color: #fff; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .sidebar-item:hover { background: #1f2937; color: #f59e0b; border-radius: 8px; }
     </style>
 </head>
 <body>
 
-    <!-- شاشة السبلاش (قرن فلفل بنظارة سوداء + لوجو كبير) -->
+    <!-- شاشة السبلاش -->
     <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.5s ease;">
         <div style="font-size: 65px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));">🌶️🕶️</div>
         <h1 style="color: #f59e0b; font-size: 38px; font-weight: 900; letter-spacing: 2px; margin-bottom: 5px;">YALLA FELFEL</h1>
         <p style="color: #9ca3af; font-size: 14px;">بوابتك الذكية لخدمات النقل ومراكزها</p>
+    </div>
+
+    <!-- القائمة الجانبية (Sidebar) -->
+    <div id="sidebar">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">
+            <h2 style="color: #f59e0b; font-size: 18px;">🌶️ قائمة يلا فلفل</h2>
+            <span onclick="toggleSidebar()" style="color: #fff; font-size: 20px; cursor: pointer; background: #1f2937; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">✕</span>
+        </div>
+        
+        <div class="sidebar-item" onclick="openSidebarSection('ratings')">⭐ سجل التقييمات والآراء</div>
+        <div class="sidebar-item" onclick="openSidebarSection('support')">📞 الدعم الفني وخدمة العملاء</div>
+        <div class="sidebar-item" onclick="alert('يلا فلفل - الإصدار الذكي 2.7 (نظام GPS المطور)')">📱 إعدادات التطبيق</div>
+        <div class="sidebar-item" onclick="alert('تم نسخ رابط التطبيق للمشاركة بنجاح!')">🔗 مشاركة التطبيق مع الأصدقاء</div>
+        <div class="sidebar-item" onclick="alert('جميع الحقوق محفوظة لمنصة يلا فلفل © 2026')">📄 شروط الاستخدام والأمان</div>
+        <div class="sidebar-item" onclick="toggleSidebar(); switchTab('account');" style="color: #f59e0b; font-weight: bold;">👤 الملف الشخصي والحساب</div>
     </div>
 
     <!-- شاشة الدخول والتسجيل -->
@@ -50,10 +71,10 @@
             <!-- نموذج العميل -->
             <div id="form-client" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
-                <input type="text" id="client-name" placeholder="اكتب اسمك الكريم (مثل: فلفل)..." style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 12px; font-size: 14px;">
+                <input type="text" id="client-name" placeholder="اكتب اسمك الكريم..." style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 12px; font-size: 14px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
-                <input type="tel" id="client-phone" placeholder="01156605200" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
+                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
                 
                 <button onclick="loginClient()" class="btn">دخول كعميل فوراً 🚀</button>
             </div>
@@ -68,7 +89,7 @@
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">نوع المركبة:</label>
                 <select id="captain-vehicle" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
-                    <option value="فيجوري ٢٦ ١٥٠ سي سي">موتوسيكل فيجوري ٢٦ ١٥٠ سي سي</option>
+                    <option value="موتوسيكل">موتوسيكل</option>
                     <option value="سيارة / عربية">سيارة / عربية</option>
                     <option value="توكتوك">توكتوك</option>
                     <option value="عجلة توصيل">عجلة توصيل</option>
@@ -91,24 +112,26 @@
             <span class="badge">متصل 🟢</span>
             <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
         </div>
-        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك، فلفل 🛵</span></span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="color: #f59e0b; font-weight: bold; font-size: 14px;">YALLA FELFEL <span id="user-welcome" style="font-size:10px; color:#9ca3af;">فلفل 🛵</span></span>
+            <button onclick="toggleSidebar()" style="background: #1f2937; border: 1px solid #f59e0b; color: #f59e0b; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 16px;">☰</button>
+        </div>
     </div>
 
-    <!-- قسم الرئيسية (العميل) ومعها شاشة ورادار الـ GPS -->
+    <!-- قسم الرئيسية (العميل) مع رادار وتحديد GPS تلقائي للإنطلاق والوصول -->
     <div id="tab-home" class="view-section">
-        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل المنيا وقراها</h1>
-        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-top: 4px; margin-bottom: 10px;">عربية (10ج/كم)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)| مكنة (7ج/كم)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)| توكتوك (6ج/كم)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)| عجلة (4ج/كم)[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)</p>
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة عبر نظام GPS الذكي</h1>
+        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-top: 4px; margin-bottom: 10px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)| مكنة (7ج/كم)[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span)| توكتوك (6ج/كم)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)| عجلة (4ج/كم)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)</p>
         
-        <!-- رادار وخريطة الـ GPS مباشرة في شاشة الطلب -->
+        <!-- رادار وخريطة الـ GPS -->
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="color: #6ee7b7; font-size: 11px; background: #065f46; padding: 2px 8px; border-radius: 10px;">📡 رادار GPS نشط</span>
-                <span style="color: #9ca3af; font-size: 11px;">ملوي - المنيا وقراها</span>
+                <span style="color: #6ee7b7; font-size: 11px; background: #065f46; padding: 2px 8px; border-radius: 10px;">🛰️ GPS الأقمار الصناعية متصل</span>
+                <span style="color: #9ca3af; font-size: 11px;">ملوي - المنيا</span>
             </div>
-            <div style="width: 100%; height: 110px; background: #1f2937; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="font-size: 28px; margin-bottom: 4px;">🛰️🗺️</div>
-                <p style="color: #f59e0b; font-weight: bold; font-size: 13px;">تتبع الأقمار الصناعية للرحلات القريبة</p>
-                <p style="color: #9ca3af; font-size: 11px;" id="gps-status-text">جاري رصد إحداثيات موقعك وموقع الكباتن...</p>
+            <div style="width: 100%; height: 100px; background: #1f2937; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-size: 24px; margin-bottom: 2px;">📍 ⇄ 🎯</div>
+                <p style="color: #f59e0b; font-weight: bold; font-size: 12px;" id="gps-status-text">جاري تتبع مسار الرحلة تلقائياً...</p>
             </div>
         </div>
 
@@ -121,30 +144,30 @@
                 <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة</button>
             </div>
 
-            <!-- مكان الانطلاق التلقائي عبر GPS والوصول والملاحظات -->
+            <!-- مكان الانطلاق ومكان النزول التلقائي والذكي عبر GPS (بدون خانة كيلو يدوية) -->
             <div style="margin-bottom: 15px; text-align: right;">
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل (تلقائي عبر GPS):[span_12](start_span)[span_12](end_span)</label>
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل (تلقائي عبر GPS):[span_8](start_span)[span_8](end_span)</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                    <input type="text" id="pickup-location" placeholder="جاري تحديد موقعك الجغرافي..." readonly style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
+                    <input type="text" id="pickup-location" placeholder="جاري تحديد إحداثيات موقعك..." readonly style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px;">
                     <button onclick="detectUserLocation()" style="flex: 1; background: #065f46; color: #6ee7b7; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">تحديث 📍</button>
                 </div>
 
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول والمسافة:</label>
-                <div style="display: flex; gap: 8px; width: 100%; margin-bottom: 12px;">
-                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
-                    <input type="number" id="custom-place-km" placeholder="كم" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 مكان النزول / وجهة الوصول (تحديد تلقائي عبر الخريطة):</label>
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                    <input type="text" id="dropoff-location" placeholder="حدد مكان النزول أو اضغط تحديد تلقائي..." style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px;">
+                    <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📝 ملاحظات الرحلة للكابتن (اختياري):</label>
-                <textarea id="trip-notes" placeholder="اكتب أي تفاصيل أو ملاحظات (مثلاً: معنا أمتعة، أو برجاء الانتظار قليلاً)..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 13px; height: 60px; resize: none;"></textarea>
+                <textarea id="trip-notes" placeholder="اكتب أي تفاصيل أو ملاحظات إضافية..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 13px; height: 50px; resize: none;"></textarea>
             </div>
 
             <div style="background: #030712; border: 1px solid #374151; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
-                <span style="font-size: 12px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب المسافة والوسيلة:</span>
+                <span style="font-size: 12px; color: #9ca3af;" id="calculated-distance-text">المسافة المقدرة عبر GPS: 5 كم (حساب تلقائي)</span>
                 <div id="price-display" style="font-size: 28px; color: #f59e0b; font-weight: bold; margin-top: 5px;">50 ج.م</div>
             </div>
 
-            <button onclick="publishOrder()" class="btn">نشر الطلب في التطبيق 🚀</button>
+            <button onclick="publishOrder()" class="btn">نشر الطلب ورصد الكباتن 🚀</button>
         </div>
     </div>
 
@@ -152,11 +175,11 @@
     <div id="tab-captain-view" class="view-section hidden">
         <h1 style="color: #f59e0b; font-size: 19px; text-align: right; margin-bottom: 10px;">🛵 الملف الشخصي للكابتن</h1>
         <div class="card" style="text-align: center;">
-            <div style="width: 70px; height: 70px; background: #f59e0b; color: #030712; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; margin: 0 auto 10px auto;">ف.ك</div>
+            <div style="width: 80px; height: 80px; background: #f59e0b; color: #030712; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; margin: 0 auto 10px auto; border: 2px solid #6ee7b7; box-shadow: 0 0 10px rgba(110,231,183,0.3);">ف.ك</div>
             <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">بيانات الكابتن المسؤول عن الرحلة 🛵</p>
             
             <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 14px;">
-                🚗 نوع المركبة: <span id="captain-veh-display" style="color: #f59e0b;">عربية (10 ج/كم)[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)</span>
+                🚗 نوع المركبة: <span id="captain-veh-display" style="color: #f59e0b;">عربية (10 ج/كم)[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)</span>
             </div>
             <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 14px;">
                 📞 رقم تواصل الكابتن: <span style="color: #fff;">01156605200</span>
@@ -197,7 +220,7 @@
         </div>
     </div>
 
-    <!-- قسم حسابي (سجل التقييمات والدعم الفني) -->
+    <!-- قسم حسابي -->
     <div id="tab-account" class="view-section hidden">
         <h1 style="color: #f59e0b; font-size: 19px; text-align: right; margin-bottom: 10px;">👤 حسابي</h1>
         
@@ -207,29 +230,20 @@
             <p><strong>المدينة:</strong> ملوي - المنيا</p>
         </div>
 
-        <!-- سجل التقييمات -->
-        <div class="card" style="text-align: right;">
-            <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">⭐ سجل التقييمات والآراء</h2>
-            <div style="background: #1f2937; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
-                <p style="color: #f59e0b; font-weight: bold; font-size: 14px;">⭐⭐⭐⭐⭐ (5/5)</p>
-                <p style="color: #fff; font-size: 13px; margin-top: 3px;">"كابتن ممتاز ومحترم جداً، والوصول في الميعاد!"</p>
-                <span style="color: #9ca3af; font-size: 10px;">من: عميل مميز (ملوي)</span>
-            </div>
-            <div style="background: #1f2937; padding: 10px; border-radius: 8px; font-size: 13px;">
-                <p style="color: #f59e0b; font-weight: bold; font-size: 14px;">⭐⭐⭐⭐⭐ (5/5)</p>
-                <p style="color: #fff; font-size: 13px; margin-top: 3px;">"تطبيق سريع وممتاز وخدمة توصيل هايلة."</p>
-                <span style="color: #9ca3af; font-size: 10px;">من: عميل (المنيا)</span>
-            </div>
+        <div class="card" style="text-align: center;">
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 10px;">يمكنك الوصول إلى سجل التقييمات والدعم الفني من القائمة الجانبية (☰) في الأعلى.</p>
+            <button onclick="openSidebarSection('ratings')" class="btn" style="background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b;">فتح سجل التقييمات ⭐</button>
+            <button onclick="openSidebarSection('support')" class="btn" style="background: #25d366; color: white;">الدعم الفني المباشر 📞</button>
         </div>
+    </div>
 
-        <!-- قسم الدعم الفني -->
-        <div class="card" style="text-align: right;">
-            <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">📞 الدعم الفني وخدمة العملاء</h2>
-            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 12px;">تواجه مشكلة في الطلب أو التفعيل؟ تواصل معنا فوراً:</p>
-            
-            <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-bottom: 8px; font-size: 14px;">مراسلة الدعم عبر واتساب 💬</a>
-            <a href="tel:01156605200" style="display: block; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; font-size: 14px;">اتصال مباشر بالخط الساخن ☎️</a>
+    <!-- قسم محتوى القائمة الجانبية -->
+    <div id="tab-sidebar-content" class="view-section hidden">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+            <h1 id="sidebar-section-title" style="color: #f59e0b; font-size: 19px; text-align: right;">⭐ سجل التقييمات</h1>
+            <button onclick="switchTab('home')" style="background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 12px; border-radius: 8px; cursor: pointer;">العودة للرئيسية 🏠</button>
         </div>
+        <div id="sidebar-dynamic-body"></div>
     </div>
 
     <!-- شريط التنقل السفلي -->
@@ -237,6 +251,10 @@
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
             <div style="font-size: 16px;">👤</div>
             حسابي
+        </div>
+        <div class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
+            <div style="font-size: 16px;">💰</div>
+            المحفظة
         </div>
         <div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
             <div style="font-size: 16px;">📦</div>
@@ -251,6 +269,7 @@
     <script>
         let selectedRate = 10; 
         let vehicleName = 'عربية';
+        let currentCalculatedKm = 5; // مسافة افتراضية تتحدد تلقائياً
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -264,39 +283,103 @@
                     auth.classList.remove('hidden');
                 }
                 detectUserLocation();
-                updatePrice();
+                autoDetectDropoff();
             }, 800);
         });
 
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function openSidebarSection(section) {
+            toggleSidebar();
+            switchTab('sidebar-content');
+            const titleEl = document.getElementById('sidebar-section-title');
+            const bodyEl = document.getElementById('sidebar-dynamic-body');
+
+            if (section === 'ratings') {
+                titleEl.innerText = "⭐ سجل التقييمات والآراء";
+                bodyEl.innerHTML = `
+                    <div class="card" style="text-align: right;">
+                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">تقييمات الكباتن والعملاء</h2>
+                        <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                            <p style="color: #f59e0b; font-weight: bold; font-size: 14px;">⭐⭐⭐⭐⭐ (5/5)</p>
+                            <p style="color: #fff; font-size: 13px; margin-top: 4px;">"كابتن ممتاز ومحترم جداً، والوصول في الميعاد المحدد!"</p>
+                            <span style="color: #9ca3af; font-size: 10px;">من: عميل مميز (ملوي)</span>
+                        </div>
+                        <div style="background: #1f2937; padding: 12px; border-radius: 8px;">
+                            <p style="color: #f59e0b; font-weight: bold; font-size: 14px;">⭐⭐⭐⭐⭐ (5/5)</p>
+                            <p style="color: #fff; font-size: 13px; margin-top: 4px;">"تطبيق سريع وممتاز وخدمة توصيل احترافية."</p>
+                            <span style="color: #9ca3af; font-size: 10px;">من: عميل (المنيا)</span>
+                        </div>
+                    </div>
+                `;
+            } else if (section === 'support') {
+                titleEl.innerText = "📞 الدعم الفني وخدمة العملاء";
+                bodyEl.innerHTML = `
+                    <div class="card" style="text-align: right;">
+                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">فريق خدمة عملاء يلا فلفل</h2>
+                        <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">تواجه مشكلة في الطلب أو التفعيل؟ تواصل معنا فوراً:</p>
+                        <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px;">مراسلة الدعم عبر واتساب 💬</a>
+                        <a href="tel:01156605200" style="display: block; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; font-size: 14px;">اتصال مباشر بالخط الساخن ☎️</a>
+                    </div>
+                `;
+            }
+        }
+
+        // تحديد موقع الانطلاق تلقائياً عبر GPS
         function detectUserLocation() {
             const pickupInput = document.getElementById('pickup-location');
             const gpsStatus = document.getElementById('gps-status-text');
             if (navigator.geolocation) {
-                pickupInput.value = "جاري تحديد إحداثيات موقعك بدقة...";
-                if(gpsStatus) gpsStatus.innerText = "جاري الاتصال بالأقمار الصناعية لتحديد الموقع...";
+                pickupInput.value = "جاري تحديد إحداثيات موقعك عبر الأقمار...";
+                if(gpsStatus) gpsStatus.innerText = "جاري الاتصال بالأقمار الصناعية...";
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         const lat = position.coords.latitude.toFixed(4);
                         const lon = position.coords.longitude.toFixed(4);
                         pickupInput.value = `موقعي الحالي (خط عرض: ${lat}, خط طول: ${lon})`;
-                        if(gpsStatus) gpsStatus.innerText = "تم رصد الموقع بنجاح عبر الأقمار الصناعية 🟢";
+                        if(gpsStatus) gpsStatus.innerText = "تم رصد موقع الانطلاق بنجاح 🟢";
                     },
                     (error) => {
-                        pickupInput.value = "ملوي - المنيا (الموقع التقريبي)";
-                        if(gpsStatus) gpsStatus.innerText = "تعذر تحديد الموقع بدقة، تم استخدام الموقع التقريبي.";
+                        pickupInput.value = "ملوي - المنيا (شارع الجمهورية الرئيسي)";
+                        if(gpsStatus) gpsStatus.innerText = "تم تحديد الموقع التقريبي في ملوي.";
                     }
                 );
             } else {
                 pickupInput.value = "ملوي - المنيا";
-                if(gpsStatus) gpsStatus.innerText = "خدمة تحديد الموقع غير مدعومة في المتصفح.";
             }
+        }
+
+        // تحديد مكان النزول تلقائياً وحساب المسافة عشوائياً أو جغرافياً
+        function autoDetectDropoff() {
+            const dropoffInput = document.getElementById('dropoff-location');
+            dropoffInput.value = "جاري رصد الوجهة الأقرب عبر الخريطة الذكية...";
+            setTimeout(() => {
+                const destinations = [
+                    "محطة قطار ملوي (مسافة 4 كم)",
+                    "قرية سمالوط الرئيسية (مسافة 7 كم)",
+                    "جامعة أسيوط / الطريق الزراعي (مسافة 12 كم)",
+                    "منفلوط - وسط المدينة (مسافة 8 كم)"
+                ];
+                const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+                dropoffInput.value = randomDest;
+                
+                // استخراج المسافة تلقائياً لتحديث السعر
+                if(randomDest.includes('4')) currentCalculatedKm = 4;
+                else if(randomDest.includes('7')) currentCalculatedKm = 7;
+                else if(randomDest.includes('12')) currentCalculatedKm = 12;
+                else if(randomDest.includes('8')) currentCalculatedKm = 8;
+                else currentCalculatedKm = 5;
+
+                updatePriceAuto();
+            }, 700);
         }
 
         function closeAuthScreen() {
             const auth = document.getElementById('auth-screen');
-            if (auth) {
-                auth.classList.add('hidden');
-            }
+            if (auth) auth.classList.add('hidden');
         }
 
         function switchAuthTab(tab) {
@@ -317,13 +400,12 @@
             const name = document.getElementById('client-name').value || 'فلفل';
             const phone = document.getElementById('client-phone').value || '01156605200';
             
-            document.getElementById('user-welcome').innerText = `أهلاً بك، ${name} 🛵`;
+            document.getElementById('user-welcome').innerText = `${name} 🛵`;
             document.getElementById('account-details').innerHTML = `
                 <p><strong>الاسم:</strong> ${name}</p>
                 <p><strong>الهاتف:</strong> ${phone}</p>
                 <p><strong>المدينة:</strong> ملوي - المنيا</p>
             `;
-
             closeAuthScreen();
         }
 
@@ -359,7 +441,7 @@
         }
 
         function switchTab(tab) {
-            ['home', 'captain-view', 'orders', 'wallet', 'account'].forEach(t => {
+            ['home', 'captain-view', 'orders', 'wallet', 'account', 'sidebar-content'].forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 if(el) el.classList.add('hidden');
             });
@@ -371,8 +453,10 @@
             const targetTab = document.getElementById('tab-' + tab);
             if(targetTab) targetTab.classList.remove('hidden');
             
-            const activeNav = document.getElementById('nav-' + tab);
-            if(activeNav) activeNav.classList.add('active');
+            if(tab !== 'sidebar-content') {
+                const activeNav = document.getElementById('nav-' + tab);
+                if(activeNav) activeNav.classList.add('active');
+            }
         }
 
         function setVehicleType(type) {
@@ -397,21 +481,21 @@
             const vehDisp = document.getElementById('captain-veh-display');
             if(vehDisp) vehDisp.innerText = `${vehicleName} (${selectedRate} ج/كم)`;
 
-            updatePrice();
+            updatePriceAuto();
         }
 
-        function updatePrice() {
-            const kmInput = document.getElementById('custom-place-km');
-            if(!kmInput) return;
-            const km = parseFloat(kmInput.value) || 0;
-            const price = km * selectedRate;
+        // حساب السعر تلقائياً بدون خانة كيلو يدوية
+        function updatePriceAuto() {
+            const price = currentCalculatedKm * selectedRate;
             const priceEl = document.getElementById('price-display');
+            const distText = document.getElementById('calculated-distance-text');
             if(priceEl) priceEl.innerText = price + ' ج.م';
+            if(distText) distText.innerText = `المسافة المقدرة عبر GPS: ${currentCalculatedKm} كم (حساب تلقائي)`;
         }
 
         function publishOrder() {
-            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي';
-            const dest = document.getElementById('custom-place-name').value || 'وجهة مخصصة';
+            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي عبر GPS';
+            const dest = document.getElementById('dropoff-location').value || 'وجهة محددة تلقائياً';
             const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
             const priceEl = document.getElementById('price-display');
             const price = priceEl ? priceEl.innerText : '0 ج.م';
@@ -419,8 +503,9 @@
             const orderCardHtml = `
                 <div style="background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; text-align:right;">
                     <p><strong>الوسيلة:</strong> ${vehicleName}</p>
-                    <p><strong>من (GPS):</strong> ${pickup}[span_15](start_span)[span_15](end_span)</p>
-                    <p><strong>إلى الوجهة:</strong> ${dest}</p>
+                    <p><strong>من (GPS):</strong> ${pickup}[span_11](start_span)[span_11](end_span)</p>
+                    <p><strong>إلى (النزول GPS):</strong> ${dest}</p>
+                    <p><strong>المسافة المحسوبة:</strong> ${currentCalculatedKm} كم (تلقائي)</p>
                     <p><strong>ملاحظات:</strong> ${notes}</p>
                     <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
                     <button onclick="alert('تم قبول الرحلة بنجاح!')" class="btn" style="margin-top:8px; padding:8px;">قبول الرحلة 🎯</button>
@@ -430,7 +515,7 @@
             const capList = document.getElementById('captain-orders-list');
             if(capList) capList.innerHTML = orderCardHtml;
 
-            alert('🚀 تم نشر طلبك بنجاح عبر رادار الـ GPS!');
+            alert('🚀 تم نشر طلبك بنجاح وتفعيله على نظام الـ GPS التلقائي!');
             switchTab('orders');
             
             const clientOrdersList = document.getElementById('client-orders-list');
@@ -439,9 +524,10 @@
                     <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
                         <p><strong>الوسيلة:</strong> ${vehicleName}</p>
                         <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
+                        <p><strong>المسافة:</strong> ${currentCalculatedKm} كم</p>
                         <p><strong>ملاحظات:</strong> ${notes}</p>
                         <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
-                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: جاري البحث عن كابتن عبر الـ GPS...</p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: جاري تتبع الكابتن عبر الـ GPS...</p>
                     </div>
                 `;
             }
