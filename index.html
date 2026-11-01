@@ -13,9 +13,10 @@
         .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 15px; margin-top: 12px; cursor: pointer; transition: 0.2s; }
         .btn:active { transform: scale(0.98); }
         
-        /* زر متصل المزغرف والفخم */
-        .badge-fancy { background: linear-gradient(135deg, rgba(6,95,70,0.8), rgba(4,120,87,0.9)); color: #6ee7b7; padding: 6px 14px; border-radius: 25px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #10b981; font-weight: bold; box-shadow: 0 0 10px rgba(16,185,129,0.3); }
-        
+        /* زر أونلاين / أوفلاين الصغير والمزغرف */
+        .status-toggle-btn { background: #065f46; color: #6ee7b7; border: 1px solid #10b981; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .status-toggle-btn.offline { background: #7f1d1d; color: #fca5a5; border-color: #ef4444; }
+
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
         .nav-item { text-align: center; color: #9ca3af; font-size: 10px; cursor: pointer; padding: 4px 8px; border-radius: 12px; transition: 0.2s; }
         .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -141,13 +142,13 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي (مع زر متصل المزغرف الجديد) -->
+    <!-- الهيدر العلوي (مع زر أونلاين / أوفلاين الصغير) -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
-            <div class="badge-fancy">
-                <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #34d399;"></span>
-                متصل بالشبكة
-            </div>
+            <button id="status-btn" onclick="toggleOnlineStatus()" class="status-toggle-btn">
+                <span id="status-dot" style="width: 7px; height: 7px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #34d399;"></span>
+                <span id="status-text">أونلاين</span>
+            </button>
         </div>
         <div style="display: flex; align-items: center; gap: 10px;">
             <div style="text-align: left;">
@@ -158,7 +159,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل (التوصيل والنقل) -->
+    <!-- الشاشة الرئيسية للعميل -->
     <div id="tab-home" class="view-section">
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -267,7 +268,7 @@
 
     <!-- قسم الطلبات -->
     <div id="tab-orders" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - ORDERS</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">الطلبات والرحلات</h1>
         <div class="card">
             <div id="client-orders-list">
                 <p style="color: #9ca3af; text-align: center; padding: 15px;">ليس لديك طلبات نشطة حالياً.</p>
@@ -275,9 +276,9 @@
         </div>
     </div>
 
-    <!-- قسم المحفظة -->
+    <!-- قسم المحفظة (تم إزالة العنوان الإنجليزي) -->
     <div id="tab-wallet" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - WALLET</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">المحفظة واستقبال الأموال</h1>
         <div class="card" style="text-align: center;">
             <p style="color: #9ca3af; font-size: 13px;">رصيد الاستقبال عبر فودافون كاش</p>
             <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;" id="wallet-balance-num">0.00 ج.م</h2>
@@ -299,9 +300,9 @@
         </div>
     </div>
 
-    <!-- قسم حسابي -->
+    <!-- قسم حسابي (تم إزالة العنوان الإنجليزي) -->
     <div id="tab-account" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - ACCOUNT</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">الملف الشخصي والحساب</h1>
         
         <div class="card" style="text-align: right;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;">
@@ -366,6 +367,7 @@
         let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فادي (فلفل)';
         let isCaptainMode = false;
+        let isOnlineState = true;
         let captainBalance = 0;
         const MAX_DEBT = -50;
 
@@ -380,6 +382,25 @@
                 autoDetectDropoff();
             }, 1200);
         });
+
+        function toggleOnlineStatus() {
+            isOnlineState = !isOnlineState;
+            const btn = document.getElementById('status-btn');
+            const dot = document.getElementById('status-dot');
+            const txt = document.getElementById('status-text');
+
+            if (isOnlineState) {
+                btn.className = 'status-toggle-btn';
+                dot.style.background = '#34d399';
+                dot.style.boxShadow = '0 0 6px #34d399';
+                txt.innerText = 'أونلاين';
+            } else {
+                btn.className = 'status-toggle-btn offline';
+                dot.style.background = '#f87171';
+                dot.style.boxShadow = '0 0 6px #f87171';
+                txt.innerText = 'أوفلاين';
+            }
+        }
 
         function publishMarketOrder() {
             const orderText = document.getElementById('custom-market-order').value;
@@ -451,7 +472,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.8</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.9</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
