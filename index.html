@@ -28,6 +28,10 @@
         /* الشعار المزغرف الفخم */
         .brand-logo { font-family: 'Courier New', Courier, monospace; font-weight: 900; background: linear-gradient(45deg, #f59e0b, #ef4444, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3); letter-spacing: 2px; }
 
+        /* زرار القائمة الجانبية المزغرف الفخم */
+        .fancy-sidebar-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #030712; font-weight: bold; padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); font-size: 14px; transition: 0.2s; }
+        .fancy-sidebar-btn:active { transform: scale(0.97); }
+
         /* القائمة الجانبية */
         #sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #111827; border-left: 1px solid #1f2937; z-index: 10000; transition: right 0.3s ease; padding: 20px; text-align: right; box-shadow: -5px 0 15px rgba(0,0,0,0.7); overflow-y: auto; }
         #sidebar.open { right: 0; }
@@ -44,22 +48,27 @@
         <p style="color: #9ca3af; font-size: 14px;">المنصة الذكية الأولى للنقل والتوصيل في المنيا وقراها</p>
     </div>
 
-    <!-- القائمة الجانبية -->
+    <!-- القائمة الجانبية (مع الزرار المزغرف الفخم للتبديل) -->
     <div id="sidebar">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">
             <h2 class="brand-logo" style="font-size: 16px;">🌶️ YALLA FELFEL</h2>
             <span onclick="toggleSidebar()" style="color: #fff; font-size: 20px; cursor: pointer; background: #1f2937; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">✕</span>
         </div>
         
+        <!-- الزرار المزغرف الفخم للتبديل بين الكابتن والعميل -->
+        <div class="fancy-sidebar-btn" onclick="toggleRoleFromSidebar()" id="sidebar-role-btn">
+            🔄 التبديل إلى لوحة تحكم (الكابتن) 🛵
+        </div>
+
         <div class="sidebar-item" onclick="openSidebarSection('ratings')">⭐ سجل التقييمات والآراء</div>
         <div class="sidebar-item" onclick="openSidebarSection('support')">📞 الدعم الفني وخدمة العملاء</div>
-        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.5')">📱 إعدادات التطبيق</div>
+        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.6')">📱 إعدادات التطبيق</div>
         <div class="sidebar-item" onclick="alert('تم نسخ رابط تطبيق يلا فلفل بنجاح!')">🔗 مشاركة التطبيق مع الأصدقاء</div>
         <div class="sidebar-item" onclick="alert('جميع الحقوق محفوظة لمنصة يلا فلفل © 2026')">📄 شروط الاستخدام والأمان</div>
         <div class="sidebar-item" onclick="toggleSidebar(); switchTab('account');" style="color: #f59e0b; font-weight: bold;">👤 الملف الشخصي والحساب</div>
     </div>
 
-    <!-- شاشة الدخول والتسجيل (بدون زر تخطي نهائياً) -->
+    <!-- شاشة الدخول والتسجيل (بدون زر تخطي) -->
     <div id="auth-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.98); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
         <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
             <div style="font-size: 45px; margin-bottom: 5px;">🌶️🕶️</div>
@@ -82,7 +91,7 @@
                 <button onclick="loginClient()" class="btn">دخول كعميل وبدء الطلب 🚀</button>
             </div>
 
-            <!-- نموذج الكابتن (محدث بالمستندات الإلزامية المطلوبة) -->
+            <!-- نموذج الكابتن (بدون رخصة للعجلة، مستندات مضبوطة) -->
             <div id="form-captain" class="hidden" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
                 <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
@@ -91,26 +100,29 @@
                 <input type="tel" id="captain-phone" placeholder="01156605200" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">نوع المركبة:</label>
-                <select id="captain-vehicle" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <select id="captain-vehicle" onchange="checkVehicleLicenseRequirement()" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                     <option value="موتوسيكل">موتوسيكل</option>
                     <option value="سيارة / عربية">سيارة / عربية</option>
-                    <option value="عجلة توصيل">عجلة توصيل</option>
+                    <option value="عجلة توصيل">عجلة توصيل (بدون رخصة)</option>
                 </select>
 
                 <label class="file-label">📸 (إلزامي) رفع صورتك الشخصية الحقيقية<input type="file" id="mandatory-personal-img" accept="image/*" style="display: none;" onchange="previewCaptainImage(event)"></label>
                 <label class="file-label">🪪 (إلزامي) صورة البطاقة الشخصية (وجهين)<input type="file" id="captain-id-img" accept="image/*" style="display: none;"></label>
-                <label class="file-label">📄 (إلزامي) صورة رخصة القيادة / المركبة<input type="file" id="captain-license-img" accept="image/*" style="display: none;"></label>
+                
+                <!-- خانة الرخصة تظهر فقط للموتوسيكل والسيارة وتختفي للعجلة -->
+                <div id="license-upload-container">
+                    <label class="file-label">📄 (إلزامي) صورة رخصة القيادة / المركبة<input type="file" id="captain-license-img" accept="image/*" style="display: none;"></label>
+                </div>
 
                 <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال طلب الانضمام والتفعيل عبر واتساب 💬</button>
             </div>
         </div>
     </div>
 
-    <!-- الهيدر العلوي -->
+    <!-- الهيدر العلوي النظيف (بدون زرار التبديل العشوائي) -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
-            <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="brand-logo" style="font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:10px; color:#9ca3af; -webkit-text-fill-color: #9ca3af;">فلفل 🛵</span></span>
@@ -235,7 +247,7 @@
         </div>
     </div>
 
-    <!-- قسم حسابي (ممتلئ بالبيانات الشخصية) -->
+    <!-- قسم حسابي -->
     <div id="tab-account" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">👤 الملف الشخصي للعميل</h1>
         
@@ -297,6 +309,7 @@
         let currentCalculatedKm = 5;
         let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فادي (فلفل)';
+        let isCaptainMode = false;
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -309,6 +322,17 @@
                 autoDetectDropoff();
             }, 800);
         });
+
+        // إخفاء/إظهار خانة رخصة القيادة حسب نوع المركبة (العجلة مش محتاجة رخصة)
+        function checkVehicleLicenseRequirement() {
+            const vehSelect = document.getElementById('captain-vehicle').value;
+            const licenseContainer = document.getElementById('license-upload-container');
+            if (vehSelect.includes('عجلة')) {
+                licenseContainer.style.display = 'none';
+            } else {
+                licenseContainer.style.display = 'block';
+            }
+        }
 
         function previewCaptainImage(event) {
             const file = event.target.files[0];
@@ -325,6 +349,21 @@
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('open');
+        }
+
+        // التبديل عبر الزرار المزغرف في القائمة الجانبية
+        function toggleRoleFromSidebar() {
+            isCaptainMode = !isCaptainMode;
+            const roleBtn = document.getElementById('sidebar-role-btn');
+            toggleSidebar(); // قفل القائمة
+
+            if (isCaptainMode) {
+                roleBtn.innerHTML = "🔄 التبديل إلى لوحة (العميل) 👤";
+                switchTab('captain-view');
+            } else {
+                roleBtn.innerHTML = "🔄 التبديل إلى لوحة تحكم (الكابتن) 🛵";
+                switchTab('home');
+            }
         }
 
         function openSidebarSection(section) {
@@ -473,32 +512,24 @@
                 return;
             }
 
-            if(!personalImg || !idImg || !licenseImg) {
-                alert('عذراً يا أسطورة، يجب رفع (الصورة الشخصية + صورة البطاقة + صورة الرخصة) لإتمام التسجيل والتفعيل!');
+            if(!personalImg || !idImg) {
+                alert('عذراً يا أسطورة، يجب رفع (الصورة الشخصية + صورة البطاقة) لإتمام التسجيل والتفعيل!');
+                return;
+            }
+
+            if(!vehicle.includes('عجلة') && !licenseImg) {
+                alert('عذراً، رفع صورة الرخصة إلزامي للموتوسيكل والسيارات!');
                 return;
             }
 
             document.getElementById('profile-captain-name').innerText = name;
 
             const myWhatsAppNumber = "201156605200"; 
-            let message = `مرحباً إدارة YALLA FELFEL ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n🪪 تم إرفاق (الصورة الشخصية + البطاقة + الرخصة).\n\nبرجاء مراجعة مستنداتي وتفعيلي فوراً.`;
+            let message = `مرحباً إدارة YALLA FELFEL ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n🪪 تم إرفاق المستندات المطلوبة.\n\nبرجاء مراجعة مستنداتي وتفعيلي فوراً.`;
 
             const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
             closeAuthScreen();
-        }
-
-        let isCaptainMode = false;
-        function toggleRole() {
-            isCaptainMode = !isCaptainMode;
-            const btn = document.getElementById('btn-role-switch');
-            if (isCaptainMode) {
-                btn.innerText = "العميل";
-                switchTab('captain-view');
-            } else {
-                btn.innerText = "الكابتن";
-                switchTab('home');
-            }
         }
 
         function switchTab(tab) {
