@@ -25,7 +25,7 @@
         input, select, textarea { box-sizing: border-box; width: 100%; }
         .file-label { display: block; background: #1f2937; color: #f59e0b; padding: 12px; border-radius: 8px; border: 1px dashed #f59e0b; margin-bottom: 10px; font-size: 13px; text-align: center; cursor: pointer; font-weight: bold; }
         
-        /* اللوجو المزغرف الفخم */
+        /* الشعار المزغرف الفخم */
         .brand-logo { font-family: 'Courier New', Courier, monospace; font-weight: 900; background: linear-gradient(45deg, #f59e0b, #ef4444, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3); letter-spacing: 2px; }
 
         /* القائمة الجانبية */
@@ -37,7 +37,7 @@
 </head>
 <body>
 
-    <!-- شاشة البداية (سبلاش) بالشعار المزغرف الفخم -->
+    <!-- شاشة البداية (سبلاش) -->
     <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.5s ease;">
         <div style="font-size: 75px; margin-bottom: 12px; filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.7));">🌶️🕶️</div>
         <h1 class="brand-logo" style="font-size: 40px; margin-bottom: 5px;">YALLA FELFEL</h1>
@@ -53,7 +53,7 @@
         
         <div class="sidebar-item" onclick="openSidebarSection('ratings')">⭐ سجل التقييمات والآراء</div>
         <div class="sidebar-item" onclick="openSidebarSection('support')">📞 الدعم الفني وخدمة العملاء</div>
-        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.1')">📱 إعدادات التطبيق</div>
+        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.4')">📱 إعدادات التطبيق</div>
         <div class="sidebar-item" onclick="alert('تم نسخ رابط تطبيق يلا فلفل بنجاح!')">🔗 مشاركة التطبيق مع الأصدقاء</div>
         <div class="sidebar-item" onclick="alert('جميع الحقوق محفوظة لمنصة يلا فلفل © 2026')">📄 شروط الاستخدام والأمان</div>
         <div class="sidebar-item" onclick="toggleSidebar(); switchTab('account');" style="color: #f59e0b; font-weight: bold;">👤 الملف الشخصي والحساب</div>
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي بالشعار المزغرف الفخم -->
+    <!-- الهيدر العلوي -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
@@ -119,12 +119,11 @@
         </div>
     </div>
 
-    <!-- قسم الرئيسية (العميل) بالأسعار الثابتة العادلة والحساب التلقائي -->
+    <!-- الشاشة الرئيسية للعميل -->
     <div id="tab-home" class="view-section">
-        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 4px;">⚡ YALLA FELFEL - طلب رحلة ذكي</h1>
-        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-bottom: 12px;">عربية (10ج/كم)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span) | مكنة (7ج/كم)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span) | عجلة (4ج/كم)[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)</p>
+        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 4px;">⚡ الشاشة الرئيسية للعميل</h1>
+        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-bottom: 12px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span) | مكنة (7ج/كم)[span_1](start_span)[span_1](end_span) | عجلة (4ج/كم)[span_2](start_span)[span_2](end_span)</p>
         
-        <!-- رادار الـ GPS -->
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="color: #6ee7b7; font-size: 11px; background: #065f46; padding: 2px 8px; border-radius: 10px;">🛰️ GPS الأقمار الصناعية متصل</span>
@@ -144,9 +143,8 @@
                 <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)</button>
             </div>
 
-            <!-- مكان الانطلاق والوصول والحساب الثابت التلقائي -->
             <div style="margin-bottom: 15px; text-align: right;">
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل (تلقائي عبر GPS):[span_12](start_span)[span_12](end_span)</label>
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل (تلقائي عبر GPS):[span_3](start_span)[span_3](end_span)</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
                     <input type="text" id="pickup-location" placeholder="جاري تحديد إحداثيات موقعك..." readonly style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px;">
                     <button onclick="detectUserLocation()" style="flex: 1; background: #065f46; color: #6ee7b7; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">تحديث 📍</button>
@@ -171,11 +169,11 @@
         </div>
     </div>
 
-    <!-- لوحة تحكم الكابتن -->
+    <!-- الشاشة الرئيسية للكابتن (مع أزرار الاتصال والواتساب الفورية) -->
     <div id="tab-captain-view" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">🛵 الملف الشخصي للكابتن</h1>
+        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">🛵 الشاشة الرئيسية للكابتن</h1>
+        
         <div class="card" style="text-align: center;">
-            
             <div style="position: relative; width: 90px; height: 90px; margin: 0 auto 12px auto;">
                 <div id="captain-avatar-preview" style="width: 90px; height: 90px; background: #1f2937; color: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; border: 3px solid #f59e0b; box-shadow: 0 0 15px rgba(245,158,11,0.4); overflow: hidden;">
                     🌶️
@@ -194,17 +192,12 @@
             </div>
             
             <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 12px; font-size: 14px;">انضم لجروب واتساب الكابتن 🚀💬</a>
-
-            <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-top: 15px; font-size: 14px;">
-                <p style="color: #9ca3af; margin-bottom: 5px;">منطقة الخدمة: محافظة المنيا ومراكزها (ملوي)</p>
-                <p style="color: #6ee7b7; font-weight: bold;">حالة الحساب: مفعل بالبطاقة والصورة الشخصية ✅</p>
-            </div>
         </div>
 
-        <h2 style="color: #f59e0b; font-size: 17px; text-align: right; margin: 15px 0 8px 0;">📋 الطلبات المتاحة للكابتن</h2>
+        <h2 class="brand-logo" style="font-size: 16px; text-align: right; margin: 15px 0 8px 0;">📋 الطلبات الواردة (رادار الكابتن)</h2>
         <div class="card">
             <div id="captain-orders-list">
-                <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً.</p>
+                <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً في منطقتك.</p>
             </div>
         </div>
     </div>
@@ -219,7 +212,7 @@
         </div>
     </div>
 
-    <!-- قسم المحفظة -->
+    <!-- قسم المحفظة مع إيصال التحويل -->
     <div id="tab-wallet" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأموال</h1>
         <div class="card" style="text-align: center;">
@@ -229,13 +222,17 @@
             <div style="background: #1f2937; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: right; border: 1px solid #f59e0b;">
                 <p style="color: #f59e0b; font-weight: bold; font-size: 14px; margin-bottom: 5px;">📱 رقم فودافون كاش المعتمد للاستقبال:</p>
                 <p style="color: #fff; font-size: 18px; font-weight: bold; letter-spacing: 1px;">01156605200</p>
-                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل قيمة الرحلة أو العمولة على هذا الرقم، ثم اضغط تأكيد التحويل أدناه.</p>
+                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل قيمة الرحلة أو العمولة على هذا الرقم، وارفق لقطة شاشة التحويل أدناه.</p>
             </div>
 
-            <label style="font-size: 13px; color: #f59e0b; display: block; margin-top: 15px; text-align: right;">رقم هاتفك المحول منه:</label>
-            <input type="tel" id="sender-wallet-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 10px;">
+            <div style="margin-top: 15px; text-align: right;">
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم هاتفك المحول منه:</label>
+                <input type="tel" id="sender-wallet-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 12px;">
 
-            <button onclick="confirmWalletTransfer()" class="btn" style="background: #065f46; color: #6ee7b7;">تأكيد عملية التحويل ⚡</button>
+                <label class="file-label">📸 رفع لقطة شاشة التحويل (إيصال فودافون كاش)<input type="file" id="transfer-screenshot" accept="image/*" style="display: none;"></label>
+            </div>
+
+            <button onclick="confirmWalletTransfer()" class="btn" style="background: #065f46; color: #6ee7b7;">تأكيد عملية التحويل وإرفاق الإيصال ⚡</button>
         </div>
     </div>
 
@@ -286,9 +283,11 @@
     </div>
 
     <script>
-        let selectedRate = 10; // السعر الافتتاحي للعربية (10 جنيه/كم)
+        let selectedRate = 10; 
         let vehicleName = 'عربية';
         let currentCalculatedKm = 5;
+        let clientGlobalPhone = '01156605200';
+        let clientGlobalName = 'عميل يلا فلفل';
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -446,6 +445,9 @@
             const name = document.getElementById('client-name').value || 'فلفل';
             const phone = document.getElementById('client-phone').value || '01156605200';
             
+            clientGlobalName = name;
+            clientGlobalPhone = phone;
+
             document.getElementById('user-welcome').innerText = `${name} 🛵`;
             document.getElementById('account-details').innerHTML = `
                 <p><strong>الاسم:</strong> ${name}</p>
@@ -514,27 +516,32 @@
         }
 
         function publishOrder() {
-            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي عبر GPS';
+            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي عبر GPS[span_4](start_span)[span_4](end_span)';
             const dest = document.getElementById('dropoff-location').value || 'وجهة محددة تلقائياً';
             const priceEl = document.getElementById('price-display');
             const price = priceEl ? priceEl.innerText : '50 ج.م';
             const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
 
             const orderCardHtml = `
-                <div style="background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; text-align:right;">
+                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
+                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👤 العميل: ${clientGlobalName}</p>
                     <p><strong>الوسيلة:</strong> ${vehicleName}</p>
                     <p><strong>من:</strong> ${pickup}</p>
                     <p><strong>إلى:</strong> ${dest}</p>
-                    <p><strong>السعر العادل الثابت:</strong> <span style="color:#f59e0b;">${price}</span></p>
+                    <p><strong>السعر العادل الثابت:</strong> <span style="color:#6ee7b7; font-weight:bold;">${price}</span></p>
                     <p><strong>ملاحظات:</strong> ${notes}</p>
-                    <button onclick="alert('تم قبول الرحلة بنجاح والتوصيل في الميعاد!')" class="btn" style="margin-top:8px; padding:8px;">قبول الرحلة 🎯</button>
+                    
+                    <div style="display: flex; gap: 8px; margin-top: 12px;">
+                        <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
+                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام رحلتك على يلا فلفل 🚗')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
+                    </div>
                 </div>
             `;
 
             const capList = document.getElementById('captain-orders-list');
             if(capList) capList.innerHTML = orderCardHtml;
 
-            alert('🚀 تم نشر طلبك بنجاح وعرضه على الكباتن بالسعر الثابت العادل!');
+            alert('🚀 تم نشر طلبك بنجاح وعرضه على الكباتن مع أزرار التواصل المباشر!');
             switchTab('orders');
             
             const clientOrdersList = document.getElementById('client-orders-list');
@@ -545,7 +552,7 @@
                         <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
                         <p><strong>السعر الثابت:</strong> <span style="color:#f59e0b;">${price}</span></p>
                         <p><strong>ملاحظات:</strong> ${notes}</p>
-                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: جاري البحث عن كابتن وتأكيد الرحلة...</p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن وتواصله...</p>
                     </div>
                 `;
             }
@@ -553,11 +560,17 @@
 
         function confirmWalletTransfer() {
             const senderPhone = document.getElementById('sender-wallet-phone').value;
+            const screenshot = document.getElementById('transfer-screenshot').files[0];
+
             if(!senderPhone) {
                 alert('الرجاء إدخال رقم هاتفك المحول منه للتأكيد!');
                 return;
             }
-            alert('✅ تم استلام طلب التحويل بنجاح، وسيتم مراجعته وإضافة الرصيد فوراً على رقمك 01156605200!');
+            if(!screenshot) {
+                alert('الرجاء إرفاق لقطة شاشة التحويل (الإيصال) لتأكيد العملية بنجاح!');
+                return;
+            }
+            alert('✅ تم استلام إيصال التحويل ورقم الهاتف بنجاح، وسيتم إضافة الرصيد فوراً على رقمك 01156605200!');
         }
     </script>
 </body>
