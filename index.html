@@ -40,10 +40,10 @@
 </head>
 <body>
 
-    <!-- شاشة البداية (سبلاش) -->
-    <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.5s ease;">
-        <div style="font-size: 75px; margin-bottom: 12px; filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.7));">🌶️🕶️</div>
-        <h1 class="brand-logo" style="font-size: 40px; margin-bottom: 5px;">YALLA FELFEL</h1>
+    <!-- شاشة البداية (سبلاش - تم إطالة مدة ظهورها لتكون أطول وأشيك) -->
+    <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.8s ease;">
+        <div style="font-size: 85px; margin-bottom: 15px; filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8));">🌶️🕶️</div>
+        <h1 class="brand-logo" style="font-size: 42px; margin-bottom: 5px;">YALLA FELFEL</h1>
         <p style="color: #9ca3af; font-size: 14px;">المنصة الذكية الأولى للنقل والتوصيل في المنيا وقراها</p>
     </div>
 
@@ -55,7 +55,7 @@
         </div>
         
         <div class="fancy-main-btn" onclick="toggleRoleFromSidebar()" id="sidebar-role-btn">
-            ⚡ ⦗ التبديل إلى لوحة الكابتن ⦘ 🛵
+            ⚡ ⦗ التبديل إلى لوحة الكابتن ⦘
         </div>
 
         <div class="fancy-sidebar-card" onclick="openSidebarSection('ratings')">
@@ -93,7 +93,7 @@
     <div id="auth-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.98); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
         <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
             <div style="font-size: 45px; margin-bottom: 5px;">🌶️🕶️</div>
-            <h2 class="brand-logo" style="font-size: 24px; margin-bottom: 2px;">YALLA FELFEL</h2>
+            <h2 class="brand-logo" style="font-size: 26px; margin-bottom: 2px;">YALLA FELFEL</h2>
             <p style="color: #9ca3af; font-size: 12px; margin-bottom: 20px;">بوابتك الذكية لخدمات محافظة المنيا ومراكزها</p>
             
             <div style="display: flex; gap: 8px; margin-bottom: 20px;">
@@ -139,14 +139,14 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي (تم تكبير لوجو يلا فلفل وإزالة إيموجي الاسكوتر) -->
+    <!-- الهيدر العلوي (لوجو يلا فلفل الكبير بالإنجليزية وبدون إيموجي الاسكوتر) -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
             <div style="text-align: left;">
-                <span class="brand-logo" style="font-size: 18px; font-weight: 900; display: block; letter-spacing: 1px;">YALLA FELFEL</span>
+                <span class="brand-logo" style="font-size: 20px; font-weight: 900; display: block; letter-spacing: 2px;">YALLA FELFEL</span>
                 <span id="user-welcome" style="font-size:11px; color:#9ca3af; display: block;">فلفل</span>
             </div>
             <button onclick="toggleSidebar()" style="background: #1f2937; border: 1px solid #f59e0b; color: #f59e0b; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 16px;">☰</button>
@@ -204,9 +204,12 @@
         </div>
     </div>
 
-    <!-- قسم الماركت المزغرف والمطور (خانة كتابة الطلبات الحرة) -->
+    <!-- قسم الماركت (مع لوجو YALLA FELFEL بالإنجليزية بدلاً من النص القديم) -->
     <div id="tab-market" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">🛒 يلا فلفل ماركت (اكتب طلباتك بحرية)</h1>
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h1 class="brand-logo" style="font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 2px;">YALLA FELFEL</h1>
+            <p style="color: #f59e0b; font-size: 13px; font-weight: bold;">MARKET - قسم كتابة الطلبات الحرة</p>
+        </div>
         
         <div class="card" style="border: 2px solid rgba(245, 158, 11, 0.4);">
             <div style="text-align: right; margin-bottom: 12px;">
@@ -227,7 +230,7 @@
 
     <!-- الشاشة الرئيسية للكابتن -->
     <div id="tab-captain-view" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">الشاشة الرئيسية للكابتن</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - CAPTAIN</h1>
         
         <div class="card" style="text-align: center;">
             <div style="position: relative; width: 85px; height: 85px; margin: 0 auto 10px auto;">
@@ -258,7 +261,7 @@
             <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 13px;">انضم لجروب واتساب الكابتن 🚀💬</a>
         </div>
 
-        <h2 class="brand-logo" style="font-size: 16px; text-align: right; margin: 15px 0 8px 0;">📋 الطلبات الواردة (رادار الكابتن)</h2>
+        <h2 class="brand-logo" style="font-size: 18px; font-weight: 900; text-align: right; margin: 15px 0 8px 0;">RADAR - الطلبات الواردة</h2>
         <div class="card">
             <div id="captain-orders-list">
                 <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً في منطقتك.</p>
@@ -268,7 +271,7 @@
 
     <!-- قسم الطلبات -->
     <div id="tab-orders" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">📦 تتبع الطلبات والرحلات</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - ORDERS</h1>
         <div class="card">
             <div id="client-orders-list">
                 <p style="color: #9ca3af; text-align: center; padding: 15px;">ليس لديك طلبات نشطة حالياً.</p>
@@ -278,7 +281,7 @@
 
     <!-- قسم المحفظة -->
     <div id="tab-wallet" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأموال</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - WALLET</h1>
         <div class="card" style="text-align: center;">
             <p style="color: #9ca3af; font-size: 13px;">رصيد الاستقبال عبر فودافون كاش</p>
             <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;" id="wallet-balance-num">0.00 ج.م</h2>
@@ -302,7 +305,7 @@
 
     <!-- قسم حسابي -->
     <div id="tab-account" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">👤 الملف الشخصي</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">YALLA FELFEL - ACCOUNT</h1>
         
         <div class="card" style="text-align: right;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;">
@@ -375,11 +378,11 @@
                 const splash = document.getElementById('splash-screen');
                 if (splash) {
                     splash.style.opacity = '0';
-                    setTimeout(() => splash.style.display = 'none', 500);
+                    setTimeout(() => splash.style.display = 'none', 800);
                 }
                 detectUserLocation();
                 autoDetectDropoff();
-            }, 800);
+            }, 1200); // إطالة وقت السبلاش لضمان تجربة أطول وأشيك
         });
 
         function sendCustomMarketOrderToWhatsApp() {
@@ -405,7 +408,7 @@
             toggleSidebar();
 
             if (isCaptainMode) {
-                roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة العميل ⦘ 👤";
+                roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة العميل ⦘";
                 switchTab('captain-view');
             } else {
                 roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة الكابتن ⦘";
@@ -427,7 +430,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.5</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.6</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
