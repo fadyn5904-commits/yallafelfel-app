@@ -8,14 +8,17 @@
     <meta name="theme-color" content="#f59e0b">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; text-align: center; padding-bottom: 90px; }
+        body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; text-align: center; padding-bottom: 95px; }
         .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 18px; margin-top: 10px; text-align: right; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 15px; margin-top: 12px; cursor: pointer; transition: 0.2s; }
         .btn:active { transform: scale(0.98); }
         .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: #111827; border-top: 1px solid #1f2937; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
-        .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; }
-        .nav-item.active { color: #f59e0b; font-weight: bold; }
+        
+        /* شريط التنقل السفلي المزغرف والفخم */
+        .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
+        .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; padding: 6px 12px; border-radius: 12px; transition: 0.2s; }
+        .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
+
         .hidden { display: none !important; }
         .view-section { display: none; }
         .view-section:not(.hidden) { display: block; }
@@ -66,7 +69,7 @@
             <span style="color: #f59e0b;">❯</span>
         </div>
 
-        <div class="fancy-sidebar-card" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 4.0')">
+        <div class="fancy-sidebar-card" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 4.1')">
             <span>⚙️ إعدادات التطبيق العامة</span>
             <span style="color: #f59e0b;">❯</span>
         </div>
@@ -148,15 +151,8 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل (مع الرسالة الترحيبية الشيك) -->
+    <!-- الشاشة الرئيسية للعميل (بدون رسالة ترحيبية أو كلام زائد) -->
     <div id="tab-home" class="view-section">
-        <div style="background: linear-gradient(135deg, #1f2937, #111827); padding: 15px; border-radius: 12px; border: 1px solid #f59e0b; text-align: right; margin-bottom: 12px;">
-            <h1 class="brand-logo" style="font-size: 17px; margin-bottom: 3px;">👋 أهلاً بك يا فلفل.. جاهز لرحلتك القادمة؟ 🚀</h1>
-            <p style="color: #9ca3af; font-size: 12px;">حدد مكان الوصول، واطلب وسيلتك المفضلة بأعلى أمان وسعر عادل ثابت!</p>
-        </div>
-
-        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-bottom: 10px;">عربية (10ج/كم)[span_3](start_span)[span_3](end_span) | مكنة (7ج/كم)[span_4](start_span)[span_4](end_span) | عجلة (4ج/كم)[span_5](start_span)[span_5](end_span)</p>
-        
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="color: #6ee7b7; font-size: 11px; background: #065f46; padding: 2px 8px; border-radius: 10px;">🛰️ GPS الأقمار الصناعية متصل</span>
@@ -189,14 +185,12 @@
                     <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
-                <!-- خانة تحديد طريقة المحاسبة والدفع للعميل -->
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">💳 طريقة الدفع والمحاسبة:</label>
                 <select id="payment-method-select" onchange="toggleClientPaymentProof()" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px; margin-bottom: 12px;">
                     <option value="cash">💵 محاسبة كاش (نقداً قبل أو بعد الرحلة)</option>
                     <option value="vodafone">📱 تحويل فودافون كاش مسبقاً (01156605200)</option>
                 </select>
 
-                <!-- قسم رفع إثبات التحويل للعميل في حالة الدفع فودافون كاش -->
                 <div id="client-proof-container" class="hidden">
                     <label class="file-label">📸 ارفق لقطة شاشة تحويل فودافون كاش لـ 01156605200<input type="file" id="client-payment-screenshot" accept="image/*" style="display: none;"></label>
                 </div>
@@ -214,7 +208,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للكابتن (مع نظام السلف والعمولة والشحن الإجباري) -->
+    <!-- الشاشة الرئيسية للكابتن -->
     <div id="tab-captain-view" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">🛵 الشاشة الرئيسية للكابتن</h1>
         
@@ -229,7 +223,6 @@
             <h3 style="color: #fff; font-size: 16px; margin-bottom: 4px;" id="profile-captain-name">فادي ناصر (فلفل)</h3>
             <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">كابتن معتمد بخدمات التوصيل السريع 🛵</p>
             
-            <!-- كارت رصيد الكابتن وحد السلف -->
             <div style="background: #030712; border: 1px solid #f59e0b; padding: 12px; border-radius: 10px; margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: #9ca3af;">رصيد محفظتك الحالي:</span>
@@ -241,9 +234,8 @@
                 </div>
             </div>
 
-            <!-- تنبيه إجبار الشحن عند تجاوز حد السلف -->
             <div id="charge-warning-banner" class="hidden" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 10px; border-radius: 8px; font-size: 12px; color: #fca5a5; margin-bottom: 10px; text-align: right;">
-                ⚠️ <strong>تنبيه هائم:</strong> لقد تجاوزت حد السلف المسموح (-50 ج.م). تم إيقاف استقبال الرحلات مؤقتاً! يرجى شحن محفظتك فوراً عبر فودافون كاش لفك التجميد.
+                ⚠️ <strong>تنبيه هام:</strong> لقد تجاوزت حد السلف المسموح (-50 ج.م). تم إيقاف استقبال الرحلات مؤقتاً! يرجى شحن محفظتك فوراً عبر فودافون كاش لفك التجميد.
             </div>
 
             <div style="background: #1f2937; padding: 10px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 13px;">
@@ -279,9 +271,9 @@
             <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;" id="wallet-balance-num">0.00 ج.م</h2>
             
             <div style="background: #1f2937; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: right; border: 1px solid #f59e0b;">
-                <p style="color: #f59e0b; font-weight: bold; font-size: 14px; margin-bottom: 5px;">📱 رقم فودافون كاش المعتمد للاستقبال للشحن:</p>
+                <p style="color: #f59e0b; font-weight: bold; font-size: 14px; margin-bottom: 5px;">📱 رقم فودافون كاش المعتمد للشحن والاستقبال:</p>
                 <p style="color: #fff; font-size: 18px; font-weight: bold; letter-spacing: 1px;">01156605200</p>
-                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل التحويل على الرقم واضغط لإرسال الإيصال مباشرة على واتساب الإدارة لفك التجميد وشحن الرصيد.</p>
+                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل التحويل على الرقم واضغط لإرسال الإيصال مباشرة على واتساب الإدارة.</p>
             </div>
 
             <div style="margin-top: 15px; text-align: right;">
@@ -311,7 +303,7 @@
             <div style="display: grid; gap: 10px; font-size: 14px;" id="account-details">
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📱 رقم الهاتف:</strong> <span id="acc-phone" style="color: #f59e0b;">01156605200</span></p>
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 المدينة / المركز:</strong> ملوي - المنيا</p>
-                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>💳 حد السلف المسموح للكابتن:</strong> -50.00 ج.م</p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>💳 حد السلف المسموح:</strong> -50.00 ج.م</p>
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>⭐ المستوى:</strong> VIP (عضو أسطوري)</p>
             </div>
         </div>
@@ -331,23 +323,23 @@
         <div id="sidebar-dynamic-body"></div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
+    <!-- شريط التنقل السفلي المزغرف والمحدث بأيقونات فخمة -->
     <div class="nav-bar">
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
-            <div style="font-size: 16px;">👤</div>
-            حسابي
+            <div style="font-size: 18px;">👤</div>
+            <span>حسابي</span>
         </div>
         <div class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
-            <div style="font-size: 16px;">💰</div>
-            المحفظة
+            <div style="font-size: 18px;">💰</div>
+            <span>المحفظة</span>
         </div>
         <div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
-            <div style="font-size: 16px;">📦</div>
-            الطلبات
+            <div style="font-size: 18px;">📦</div>
+            <span>الطلبات</span>
         </div>
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
-            <div style="font-size: 16px;">🏠</div>
-            الرئيسية
+            <div style="font-size: 18px;">🏠</div>
+            <span>الرئيسية</span>
         </div>
     </div>
 
@@ -358,11 +350,8 @@
         let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فادي (فلفل)';
         let isCaptainMode = false;
-
-        // متغيرات محفظة الكابتن والحد الأقصى للسلف
-        let captainBalance = 0; // الرصيد الحالي
-        const MAX_DEBT = -50; // الحد الأقصى للسلف (-50 ج.م)
-        const COMMISSION_RATE = 0.10; // 10% عمولة التطبيق
+        let captainBalance = 0;
+        const MAX_DEBT = -50;
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -615,7 +604,6 @@
             const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
             const payMethod = document.getElementById('payment-method-select').value === 'vodafone' ? '📱 فودافون كاش (تم التحويل)' : '💵 كاش قبل/بعد الرحلة';
 
-            // التحقق من حد سلف الكابتن قبل نشر الرحلات في رادار الكابتن
             if (captainBalance <= MAX_DEBT) {
                 document.getElementById('charge-warning-banner').classList.remove('hidden');
             }
