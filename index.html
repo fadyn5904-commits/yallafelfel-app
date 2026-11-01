@@ -15,7 +15,7 @@
         .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
         
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
-        .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; padding: 6px 12px; border-radius: 12px; transition: 0.2s; }
+        .nav-item { text-align: center; color: #9ca3af; font-size: 10px; cursor: pointer; padding: 4px 8px; border-radius: 12px; transition: 0.2s; }
         .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
 
         .hidden { display: none !important; }
@@ -36,6 +36,8 @@
         .fancy-sidebar-card:hover { background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; transform: translateX(-3px); }
         
         .fancy-main-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #030712; font-weight: 900; padding: 14px; border-radius: 12px; text-align: center; cursor: pointer; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5); font-size: 13px; border: 1px solid #ffedd5; }
+        
+        .market-item { background: #1f2937; border: 1px solid #374151; border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
@@ -150,7 +152,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل -->
+    <!-- الشاشة الرئيسية للعميل (التوصيل والنقل) -->
     <div id="tab-home" class="view-section">
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -166,9 +168,9 @@
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold; font-size: 14px;">🚗 اختر وسيلة التوصيل:</p>
             <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span)</button>
-                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_1](start_span)[span_1](end_span)</button>
-                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_2](start_span)[span_2](end_span)</button>
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_1](start_span)[span_1](end_span)</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_2](start_span)[span_2](end_span)</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_3](start_span)[span_3](end_span)</button>
             </div>
 
             <div style="margin-bottom: 15px; text-align: right;">
@@ -184,10 +186,8 @@
                     <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
-                <!-- نظام الدفع كاش إجباري قبل الرحلة -->
                 <div style="background: #1f2937; border: 1px solid #f59e0b; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: right;">
                     <p style="color: #f59e0b; font-weight: bold; font-size: 13px; margin-bottom: 4px;">💵 نظام الدفع: <span style="color: #6ee7b7;">كاش إجباري (نقداً للكابتن قبل الرحلة)</span></p>
-                    <p style="color: #9ca3af; font-size: 11px;">يتم تسليم قيمة الرحلة نقداً مباشرة للكابتن مع بدء التحرك.</p>
                 </div>
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📝 ملاحظات الرحلة للكابتن:</label>
@@ -200,6 +200,46 @@
             </div>
 
             <button onclick="publishOrder()" class="btn">نشر الطلب في التطبيق 🚀</button>
+        </div>
+    </div>
+
+    <!-- قسم الماركت الجديد (Yalla Felfel Market) -->
+    <div id="tab-market" class="view-section hidden">
+        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">🛒 يلا فلفل ماركت (سوبر ماركت وخضار)</h1>
+        
+        <div class="card">
+            <p style="color: #f59e0b; font-weight: bold; margin-bottom: 10px; font-size: 14px;">🛍️ اختر المنتجات المطلوبة:</p>
+            
+            <div class="market-item">
+                <div style="text-align: right;">
+                    <p style="font-weight: bold; font-size: 14px;">عبوة مياه معدنية (كبيرة)</p>
+                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 10 ج.م</p>
+                </div>
+                <button onclick="addToCart('مياه معدنية', 10)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
+            </div>
+
+            <div class="market-item">
+                <div style="text-align: right;">
+                    <p style="font-weight: bold; font-size: 14px;">كيلو طماطم وخضار طازج</p>
+                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 15 ج.م</p>
+                </div>
+                <button onclick="addToCart('خضار طازج', 15)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
+            </div>
+
+            <div class="market-item">
+                <div style="text-align: right;">
+                    <p style="font-weight: bold; font-size: 14px;">علبة جبن ريفي بلدي (نصف كيلو)</p>
+                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 40 ج.م</p>
+                </div>
+                <button onclick="addToCart('جبن ريفي', 40)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
+            </div>
+
+            <div style="background: #030712; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; margin-top: 15px; text-align: right;">
+                <p style="font-size: 13px; color: #9ca3af;">مشترياتك الحالية في السلة: <strong style="color: #f59e0b;" id="cart-summary">لا توجد منتجات</strong></p>
+                <p style="font-size: 14px; color: #6ee7b7; margin-top: 5px;">الإجمالي: <strong id="cart-total">0 ج.م</strong></p>
+            </div>
+
+            <button onclick="checkoutMarketOrder()" class="btn" style="background: #25d366; color: #fff; margin-top: 12px;">إرسال طلب الماركت عبر واتساب 🛒💬</button>
         </div>
     </div>
 
@@ -216,7 +256,7 @@
             </div>
 
             <h3 style="color: #fff; font-size: 16px; margin-bottom: 4px;" id="profile-captain-name">فادي ناصر (فلفل)</h3>
-            <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">كابتن معتمد بخدمات التوصيل السريع 🛵</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">كابتن معتمد بخدمات التوصيل والسوبر ماركت 🛵</p>
             
             <div style="background: #030712; border: 1px solid #f59e0b; padding: 12px; border-radius: 10px; margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -227,10 +267,6 @@
                     <span>حد السلف: <strong style="color: #ef4444;">-50 ج.م</strong></span>
                     <span>عمولة المنصة: <strong style="color: #f59e0b;">10%</strong></span>
                 </div>
-            </div>
-
-            <div id="charge-warning-banner" class="hidden" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 10px; border-radius: 8px; font-size: 12px; color: #fca5a5; margin-bottom: 10px; text-align: right;">
-                ⚠️ <strong>تنبيه هام:</strong> لقد تجاوزت حد السلف المسموح (-50 ج.م). تم إيقاف استقبال الرحلات مؤقتاً! يرجى شحن محفظتك فوراً عبر فودافون كاش لفك التجميد.
             </div>
 
             <div style="background: #1f2937; padding: 10px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 13px;">
@@ -309,7 +345,7 @@
         </div>
     </div>
 
-    <!-- قسم محتوى القائمة الجانبية (شامل إعدادات التطبيق العامة) -->
+    <!-- قسم محتوى القائمة الجانبية -->
     <div id="tab-sidebar-content" class="view-section hidden">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
             <h1 id="sidebar-section-title" class="brand-logo" style="font-size: 18px; text-align: right;">⭐ سجل التقييمات</h1>
@@ -318,22 +354,26 @@
         <div id="sidebar-dynamic-body"></div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
+    <!-- شريط التنقل السفلي المحدث (مع زر الماركت الجديد) -->
     <div class="nav-bar">
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
-            <div style="font-size: 18px;">👤</div>
+            <div style="font-size: 16px;">👤</div>
             <span>حسابي</span>
         </div>
         <div class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
-            <div style="font-size: 18px;">💰</div>
+            <div style="font-size: 16px;">💰</div>
             <span>المحفظة</span>
         </div>
         <div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
-            <div style="font-size: 18px;">📦</div>
+            <div style="font-size: 16px;">📦</div>
             <span>الطلبات</span>
         </div>
+        <div class="nav-item" id="nav-market" onclick="switchTab('market')">
+            <div style="font-size: 16px;">🛒</div>
+            <span>الماركت</span>
+        </div>
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
-            <div style="font-size: 18px;">🏠</div>
+            <div style="font-size: 16px;">🏠</div>
             <span>الرئيسية</span>
         </div>
     </div>
@@ -345,8 +385,8 @@
         let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فادي (فلفل)';
         let isCaptainMode = false;
-        let captainBalance = 0;
-        const MAX_DEBT = -50;
+        let cartItems = [];
+        let cartTotal = 0;
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -360,26 +400,23 @@
             }, 800);
         });
 
-        function checkVehicleLicenseRequirement() {
-            const vehSelect = document.getElementById('captain-vehicle').value;
-            const licenseContainer = document.getElementById('license-upload-container');
-            if (vehSelect.includes('عجلة')) {
-                licenseContainer.style.display = 'none';
-            } else {
-                licenseContainer.style.display = 'block';
-            }
+        function addToCart(itemName, price) {
+            cartItems.push(itemName);
+            cartTotal += price;
+            document.getElementById('cart-summary').innerText = cartItems.join(', ');
+            document.getElementById('cart-total').innerText = cartTotal + ' ج.م';
+            alert(`تم إضافة (${itemName}) إلى سلة الماركت بنجاح! 🛒`);
         }
 
-        function previewCaptainImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const avatarContainer = document.getElementById('captain-avatar-preview');
-                    avatarContainer.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-                }
-                reader.readAsDataURL(file);
+        function checkoutMarketOrder() {
+            if(cartItems.length === 0) {
+                alert('سلة الماركت فارغة! أضف منتجات أولاً.');
+                return;
             }
+            const adminWhatsApp = "201156605200";
+            let msg = `طلب جديد من YALLA FELFEL MARKET 🛒:\nالعميل: ${clientGlobalName}\nالهاتف: ${clientGlobalPhone}\nالمنتجات: ${cartItems.join(', ')}\nالإجمالي: ${cartTotal} ج.م\nالدفع: كاش عند الاستلام`;
+            let url = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
         }
 
         function toggleSidebar() {
@@ -409,60 +446,26 @@
 
             if (section === 'ratings') {
                 titleEl.innerText = "⭐ سجل التقييمات والآراء";
-                bodyEl.innerHTML = `
-                    <div class="card" style="text-align: right;">
-                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">تقييمات الكباتن والعملاء</h2>
-                        <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
-                            <p style="color: #f59e0b; font-weight: bold; font-size: 14px;">⭐⭐⭐⭐⭐ (5/5)</p>
-                            <p style="color: #fff; font-size: 13px; margin-top: 4px;">"كابتن ممتاز ومحترم جداً، والوصول في الميعاد المحدد!"</p>
-                            <span style="color: #9ca3af; font-size: 10px;">من: عميل مميز (ملوي)</span>
-                        </div>
-                    </div>
-                `;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><h2 style="color: #f59e0b; font-size: 16px;">تقييمات العملاء</h2><p style="color:#fff; margin-top:5px;">⭐⭐⭐⭐⭐ (خدمة ممتازة وسريعة)</p></div>`;
             } else if (section === 'support') {
                 titleEl.innerText = "📞 الدعم الفني وخدمة العملاء";
-                bodyEl.innerHTML = `
-                    <div class="card" style="text-align: right;">
-                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 10px;">فريق خدمة عملاء يلا فلفل</h2>
-                        <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">تواجه مشكلة في التحويل أو التفعيل؟ تواصل معنا فوراً:</p>
-                        <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px;">مراسلة الدعم عبر واتساب 💬</a>
-                        <a href="tel:01156605200" style="display: block; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; font-size: 14px;">اتصال مباشر بالخط الساخن ☎️</a>
-                    </div>
-                `;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `
-                    <div class="card" style="text-align: right;">
-                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 12px;">خيارات النظام والتشغيل</h2>
-                        <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 13px;">
-                            <p style="margin-bottom: 6px;">📱 <strong>إصدار التطبيق:</strong> النسخة الاحترافية 4.3</p>
-                            <p style="margin-bottom: 6px;">📍 <strong>منطقة التشغيل:</strong> ملوي - أسيوط - مراكز المنيا</p>
-                            <p style="margin-bottom: 6px;">🛰️ <strong>حالة GPS:</strong> مفعل بأقصى دقة</p>
-                            <p style="margin-bottom: 6px;">💵 <strong>نظام الدفع:</strong> كاش إجباري قبل الرحلة</p>
-                            <p>🔒 <strong>حالة الأمان:</strong> مشفر بالكامل (SSL)</p>
-                        </div>
-                        <button onclick="alert('التطبيق يعمل بأحدث إصدار ومحدث تلقائياً!')" class="btn" style="background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b;">التحقق من التحديثات 🔄</button>
-                    </div>
-                `;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p>📱 إصدار التطبيق: النسخة الشاملة 4.4</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
         function detectUserLocation() {
             const pickupInput = document.getElementById('pickup-location');
-            const gpsStatus = document.getElementById('gps-status-text');
             if (navigator.geolocation) {
-                pickupInput.value = "جاري تحديد إحداثيات موقعك عبر الأقمار...";
-                if(gpsStatus) gpsStatus.innerText = "جاري الاتصال بالأقمار الصناعية...";
+                pickupInput.value = "جاري تحديد إحداثيات موقعك...";
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        const lat = position.coords.latitude.toFixed(4);
-                        const lon = position.coords.longitude.toFixed(4);
-                        pickupInput.value = `موقعي الحالي (خط عرض: ${lat}, خط طول: ${lon})`;
-                        if(gpsStatus) gpsStatus.innerText = "تم رصد موقع الانطلاق بنجاح 🟢";
+                        pickupInput.value = `موقعي الحالي (${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)})`;
                     },
                     (error) => {
-                        pickupInput.value = "ملوي - المنيا (شارع الجمهورية الرئيسي)";
-                        if(gpsStatus) gpsStatus.innerText = "تم تحديد الموقع التقريبي في ملوي.";
+                        pickupInput.value = "ملوي - المنيا";
                     }
                 );
             } else {
@@ -472,48 +475,29 @@
 
         function autoDetectDropoff() {
             const dropoffInput = document.getElementById('dropoff-location');
-            dropoffInput.value = "جاري رصد الوجهة الأقرب عبر الخريطة الذكية...";
-            setTimeout(() => {
-                const destinations = [
-                    { name: "محطة قطار ملوي", km: 4 },
-                    { name: "قرية سمالوط الرئيسية", km: 7 },
-                    { name: "جامعة أسيوط / الطريق الزراعي", km: 12 },
-                    { name: "منفلوط - وسط المدينة", km: 8 }
-                ];
-                const selected = destinations[Math.floor(Math.random() * destinations.length)];
-                dropoffInput.value = selected.name;
-                currentCalculatedKm = selected.km;
-                updatePriceAuto();
-            }, 700);
+            dropoffInput.value = "محطة قطار ملوي";
+            currentCalculatedKm = 4;
+            updatePriceAuto();
         }
 
         function setVehicleType(type) {
             ['car', 'moto', 'bicycle'].forEach(t => {
                 const b = document.getElementById('btn-' + t);
-                if(b) {
-                    b.style.background = '#1f2937';
-                    b.style.color = '#fff';
-                }
+                if(b) { b.style.background = '#1f2937'; b.style.color = '#fff'; }
             });
-            const activeBtn = document.getElementById('btn-' + type);
-            if(activeBtn) {
-                activeBtn.style.background = '#f59e0b';
-                activeBtn.style.color = '#030712';
-            }
+            document.getElementById('btn-' + type).style.background = '#f59e0b';
+            document.getElementById('btn-' + type).style.color = '#030712';
 
             if (type === 'car') { selectedRate = 10; vehicleName = 'عربية'; }
             else if (type === 'moto') { selectedRate = 7; vehicleName = 'موتوسيكل'; }
             else if (type === 'bicycle') { selectedRate = 4; vehicleName = 'عجلة'; }
-
             updatePriceAuto();
         }
 
         function updatePriceAuto() {
             const price = currentCalculatedKm * selectedRate;
-            const priceEl = document.getElementById('price-display');
-            const distText = document.getElementById('calculated-distance-text');
-            if(priceEl) priceEl.innerText = price + ' ج.م';
-            if(distText) distText.innerText = `المسافة المقدرة: ${currentCalculatedKm} كم (بسعر ${selectedRate}ج/كم)`;
+            document.getElementById('price-display').innerText = price + ' ج.م';
+            document.getElementById('calculated-distance-text').innerText = `المسافة: ${currentCalculatedKm} كم (بسعر ${selectedRate}ج/كم)`;
         }
 
         function switchAuthTab(tab) {
@@ -533,56 +517,28 @@
         function loginClient() {
             const name = document.getElementById('client-name').value || 'فلفل';
             const phone = document.getElementById('client-phone').value || '01156605200';
-            
             clientGlobalName = name;
             clientGlobalPhone = phone;
-
             document.getElementById('user-welcome').innerText = `${name} 🛵`;
             document.getElementById('acc-name-display').innerText = name;
             document.getElementById('acc-phone').innerText = phone;
-            
             document.getElementById('auth-screen').style.display = 'none';
         }
 
         function sendCaptainRequestToWhatsApp() {
             const name = document.getElementById('captain-name').value;
             const phone = document.getElementById('captain-phone').value;
-            const vehicle = document.getElementById('captain-vehicle').value;
-            const personalImg = document.getElementById('mandatory-personal-img').files[0];
-            const idImg = document.getElementById('captain-id-img').files[0];
-            const licenseImg = document.getElementById('captain-license-img').files[0];
-
-            if(!name || !phone) {
-                alert('الرجاء إدخال الاسم ورقم الهاتف على الأقل!');
-                return;
-            }
-
-            if(!personalImg || !idImg) {
-                alert('عذراً يا أسطورة، يجب رفع (الصورة الشخصية + صورة البطاقة) لإتمام التسجيل والتفعيل!');
-                return;
-            }
-
-            if(!vehicle.includes('عجلة') && !licenseImg) {
-                alert('عذراً، رفع صورة الرخصة إلزامي للموتوسيكل والسيارات!');
-                return;
-            }
-
-            document.getElementById('profile-captain-name').innerText = name;
-
-            const myWhatsAppNumber = "201156605200"; 
-            let message = `مرحباً إدارة YALLA FELFEL ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n🪪 تم إرفاق المستندات المطلوبة.\n\nبرجاء مراجعة مستنداتي وتفعيلي فوراً.`;
-
-            const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            if(!name || !phone) { alert('أدخل الاسم ورقم الهاتف!'); return; }
+            window.open(`https://wa.me/201156605200?text=${encodeURIComponent('طلب انضمام كابتن جديد: ' + name)}`, '_blank');
             document.getElementById('auth-screen').style.display = 'none';
         }
 
         function switchTab(tab) {
-            ['home', 'captain-view', 'orders', 'wallet', 'account', 'sidebar-content'].forEach(t => {
+            ['home', 'market', 'captain-view', 'orders', 'wallet', 'account', 'sidebar-content'].forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 if(el) el.classList.add('hidden');
             });
-            ['home', 'orders', 'wallet', 'account'].forEach(t => {
+            ['home', 'market', 'orders', 'wallet', 'account'].forEach(t => {
                 const nav = document.getElementById('nav-' + t);
                 if(nav) nav.classList.remove('active');
             });
@@ -597,74 +553,12 @@
         }
 
         function publishOrder() {
-            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي عبر GPS';
-            const dest = document.getElementById('dropoff-location').value || 'وجهة محددة تلقائياً';
-            const priceEl = document.getElementById('price-display');
-            const price = priceEl ? priceEl.innerText : '50 ج.م';
-            const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
-            const payMethod = '💵 كاش إجباري (نقداً للكابتن)';
-
-            if (captainBalance <= MAX_DEBT) {
-                document.getElementById('charge-warning-banner').classList.remove('hidden');
-            }
-
-            const orderCardHtml = `
-                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
-                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👤 العميل: ${clientGlobalName}</p>
-                    <p><strong>الوسيلة:</strong> ${vehicleName}</p>
-                    <p><strong>من:</strong> ${pickup}</p>
-                    <p><strong>إلى:</strong> ${dest}</p>
-                    <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">${payMethod}</span></p>
-                    <p><strong>السعر العادل الثابت:</strong> <span style="color:#6ee7b7; font-weight:bold;">${price}</span></p>
-                    <p><strong>ملاحظات:</strong> ${notes}</p>
-                    
-                    <div style="display: flex; gap: 8px; margin-top: 12px;">
-                        <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
-                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام رحلتك على يلا فلفل 🚗')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
-                    </div>
-                </div>
-            `;
-
-            const capList = document.getElementById('captain-orders-list');
-            if(capList) capList.innerHTML = orderCardHtml;
-
-            alert('🚀 تم نشر طلبك بنجاح وعرضه على الكباتن مع أزرار التواصل المباشر!');
+            alert('🚀 تم نشر طلب التوصيل بنجاح!');
             switchTab('orders');
-            
-            const clientOrdersList = document.getElementById('client-orders-list');
-            if(clientOrdersList) {
-                clientOrdersList.innerHTML = `
-                    <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
-                        <p><strong>الوسيلة:</strong> ${vehicleName}</p>
-                        <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
-                        <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">${payMethod}</span></p>
-                        <p><strong>السعر الثابت:</strong> <span style="color:#f59e0b;">${price}</span></p>
-                        <p><strong>ملاحظات:</strong> ${notes}</p>
-                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
-                    </div>
-                `;
-            }
         }
 
         function sendReceiptToWhatsApp() {
-            const senderPhone = document.getElementById('sender-wallet-phone').value;
-            const screenshot = document.getElementById('transfer-screenshot').files[0];
-
-            if(!senderPhone) {
-                alert('الرجاء إدخال رقم هاتفك المحول منه أولاً!');
-                return;
-            }
-            if(!screenshot) {
-                alert('الرجاء إرفاق لقطة شاشة التحويل (الإيصال) ليتم إرسالها على واتساب!');
-                return;
-            }
-
-            const adminWhatsApp = "201156605200";
-            let textMsg = `مرحباً إدارة يلا فلفل ⚡\nتم إرسال إيصال تحويل فودافون كاش لشحن الرصيد من الرقم: ${senderPhone}\nبرجاء مراجعة الصورة وتأكيد إضافة الرصيد فوراً.`;
-            let waUrl = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(textMsg)}`;
-            
-            window.open(waUrl, '_blank');
-            alert('✅ تم تحويلك لواتساب الإدارة لإرسال إيصال التحويل ورقم الهاتف بنجاح!');
+            window.open(`https://wa.me/201156605200?text=${encodeURIComponent('إيصال شحن رصيد')}`, '_blank');
         }
     </script>
 </body>
