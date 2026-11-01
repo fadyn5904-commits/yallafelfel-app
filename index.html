@@ -12,7 +12,9 @@
         .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 18px; margin-top: 10px; text-align: right; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 15px; margin-top: 12px; cursor: pointer; transition: 0.2s; }
         .btn:active { transform: scale(0.98); }
-        .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        
+        /* زر متصل المزغرف والفخم */
+        .badge-fancy { background: linear-gradient(135deg, rgba(6,95,70,0.8), rgba(4,120,87,0.9)); color: #6ee7b7; padding: 6px 14px; border-radius: 25px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #10b981; font-weight: bold; box-shadow: 0 0 10px rgba(16,185,129,0.3); }
         
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
         .nav-item { text-align: center; color: #9ca3af; font-size: 10px; cursor: pointer; padding: 4px 8px; border-radius: 12px; transition: 0.2s; }
@@ -139,10 +141,13 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي -->
+    <!-- الهيدر العلوي (مع زر متصل المزغرف الجديد) -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="badge">متصل 🟢</span>
+            <div class="badge-fancy">
+                <span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #34d399;"></span>
+                متصل بالشبكة
+            </div>
         </div>
         <div style="display: flex; align-items: center; gap: 10px;">
             <div style="text-align: left;">
@@ -169,9 +174,9 @@
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold; font-size: 14px;">🚗 اختر وسيلة التوصيل:</p>
             <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span)</button>
-                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_1](start_span)[span_1](end_span)</button>
-                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_2](start_span)[span_2](end_span)</button>
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)</button>
             </div>
 
             <div style="margin-bottom: 15px; text-align: right;">
@@ -187,10 +192,6 @@
                     <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
-                <div style="background: #1f2937; border: 1px solid #f59e0b; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: right;">
-                    <p style="color: #f59e0b; font-weight: bold; font-size: 13px; margin-bottom: 4px;">💵 نظام الدفع: <span style="color: #6ee7b7;">كاش إجباري (نقداً للكابتن قبل الرحلة)</span></p>
-                </div>
-
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📝 ملاحظات الرحلة للكابتن:</label>
                 <textarea id="trip-notes" placeholder="اكتب أي تفاصيل إضافية للكابتن..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 13px; height: 45px; resize: none;"></textarea>
             </div>
@@ -204,7 +205,7 @@
         </div>
     </div>
 
-    <!-- قسم الماركت (يتم نشر طلبه ضمن الطلبات) -->
+    <!-- قسم الماركت -->
     <div id="tab-market" class="view-section hidden">
         <div style="text-align: center; margin-bottom: 15px;">
             <h1 class="brand-logo" style="font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 2px;">YALLA FELFEL</h1>
@@ -217,11 +218,6 @@
                 <p style="color: #9ca3af; font-size: 11px; margin-bottom: 10px;">اكتب كل اللي محتاجه، والكابتن هيجيبهولك لحد باب البيت مع حساب سعر التوصيل المناسب.</p>
                 
                 <textarea id="custom-market-order" placeholder="مثال: عاوز 2 زجاجة مياه كبيرة، كيلو طماطم، ودواء من الصيدلية..." style="background: #1f2937; color: white; padding: 14px; border-radius: 10px; border: 1px solid #f59e0b; font-size: 14px; height: 110px; resize: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);"></textarea>
-            </div>
-
-            <div style="background: #030712; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: right;">
-                <p style="color: #6ee7b7; font-weight: bold; font-size: 13px;">💵 نظام الدفع: كاش عند الاستلام للكابتن</p>
-                <p style="color: #9ca3af; font-size: 11px; margin-top: 3px;">سعر الطلبات يُحاسب به الكابتن عند التوصيل مضافاً إليه قيمة التوصيل العادلة.</p>
             </div>
 
             <button onclick="publishMarketOrder()" class="btn" style="background: #f59e0b; color: #030712; font-size: 16px; padding: 14px;">نشر طلب الماركت ضمن الطلبات 🚀🛒</button>
@@ -396,7 +392,6 @@
                 <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
                     <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">🛒 طلب ماركت من العميل: ${clientGlobalName}</p>
                     <p style="font-size:13px; color:#fff; background:#030712; padding:8px; border-radius:6px; margin:6px 0;"><strong>تفاصيل الطلبات:</strong><br>${orderText}</p>
-                    <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">كاش إجباري عند الاستلام</span></p>
                     
                     <div style="display: flex; gap: 8px; margin-top: 12px;">
                         <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
@@ -414,7 +409,6 @@
                     <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
                         <p style="color:#f59e0b; font-weight:bold;">🛒 طلب ماركت حر</p>
                         <p style="font-size:13px; margin:6px 0;"><strong>الطلبات:</strong> ${orderText}</p>
-                        <p><strong>الدفع:</strong> <span style="color:#6ee7b7;">كاش عند الاستلام</span></p>
                         <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
                     </div>
                 `;
@@ -457,7 +451,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.7</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.8</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
@@ -570,7 +564,6 @@
                     <p><strong>الوسيلة:</strong> ${vehicleName}</p>
                     <p><strong>من:</strong> ${pickup}</p>
                     <p><strong>إلى:</strong> ${dest}</p>
-                    <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">كاش إجباري</span></p>
                     <p><strong>السعر:</strong> <span style="color:#6ee7b7; font-weight:bold;">${price}</span></p>
                     <p><strong>ملاحظات:</strong> ${notes}</p>
                     
