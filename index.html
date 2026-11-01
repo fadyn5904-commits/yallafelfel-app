@@ -53,14 +53,14 @@
         
         <div class="sidebar-item" onclick="openSidebarSection('ratings')">⭐ سجل التقييمات والآراء</div>
         <div class="sidebar-item" onclick="openSidebarSection('support')">📞 الدعم الفني وخدمة العملاء</div>
-        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.4')">📱 إعدادات التطبيق</div>
+        <div class="sidebar-item" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 3.5')">📱 إعدادات التطبيق</div>
         <div class="sidebar-item" onclick="alert('تم نسخ رابط تطبيق يلا فلفل بنجاح!')">🔗 مشاركة التطبيق مع الأصدقاء</div>
         <div class="sidebar-item" onclick="alert('جميع الحقوق محفوظة لمنصة يلا فلفل © 2026')">📄 شروط الاستخدام والأمان</div>
         <div class="sidebar-item" onclick="toggleSidebar(); switchTab('account');" style="color: #f59e0b; font-weight: bold;">👤 الملف الشخصي والحساب</div>
     </div>
 
-    <!-- شاشة الدخول والتسجيل -->
-    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.96); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
+    <!-- شاشة الدخول والتسجيل (بدون زر تخطي نهائياً) -->
+    <div id="auth-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.98); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
         <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
             <div style="font-size: 45px; margin-bottom: 5px;">🌶️🕶️</div>
             <h2 class="brand-logo" style="font-size: 24px; margin-bottom: 2px;">YALLA FELFEL</h2>
@@ -79,10 +79,10 @@
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
                 <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
                 
-                <button onclick="loginClient()" class="btn">دخول كعميل فوراً 🚀</button>
+                <button onclick="loginClient()" class="btn">دخول كعميل وبدء الطلب 🚀</button>
             </div>
 
-            <!-- نموذج الكابتن -->
+            <!-- نموذج الكابتن (محدث بالمستندات الإلزامية المطلوبة) -->
             <div id="form-captain" class="hidden" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
                 <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
@@ -98,12 +98,11 @@
                 </select>
 
                 <label class="file-label">📸 (إلزامي) رفع صورتك الشخصية الحقيقية<input type="file" id="mandatory-personal-img" accept="image/*" style="display: none;" onchange="previewCaptainImage(event)"></label>
-                <label class="file-label">🛵 (إلزامي) رفع صورة المركبة<input type="file" id="mandatory-vehicle-img" accept="image/*" style="display: none;"></label>
+                <label class="file-label">🪪 (إلزامي) صورة البطاقة الشخصية (وجهين)<input type="file" id="captain-id-img" accept="image/*" style="display: none;"></label>
+                <label class="file-label">📄 (إلزامي) صورة رخصة القيادة / المركبة<input type="file" id="captain-license-img" accept="image/*" style="display: none;"></label>
 
-                <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال الطلب والتفعيل عبر واتساب 💬</button>
+                <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال طلب الانضمام والتفعيل عبر واتساب 💬</button>
             </div>
-
-            <p onclick="closeAuthScreen()" style="color: #9ca3af; font-size: 13px; margin-top: 18px; cursor: pointer; text-decoration: underline;">التخطي والدخول السريع ⏩</p>
         </div>
     </div>
 
@@ -169,7 +168,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للكابتن (مع أزرار الاتصال والواتساب الفورية) -->
+    <!-- الشاشة الرئيسية للكابتن -->
     <div id="tab-captain-view" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">🛵 الشاشة الرئيسية للكابتن</h1>
         
@@ -212,7 +211,7 @@
         </div>
     </div>
 
-    <!-- قسم المحفظة مع إيصال التحويل -->
+    <!-- قسم المحفظة مع إرسال إيصال التحويل على واتساب -->
     <div id="tab-wallet" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأموال</h1>
         <div class="card" style="text-align: center;">
@@ -222,34 +221,44 @@
             <div style="background: #1f2937; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: right; border: 1px solid #f59e0b;">
                 <p style="color: #f59e0b; font-weight: bold; font-size: 14px; margin-bottom: 5px;">📱 رقم فودافون كاش المعتمد للاستقبال:</p>
                 <p style="color: #fff; font-size: 18px; font-weight: bold; letter-spacing: 1px;">01156605200</p>
-                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل قيمة الرحلة أو العمولة على هذا الرقم، وارفق لقطة شاشة التحويل أدناه.</p>
+                <p style="color: #9ca3af; font-size: 11px; margin-top: 5px;">أرسل التحويل على الرقم واضغط لإرسال الإيصال مباشرة على واتساب الإدارة.</p>
             </div>
 
             <div style="margin-top: 15px; text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم هاتفك المحول منه:</label>
                 <input type="tel" id="sender-wallet-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 12px;">
 
-                <label class="file-label">📸 رفع لقطة شاشة التحويل (إيصال فودافون كاش)<input type="file" id="transfer-screenshot" accept="image/*" style="display: none;"></label>
+                <label class="file-label">📸 ارفق لقطة شاشة التحويل (إيصال فودافون كاش)<input type="file" id="transfer-screenshot" accept="image/*" style="display: none;"></label>
             </div>
 
-            <button onclick="confirmWalletTransfer()" class="btn" style="background: #065f46; color: #6ee7b7;">تأكيد عملية التحويل وإرفاق الإيصال ⚡</button>
+            <button onclick="sendReceiptToWhatsApp()" class="btn" style="background: #25d366; color: #ffffff;">إرسال لقطة شاشة التحويل عبر واتساب 💬⚡</button>
         </div>
     </div>
 
-    <!-- قسم حسابي -->
+    <!-- قسم حسابي (ممتلئ بالبيانات الشخصية) -->
     <div id="tab-account" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">👤 حسابي</h1>
+        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">👤 الملف الشخصي للعميل</h1>
         
-        <div class="card" style="text-align: right;" id="account-details">
-            <p><strong>الاسم:</strong> فادي (فلفل)</p>
-            <p><strong>الهاتف:</strong> 01156605200</p>
-            <p><strong>المدينة:</strong> ملوي - المنيا</p>
+        <div class="card" style="text-align: right;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;">
+                <div style="width: 55px; height: 55px; background: #f59e0b; color: #030712; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold;">🌶️</div>
+                <div>
+                    <h3 id="acc-name-display" style="color: #fff; font-size: 16px;">فادي (فلفل)</h3>
+                    <p style="color: #6ee7b7; font-size: 12px;">عميل معتمد بمنصة يلا فلفل ✅</p>
+                </div>
+            </div>
+
+            <div style="display: grid; gap: 10px; font-size: 14px;" id="account-details">
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📱 رقم الهاتف:</strong> <span id="acc-phone" style="color: #f59e0b;">01156605200</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 المدينة / المركز:</strong> ملوي - المنيا</p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📦 الرحلات النشطة:</strong> <span style="color: #6ee7b7;">لا توجد رحلات حالية</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>⭐ مستوى العميل:</strong> VIP (مميز)</p>
+            </div>
         </div>
 
         <div class="card" style="text-align: center;">
-            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 10px;">يمكنك الوصول إلى سجل التقييمات والدعم الفني من القائمة الجانبية (☰) في الأعلى.</p>
-            <button onclick="openSidebarSection('ratings')" class="btn" style="background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b;">فتح سجل التقييمات ⭐</button>
-            <button onclick="openSidebarSection('support')" class="btn" style="background: #25d366; color: white;">الدعم الفني المباشر 📞</button>
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 10px;">تحتاج مساعدة أو تعديل بياناتك؟ تواصل معنا فوراً:</p>
+            <button onclick="openSidebarSection('support')" class="btn" style="background: #25d366; color: white;">الدعم الفني المباشر عبر واتساب 📞</button>
         </div>
     </div>
 
@@ -287,18 +296,14 @@
         let vehicleName = 'عربية';
         let currentCalculatedKm = 5;
         let clientGlobalPhone = '01156605200';
-        let clientGlobalName = 'عميل يلا فلفل';
+        let clientGlobalName = 'فادي (فلفل)';
 
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
-                const auth = document.getElementById('auth-screen');
                 if (splash) {
                     splash.style.opacity = '0';
                     setTimeout(() => splash.style.display = 'none', 500);
-                }
-                if (auth) {
-                    auth.classList.remove('hidden');
                 }
                 detectUserLocation();
                 autoDetectDropoff();
@@ -449,11 +454,9 @@
             clientGlobalPhone = phone;
 
             document.getElementById('user-welcome').innerText = `${name} 🛵`;
-            document.getElementById('account-details').innerHTML = `
-                <p><strong>الاسم:</strong> ${name}</p>
-                <p><strong>الهاتف:</strong> ${phone}</p>
-                <p><strong>المدينة:</strong> ملوي - المنيا</p>
-            `;
+            document.getElementById('acc-name-display').innerText = name;
+            document.getElementById('acc-phone').innerText = phone;
+            
             closeAuthScreen();
         }
 
@@ -462,21 +465,23 @@
             const phone = document.getElementById('captain-phone').value;
             const vehicle = document.getElementById('captain-vehicle').value;
             const personalImg = document.getElementById('mandatory-personal-img').files[0];
+            const idImg = document.getElementById('captain-id-img').files[0];
+            const licenseImg = document.getElementById('captain-license-img').files[0];
 
             if(!name || !phone) {
                 alert('الرجاء إدخال الاسم ورقم الهاتف على الأقل!');
                 return;
             }
 
-            if(!personalImg) {
-                alert('عذراً يا أسطورة، رفع الصورة الشخصية إلزامي لتفعيل حساب الكابتن!');
+            if(!personalImg || !idImg || !licenseImg) {
+                alert('عذراً يا أسطورة، يجب رفع (الصورة الشخصية + صورة البطاقة + صورة الرخصة) لإتمام التسجيل والتفعيل!');
                 return;
             }
 
             document.getElementById('profile-captain-name').innerText = name;
 
             const myWhatsAppNumber = "201156605200"; 
-            let message = `مرحباً إدارة YALLA FELFEL ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n📸 تم إرفاق الصورة الشخصية.\n\nبرجاء مراجعة بياناتي وتفعيلي.`;
+            let message = `مرحباً إدارة YALLA FELFEL ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n🪪 تم إرفاق (الصورة الشخصية + البطاقة + الرخصة).\n\nبرجاء مراجعة مستنداتي وتفعيلي فوراً.`;
 
             const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
@@ -552,25 +557,31 @@
                         <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
                         <p><strong>السعر الثابت:</strong> <span style="color:#f59e0b;">${price}</span></p>
                         <p><strong>ملاحظات:</strong> ${notes}</p>
-                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن وتواصله...</p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
                     </div>
                 `;
             }
         }
 
-        function confirmWalletTransfer() {
+        function sendReceiptToWhatsApp() {
             const senderPhone = document.getElementById('sender-wallet-phone').value;
             const screenshot = document.getElementById('transfer-screenshot').files[0];
 
             if(!senderPhone) {
-                alert('الرجاء إدخال رقم هاتفك المحول منه للتأكيد!');
+                alert('الرجاء إدخال رقم هاتفك المحول منه أولاً!');
                 return;
             }
             if(!screenshot) {
-                alert('الرجاء إرفاق لقطة شاشة التحويل (الإيصال) لتأكيد العملية بنجاح!');
+                alert('الرجاء إرفاق لقطة شاشة التحويل (الإيصال) ليتم إرسالها على واتساب!');
                 return;
             }
-            alert('✅ تم استلام إيصال التحويل ورقم الهاتف بنجاح، وسيتم إضافة الرصيد فوراً على رقمك 01156605200!');
+
+            const adminWhatsApp = "201156605200";
+            let textMsg = `مرحباً إدارة يلا فلفل ⚡\nتم إرسال إيصال تحويل فودافون كاش من الرقم: ${senderPhone}\nبرجاء مراجعة الصورة وإضافة الرصيد فوراً.`;
+            let waUrl = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(textMsg)}`;
+            
+            window.open(waUrl, '_blank');
+            alert('✅ تم تحويلك لواتساب الإدارة لإرسال إيصال التحويل ورقم الهاتف بنجاح!');
         }
     </script>
 </body>
