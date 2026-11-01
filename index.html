@@ -142,10 +142,10 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي العام -->
+    <!-- الهيدر العلوي (بدون زرار يلا فلفل في آي بي الإنجليزي) -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="background: rgba(6,95,70,0.6); color: #6ee7b7; padding: 5px 12px; border-radius: 20px; font-size: 11px; border: 1px solid #10b981; font-weight: bold;">💎 Yalla Felfel VIP</span>
+            <span style="color: #f59e0b; font-size: 12px; font-weight: bold;">📍 المنيا - ملوي</span>
         </div>
         <div style="display: flex; align-items: center; gap: 10px;">
             <div style="text-align: left;">
@@ -184,9 +184,9 @@
                     <button onclick="detectUserLocation()" style="flex: 1; background: #065f46; color: #6ee7b7; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 12px;">تحديث 📍</button>
                 </div>
 
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول / مكان النزول:</label>
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول:</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                    <input type="text" id="dropoff-location" placeholder="حدد مكان النزول تلقائياً..." style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px;">
+                    <input type="text" id="dropoff-location" placeholder="حدد وجهة الوصول تلقائياً..." style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px;">
                     <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
@@ -222,10 +222,10 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للكابتن (مع زر أونلاين / أوفلاين الخاص به) -->
+    <!-- الشاشة الرئيسية للكابتن (مع لوجو YALLA FELFEL المكبر فوق اسم الكابتن) -->
     <div id="tab-captain-view" class="view-section hidden">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h1 class="brand-logo" style="font-size: 20px; font-weight: 900; text-align: right;">لوحة تحكم الكابتن</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 2px solid #1f2937; padding-bottom: 10px;">
+            <h1 class="brand-logo" style="font-size: 24px; font-weight: 900; letter-spacing: 2px; text-align: right;">YALLA FELFEL</h1>
             <button id="status-btn" onclick="toggleOnlineStatus()" class="status-toggle-btn">
                 <span id="status-dot" style="width: 7px; height: 7px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #34d399;"></span>
                 <span id="status-text">أونلاين</span>
@@ -269,7 +269,7 @@
         </div>
     </div>
 
-    <!-- قسم الطلبات (بعنوان مزغرف وفخم) -->
+    <!-- قسم الطلبات -->
     <div id="tab-orders" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">📦 سجل الطلبات والرحلات النشطة</h1>
         <div class="card">
@@ -279,7 +279,7 @@
         </div>
     </div>
 
-    <!-- قسم المحفظة (بعنوان مزغرف وفخم) -->
+    <!-- قسم المحفظة -->
     <div id="tab-wallet" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأرباح</h1>
         <div class="card" style="text-align: center;">
@@ -303,7 +303,7 @@
         </div>
     </div>
 
-    <!-- قسم حسابي (بعنوان مزغرف وفخم) -->
+    <!-- قسم حسابي -->
     <div id="tab-account" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">👤 الملف الشخصي وحساب الأسطورة</h1>
         
@@ -475,7 +475,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.0</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.1</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
