@@ -144,17 +144,36 @@
           <button onclick="setVehicleType('bicycle')" id="btn-bicycle" class="text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-bicycle ml-1"></i> عجلة</button>
         </div>
       </div>
+<div class="space-y-2">
+    <label class="text-xs text-amber-300 font-bold block">📍 اختر وجهة الوصول أو اكتبها يدويّاً:</label>
+    
+    <!-- قائمة كبرى تضم مراكز وقرى المنيا وملوي -->
+    <select id="dropoff-location" onchange="handleLocationChange()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400 mb-2">
+        <optgroup label="✨ مركز ومدينة ملوي (الأساسية)">
+            <option value="3" data-km="3">ملوي - المحطة والمدينة الرئيسية</option>
+            <option value="5" data-km="5">ملوي - جامعة المنيا ومنطقة العشري</option>
+            <option value="12" data-km="12">ملوي - قرية طحا الأعمدة</option>
+            <option value="8" data-km="8">ملوي - قرية نزلة حسين</option>
+            <option value="10" data-km="10">ملوي - قرية البرشا</option>
+            <option value="7" data-km="7">ملوي - قرية الروضة</option>
+        </optgroup>
+        <optgroup label="🏙️ مراكز محافظة المنيا">
+            <option value="18" data-km="18">أبو قرقاص - المدينة والقرى</option>
+            <option value="25" data-km="25">المنيا - المدينة الرئيسية والجامعة</option>
+            <option value="35" data-km="35">سمالوط - المدينة والمراكز</option>
+            <option value="45" data-km="45">دير مواس - المدينة والقرى</option>
+        </optgroup>
+        <optgroup label="✍️ أخرى">
+            <option value="other">مكان آخر (اكتب العنوان اليدوي بالتفصيل)...</option>
+        </optgroup>
+    </select>
 
-      <div class="bg-gray-800 p-3 rounded-xl border border-blue-500/30 flex items-center justify-between">
-        <div class="flex items-center space-x-3 space-x-reverse">
-          <i class="fa-solid fa-location-crosshairs text-blue-400 text-lg animate-pulse"></i>
-          <div>
-            <span class="text-[10px] text-gray-400 block">مكان الانطلاق الحالي:</span>
-            <span id="gps-status" class="text-xs font-bold text-blue-300">()</span>
-          </div>
-        </div>
-        <button onclick="getGPSLocation()" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition">GPS</button>
-      </div>
+    <!-- خانة الكتابة اليدوية لو العميل اختار مكان آخر -->
+    <div id="custom-location-box" class="hidden">
+        <input type="text" id="custom-place-name" placeholder="اكتب اسم القرية أو الشارع بالتفصيل هنا..." class="w-full p-2.5 bg-gray-800 border border-amber-400 rounded-xl text-white text-xs focus:outline-none">
+    </div>
+</div>
+
 
       <div class="space-y-2">
         <label class="text-sm text-amber-300 font-bold block">🎯 اختر وجهة الوصول أو اكتبها:</label>
