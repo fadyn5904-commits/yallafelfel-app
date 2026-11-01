@@ -14,7 +14,6 @@
         .btn:active { transform: scale(0.98); }
         .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
         
-        /* شريط التنقل السفلي المزغرف والفخم */
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
         .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; padding: 6px 12px; border-radius: 12px; transition: 0.2s; }
         .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -69,7 +68,7 @@
             <span style="color: #f59e0b;">❯</span>
         </div>
 
-        <div class="fancy-sidebar-card" onclick="alert('يلا فلفل - النسخة الذكية المتطورة 4.1')">
+        <div class="fancy-sidebar-card" onclick="openSidebarSection('settings')">
             <span>⚙️ إعدادات التطبيق العامة</span>
             <span style="color: #f59e0b;">❯</span>
         </div>
@@ -151,7 +150,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل (بدون رسالة ترحيبية أو كلام زائد) -->
+    <!-- الشاشة الرئيسية للعميل -->
     <div id="tab-home" class="view-section">
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -167,9 +166,9 @@
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold; font-size: 14px;">🚗 اختر وسيلة التوصيل:</p>
             <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)</button>
-                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)</button>
-                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)</button>
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span)</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_1](start_span)[span_1](end_span)</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_2](start_span)[span_2](end_span)</button>
             </div>
 
             <div style="margin-bottom: 15px; text-align: right;">
@@ -185,14 +184,10 @@
                     <button onclick="autoDetectDropoff()" style="flex: 1; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">تحديد آلي 🎯</button>
                 </div>
 
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">💳 طريقة الدفع والمحاسبة:</label>
-                <select id="payment-method-select" onchange="toggleClientPaymentProof()" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 13px; margin-bottom: 12px;">
-                    <option value="cash">💵 محاسبة كاش (نقداً قبل أو بعد الرحلة)</option>
-                    <option value="vodafone">📱 تحويل فودافون كاش مسبقاً (01156605200)</option>
-                </select>
-
-                <div id="client-proof-container" class="hidden">
-                    <label class="file-label">📸 ارفق لقطة شاشة تحويل فودافون كاش لـ 01156605200<input type="file" id="client-payment-screenshot" accept="image/*" style="display: none;"></label>
+                <!-- نظام الدفع كاش إجباري قبل الرحلة -->
+                <div style="background: #1f2937; border: 1px solid #f59e0b; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: right;">
+                    <p style="color: #f59e0b; font-weight: bold; font-size: 13px; margin-bottom: 4px;">💵 نظام الدفع: <span style="color: #6ee7b7;">كاش إجباري (نقداً للكابتن قبل الرحلة)</span></p>
+                    <p style="color: #9ca3af; font-size: 11px;">يتم تسليم قيمة الرحلة نقداً مباشرة للكابتن مع بدء التحرك.</p>
                 </div>
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📝 ملاحظات الرحلة للكابتن:</label>
@@ -229,7 +224,7 @@
                     <span style="font-size: 18px; font-weight: bold; color: #6ee7b7;" id="captain-balance-display">0.00 ج.م</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px; color: #9ca3af;">
-                    <span>حد السلف المسموح: <strong style="color: #ef4444;">-50 ج.م</strong></span>
+                    <span>حد السلف: <strong style="color: #ef4444;">-50 ج.م</strong></span>
                     <span>عمولة المنصة: <strong style="color: #f59e0b;">10%</strong></span>
                 </div>
             </div>
@@ -314,7 +309,7 @@
         </div>
     </div>
 
-    <!-- قسم محتوى القائمة الجانبية -->
+    <!-- قسم محتوى القائمة الجانبية (شامل إعدادات التطبيق العامة) -->
     <div id="tab-sidebar-content" class="view-section hidden">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
             <h1 id="sidebar-section-title" class="brand-logo" style="font-size: 18px; text-align: right;">⭐ سجل التقييمات</h1>
@@ -323,7 +318,7 @@
         <div id="sidebar-dynamic-body"></div>
     </div>
 
-    <!-- شريط التنقل السفلي المزغرف والمحدث بأيقونات فخمة -->
+    <!-- شريط التنقل السفلي -->
     <div class="nav-bar">
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
             <div style="font-size: 18px;">👤</div>
@@ -364,16 +359,6 @@
                 autoDetectDropoff();
             }, 800);
         });
-
-        function toggleClientPaymentProof() {
-            const payMethod = document.getElementById('payment-method-select').value;
-            const proofBox = document.getElementById('client-proof-container');
-            if (payMethod === 'vodafone') {
-                proofBox.classList.remove('hidden');
-            } else {
-                proofBox.classList.add('hidden');
-            }
-        }
 
         function checkVehicleLicenseRequirement() {
             const vehSelect = document.getElementById('captain-vehicle').value;
@@ -442,6 +427,21 @@
                         <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">تواجه مشكلة في التحويل أو التفعيل؟ تواصل معنا فوراً:</p>
                         <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px;">مراسلة الدعم عبر واتساب 💬</a>
                         <a href="tel:01156605200" style="display: block; background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; font-size: 14px;">اتصال مباشر بالخط الساخن ☎️</a>
+                    </div>
+                `;
+            } else if (section === 'settings') {
+                titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
+                bodyEl.innerHTML = `
+                    <div class="card" style="text-align: right;">
+                        <h2 style="color: #f59e0b; font-size: 16px; margin-bottom: 12px;">خيارات النظام والتشغيل</h2>
+                        <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 13px;">
+                            <p style="margin-bottom: 6px;">📱 <strong>إصدار التطبيق:</strong> النسخة الاحترافية 4.3</p>
+                            <p style="margin-bottom: 6px;">📍 <strong>منطقة التشغيل:</strong> ملوي - أسيوط - مراكز المنيا</p>
+                            <p style="margin-bottom: 6px;">🛰️ <strong>حالة GPS:</strong> مفعل بأقصى دقة</p>
+                            <p style="margin-bottom: 6px;">💵 <strong>نظام الدفع:</strong> كاش إجباري قبل الرحلة</p>
+                            <p>🔒 <strong>حالة الأمان:</strong> مشفر بالكامل (SSL)</p>
+                        </div>
+                        <button onclick="alert('التطبيق يعمل بأحدث إصدار ومحدث تلقائياً!')" class="btn" style="background: #1f2937; color: #f59e0b; border: 1px solid #f59e0b;">التحقق من التحديثات 🔄</button>
                     </div>
                 `;
             }
@@ -602,7 +602,7 @@
             const priceEl = document.getElementById('price-display');
             const price = priceEl ? priceEl.innerText : '50 ج.م';
             const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
-            const payMethod = document.getElementById('payment-method-select').value === 'vodafone' ? '📱 فودافون كاش (تم التحويل)' : '💵 كاش قبل/بعد الرحلة';
+            const payMethod = '💵 كاش إجباري (نقداً للكابتن)';
 
             if (captainBalance <= MAX_DEBT) {
                 document.getElementById('charge-warning-banner').classList.remove('hidden');
