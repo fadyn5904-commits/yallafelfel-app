@@ -40,7 +40,7 @@
 </head>
 <body>
 
-    <!-- شاشة البداية (سبلاش - تم إطالة مدة ظهورها لتكون أطول وأشيك) -->
+    <!-- شاشة البداية (سبلاش) -->
     <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.8s ease;">
         <div style="font-size: 85px; margin-bottom: 15px; filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8));">🌶️🕶️</div>
         <h1 class="brand-logo" style="font-size: 42px; margin-bottom: 5px;">YALLA FELFEL</h1>
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي (لوجو يلا فلفل الكبير بالإنجليزية وبدون إيموجي الاسكوتر) -->
+    <!-- الهيدر العلوي -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل -->
+    <!-- الشاشة الرئيسية للعميل (التوصيل والنقل) -->
     <div id="tab-home" class="view-section">
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -204,7 +204,7 @@
         </div>
     </div>
 
-    <!-- قسم الماركت (مع لوجو YALLA FELFEL بالإنجليزية بدلاً من النص القديم) -->
+    <!-- قسم الماركت (يتم نشر طلبه ضمن الطلبات) -->
     <div id="tab-market" class="view-section hidden">
         <div style="text-align: center; margin-bottom: 15px;">
             <h1 class="brand-logo" style="font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 2px;">YALLA FELFEL</h1>
@@ -224,7 +224,7 @@
                 <p style="color: #9ca3af; font-size: 11px; margin-top: 3px;">سعر الطلبات يُحاسب به الكابتن عند التوصيل مضافاً إليه قيمة التوصيل العادلة.</p>
             </div>
 
-            <button onclick="sendCustomMarketOrderToWhatsApp()" class="btn" style="background: #25d366; color: #fff; font-size: 16px; padding: 14px;">إرسال طلب الماركت عبر واتساب 💬🛒</button>
+            <button onclick="publishMarketOrder()" class="btn" style="background: #f59e0b; color: #030712; font-size: 16px; padding: 14px;">نشر طلب الماركت ضمن الطلبات 🚀🛒</button>
         </div>
     </div>
 
@@ -382,19 +382,46 @@
                 }
                 detectUserLocation();
                 autoDetectDropoff();
-            }, 1200); // إطالة وقت السبلاش لضمان تجربة أطول وأشيك
+            }, 1200);
         });
 
-        function sendCustomMarketOrderToWhatsApp() {
+        function publishMarketOrder() {
             const orderText = document.getElementById('custom-market-order').value;
             if(!orderText.trim()) {
                 alert('الرجاء كتابة الطلبات المطلوبة في خانة الماركت أولاً!');
                 return;
             }
-            const adminWhatsApp = "201156605200";
-            let msg = `🛒 طلب ماركت جديد من YALLA FELFEL:\n👤 العميل: ${clientGlobalName}\n📱 الهاتف: ${clientGlobalPhone}\n\n📝 تفاصيل الطلبات:\n${orderText}\n\n💵 الدفع: كاش عند الاستلام للكابتن`;
-            let url = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+
+            const orderCardHtml = `
+                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
+                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">🛒 طلب ماركت من العميل: ${clientGlobalName}</p>
+                    <p style="font-size:13px; color:#fff; background:#030712; padding:8px; border-radius:6px; margin:6px 0;"><strong>تفاصيل الطلبات:</strong><br>${orderText}</p>
+                    <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">كاش إجباري عند الاستلام</span></p>
+                    
+                    <div style="display: flex; gap: 8px; margin-top: 12px;">
+                        <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
+                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام طلب الماركت الخاص بك 🛒')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
+                    </div>
+                </div>
+            `;
+
+            const capList = document.getElementById('captain-orders-list');
+            if(capList) capList.innerHTML = orderCardHtml;
+
+            const clientOrdersList = document.getElementById('client-orders-list');
+            if(clientOrdersList) {
+                clientOrdersList.innerHTML = `
+                    <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
+                        <p style="color:#f59e0b; font-weight:bold;">🛒 طلب ماركت حر</p>
+                        <p style="font-size:13px; margin:6px 0;"><strong>الطلبات:</strong> ${orderText}</p>
+                        <p><strong>الدفع:</strong> <span style="color:#6ee7b7;">كاش عند الاستلام</span></p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
+                    </div>
+                `;
+            }
+
+            alert('🚀 تم نشر طلب الماركت بنجاح ضمن قائمة الطلبات ورادار الكباتن!');
+            switchTab('orders');
         }
 
         function toggleSidebar() {
@@ -430,7 +457,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.6</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.7</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
@@ -531,7 +558,45 @@
         }
 
         function publishOrder() {
-            alert('🚀 تم نشر طلب التوصيل بنجاح!');
+            const pickup = document.getElementById('pickup-location').value || 'موقعي الحالي عبر GPS';
+            const dest = document.getElementById('dropoff-location').value || 'وجهة محددة تلقائياً';
+            const priceEl = document.getElementById('price-display');
+            const price = priceEl ? priceEl.innerText : '50 ج.م';
+            const notes = document.getElementById('trip-notes').value || 'لا توجد ملاحظات';
+
+            const orderCardHtml = `
+                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
+                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👤 العميل: ${clientGlobalName}</p>
+                    <p><strong>الوسيلة:</strong> ${vehicleName}</p>
+                    <p><strong>من:</strong> ${pickup}</p>
+                    <p><strong>إلى:</strong> ${dest}</p>
+                    <p><strong>طريقة الدفع:</strong> <span style="color:#6ee7b7;">كاش إجباري</span></p>
+                    <p><strong>السعر:</strong> <span style="color:#6ee7b7; font-weight:bold;">${price}</span></p>
+                    <p><strong>ملاحظات:</strong> ${notes}</p>
+                    
+                    <div style="display: flex; gap: 8px; margin-top: 12px;">
+                        <a href="tel:${clientGlobalPhone}" class="btn" style="background:#065f46; color:#6ee7b7; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">📞 اتصال بالعميل</a>
+                        <a href="https://wa.me/20${clientGlobalPhone.replace(/^0/, '')}?text=${encodeURIComponent('مرحباً بك يا أسطورة، أنا الكابتن في طريق إتمام رحلتك')}" target="_blank" class="btn" style="background:#25d366; color:#fff; text-decoration:none; text-align:center; margin-top:0; padding:10px; font-size:13px;">💬 مراسلة واتساب</a>
+                    </div>
+                </div>
+            `;
+
+            const capList = document.getElementById('captain-orders-list');
+            if(capList) capList.innerHTML = orderCardHtml;
+
+            const clientOrdersList = document.getElementById('client-orders-list');
+            if(clientOrdersList) {
+                clientOrdersList.innerHTML = `
+                    <div style="background:#1f2937; padding:12px; border-radius:8px; text-align:right;">
+                        <p><strong>الوسيلة:</strong> ${vehicleName}</p>
+                        <p><strong>من:</strong> ${pickup} ⬅️ <strong>إلى:</strong> ${dest}</p>
+                        <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
+                        <p style="color:#6ee7b7; font-size:12px; margin-top:5px;">الحالة: تم النشر بنجاح وفي انتظار قبول الكابتن...</p>
+                    </div>
+                `;
+            }
+
+            alert('🚀 تم نشر طلب النقل بنجاح!');
             switchTab('orders');
         }
 
