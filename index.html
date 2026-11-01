@@ -21,6 +21,9 @@
         .status-toggle-btn { background: #065f46; color: #6ee7b7; border: 1px solid #10b981; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
         .status-toggle-btn.offline { background: #7f1d1d; color: #fca5a5; border-color: #ef4444; }
 
+        /* شريط الأذكار الإسلامي المتحرك */
+        .athkar-ticker { background: linear-gradient(135deg, rgba(6, 95, 70, 0.4), rgba(17, 24, 39, 0.9)); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; color: #6ee7b7; text-align: center; font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
+
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
         .nav-item { text-align: center; color: #9ca3af; font-size: 10px; cursor: pointer; padding: 4px 8px; border-radius: 12px; transition: 0.2s; }
         .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -147,10 +150,17 @@
         </div>
     </div>
 
+    <!-- شريط الأذكار الإسلامي المتحرك والأعلى -->
+    <div class="athkar-ticker">
+        <span>📿</span>
+        <span id="athkar-text">سبحان الله وبحمده، سبحان الله العظيم</span>
+        <span>✨</span>
+    </div>
+
     <!-- الهيدر العلوي العام -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="color: #f59e0b; font-size: 12px; font-weight: bold;">📍 المنيا - ملوي</span>
+            <span style="color: #f59e0b; font-size: 12px; font-weight: bold;">💎 منصة الخدمات الذكية</span>
         </div>
         <div style="display: flex; align-items: center; gap: 10px;">
             <div style="text-align: left;">
@@ -323,7 +333,7 @@
 
             <div style="display: grid; gap: 10px; font-size: 14px;" id="account-details">
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📱 رقم الهاتف:</strong> <span id="acc-phone" style="color: #f59e0b;">01156605200</span></p>
-                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 المدينة / المركز:</strong> ملوي - المنيا</p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 نطاق العمل:</strong> المنيا وقراها</p>
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>💳 حد السلف المسموح:</strong> -50.00 ج.م</p>
                 <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>⭐ المستوى:</strong> VIP (عضو أسطوري)</p>
             </div>
@@ -369,6 +379,23 @@
     </div>
 
     <script>
+        // 📿 قائمة الأذكار المتغيرة تلقائياً كل 5 ثوانٍ
+        const athkarList = [
+            "سبحان الله وبحمده، سبحان الله العظيم",
+            "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد",
+            "استغفر الله العظيم واتوب إليه",
+            "اللهم صل وسلم على نبينا محمد وعلى آله وصحبه أجمعين",
+            "لا حول ولا قوة إلا بالله العلي العظيم",
+            "الحمد لله حمداً كثيراً طيباً مباركاً فيه",
+            "سبحان الله والحمد لله ولا إله إلا الله والله أكبر"
+        ];
+        let athkarIndex = 0;
+        setInterval(() => {
+            athkarIndex = (athkarIndex + 1) % athkarList.length;
+            const athkarEl = document.getElementById('athkar-text');
+            if(athkarEl) athkarEl.innerText = athkarList[athkarIndex];
+        }, 5000);
+
         let selectedRate = 10; 
         let vehicleName = 'عربية';
         let currentCalculatedKm = 5;
@@ -480,7 +507,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.2</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 5.3</p><p>📍 نطاق العمل: المنيا وقراها</p></div>`;
             }
         }
 
@@ -493,17 +520,17 @@
                         pickupInput.value = `موقعي الحالي (${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)})`;
                     },
                     (error) => {
-                        pickupInput.value = "ملوي - المنيا";
+                        pickupInput.value = "محافظة المنيا";
                     }
                 );
             } else {
-                pickupInput.value = "ملوي - المنيا";
+                pickupInput.value = "محافظة المنيا";
             }
         }
 
         function autoDetectDropoff() {
             const dropoffInput = document.getElementById('dropoff-location');
-            dropoffInput.value = "محطة قطار ملوي";
+            dropoffInput.value = "محطة قطار المنيا";
             currentCalculatedKm = 4;
             updatePriceAuto();
         }
