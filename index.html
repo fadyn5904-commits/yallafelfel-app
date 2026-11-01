@@ -145,49 +145,7 @@
         </div>
       </div>
 
-<div class="space-y-2">
-    <label class="text-xs text-amber-300 font-bold block">📍 اختر وجهة للتحرك أو اكتبها يدويّاً:</label>
-    
-    <!-- القائمة الكبرى للمراكز والقرى -->
-    <select id="dropoff-location" onchange="handleLocationChange()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400 mb-2">
-        <optgroup label="✨ مركز ومدينة ملوي (الأساسية)">
-            <option value="3" data-km="3">ملوي - المحطة والمدينة الرئيسية</option>
-            <option value="5" data-km="5">ملوي - جامعة المنيا ومنطقة العشري</option>
-            <option value="12" data-km="12">ملوي - قرية طحا الأعمدة</option>
-            <option value="8" data-km="8">ملوي - قرية نزلة حسين</option>
-            <option value="10" data-km="10">ملوي - قرية البرشا</option>
-            <option value="7" data-km="7">ملوي - قرية الروضة</option>
-        </optgroup>
-        <optgroup label="🏙️ مراكز محافظة المنيا">
-            <option value="18" data-km="18">أبو قرقاص - المدينة والقرى</option>
-            <option value="25" data-km="25">المنيا - المدينة الرئيسية والجامعة</option>
-            <option value="35" data-km="35">سمالوط - المدينة والمراكز</option>
-            <option value="45" data-km="45">دير مواس - المدينة والقرى</option>
-        </optgroup>
-        <optgroup label="✍️ أخرى">
-            <option value="other">مكان آخر (اكتب العنوان بالتفصيل)...</option>
-        </optgroup>
-    </select>
 
-    <!-- خانة الكتابة اليدوية تحت القائمة مباشرة -->
-    <div id="custom-location-box" class="hidden mt-2">
-        <input type="text" id="custom-place-name" placeholder="اكتب اسم القرية أو الشارع أو المكان بالتفصيل هنا..." class="w-full p-2.5 bg-gray-800 border border-amber-400 rounded-xl text-white text-xs focus:outline-none">
-    </div>
-</div>
-      
-
-      <div class="space-y-2">
-        <label class="text-sm text-amber-300 font-bold block">🎯 اختر وجهة الوصول أو اكتبها:</label>
-        <select id="dropoff-location" onchange="handleLocationChange()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-amber-500 text-sm font-bold">
-          <optgroup label="📍 مركز ومدينة المنيا">
-            <option value="المنيا - المحطة وقرية سمالوط" data-km="3">ميدان المحطة والمدينة الرئيسية (~3 كم)</option>
-            <option value="المنيا - جامعة المنيا / الشلبي" data-km="5">جامعة المنيا ومنطقة الشلبي (~5 كم)</option>
-            <option value="المنيا - قرية طحا الأعمدة" data-km="12">قرية طحا الأعمدة (~12 كم)</option>
-            <option value="المنيا - قرية نزلة حسين" data-km="8">قرية نزلة حسين (~8 كم)</option>
-            <option value="المنيا - قرية تلة" data-km="10">قرية تلة (~10 كم)</option>
-            <option value="المنيا - قرية البرجاية" data-km="7">قرية البرجاية (~7 كم)</option>
-          </optgroup>
-          <optgroup label="📍 مركز ومدينة ملوي (قاعدتك الأساسية)">
             <option value="ملوي - المدينة ومحطة القطار" data-km="15">مدينة ملوي ومحطة القطار (~15 كم)</option>
             <option value="ملوي - قرية الروضة" data-km="24">قرية الروضة (~24 كم)</option>
             <option value="ملوي - قرية المعصرة" data-km="20">قرية المعصرة (~20 كم)</option>
