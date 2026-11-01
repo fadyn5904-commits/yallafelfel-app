@@ -144,10 +144,11 @@
           <button onclick="setVehicleType('bicycle')" id="btn-bicycle" class="text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-bicycle ml-1"></i> عجلة</button>
         </div>
       </div>
+
 <div class="space-y-2">
-    <label class="text-xs text-amber-300 font-bold block">📍 اختر وجهة الوصول أو اكتبها يدويّاً:</label>
+    <label class="text-xs text-amber-300 font-bold block">📍 اختر وجهة للتحرك أو اكتبها يدويّاً:</label>
     
-    <!-- قائمة كبرى تضم مراكز وقرى المنيا وملوي -->
+    <!-- القائمة الكبرى للمراكز والقرى -->
     <select id="dropoff-location" onchange="handleLocationChange()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white text-xs focus:outline-none focus:border-amber-400 mb-2">
         <optgroup label="✨ مركز ومدينة ملوي (الأساسية)">
             <option value="3" data-km="3">ملوي - المحطة والمدينة الرئيسية</option>
@@ -164,16 +165,16 @@
             <option value="45" data-km="45">دير مواس - المدينة والقرى</option>
         </optgroup>
         <optgroup label="✍️ أخرى">
-            <option value="other">مكان آخر (اكتب العنوان اليدوي بالتفصيل)...</option>
+            <option value="other">مكان آخر (اكتب العنوان بالتفصيل)...</option>
         </optgroup>
     </select>
 
-    <!-- خانة الكتابة اليدوية لو العميل اختار مكان آخر -->
-    <div id="custom-location-box" class="hidden">
-        <input type="text" id="custom-place-name" placeholder="اكتب اسم القرية أو الشارع بالتفصيل هنا..." class="w-full p-2.5 bg-gray-800 border border-amber-400 rounded-xl text-white text-xs focus:outline-none">
+    <!-- خانة الكتابة اليدوية تحت القائمة مباشرة -->
+    <div id="custom-location-box" class="hidden mt-2">
+        <input type="text" id="custom-place-name" placeholder="اكتب اسم القرية أو الشارع أو المكان بالتفصيل هنا..." class="w-full p-2.5 bg-gray-800 border border-amber-400 rounded-xl text-white text-xs focus:outline-none">
     </div>
 </div>
-
+      
 
       <div class="space-y-2">
         <label class="text-sm text-amber-300 font-bold block">🎯 اختر وجهة الوصول أو اكتبها:</label>
