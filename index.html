@@ -648,5 +648,28 @@
     }
   }
 </script>
+<script>
+function handleLocationChange() {
+    const select = document.getElementById('dropoff-location');
+    const customBox = document.getElementById('custom-location-box');
+    const selectedOption = select.options[select.selectedIndex];
+    
+    if (select.value === 'other') {
+        customBox.classList.remove('hidden');
+    } else {
+        customBox.classList.add('hidden');
+    }
+
+    let km = parseFloat(selectedOption.getAttribute('data-km')) || 5; 
+    let basePrice = 10; 
+    let pricePerKm = 4;  
+    let totalPrice = basePrice + (km * pricePerKm);
+
+    const priceDisplay = document.getElementById('total-price') || document.getElementById('calculated-price');
+    if (priceDisplay) {
+        priceDisplay.innerText = totalPrice + " ج.م";
+    }
+}
+</script>
 </body>
 </html>
