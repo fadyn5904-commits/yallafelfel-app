@@ -7,7 +7,8 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#f59e0b">
     <style>
-        body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; margin: 0; text-align: center; padding-bottom: 80px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; text-align: center; padding-bottom: 90px; }
         .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-top: 10px; text-align: right; }
         .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
         .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
@@ -20,20 +21,20 @@
         .auth-tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 6px; font-weight: bold; text-align: center; }
         .auth-tab.active { background: #f59e0b; color: #030712; }
         .auth-tab.inactive { background: #1f2937; color: #9ca3af; }
-        input, select { box-sizing: border-box; }
+        input, select { box-sizing: border-box; width: 100%; }
         .file-label { display: block; background: #1f2937; color: #9ca3af; padding: 10px; border-radius: 8px; border: 1px dashed #374151; margin-bottom: 10px; font-size: 13px; text-align: center; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <!-- شاشة السبلاش -->
-    <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.7s ease;">
+    <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.5s ease;">
         <h1 style="color: #f59e0b; font-size: 28px; margin-bottom: 5px;">⚡ يلا فلفل</h1>
         <p style="color: #9ca3af; font-size: 14px;">منصتك الذكية لخدمات النقل والتوصيل في ملوي وقراها</p>
     </div>
 
-    <!-- شاشة الدخول والتسجيل المشتركة -->
-    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
+    <!-- شاشة الدخول والتسجيل -->
+    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.95); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
         <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
             <h2 style="color: #f59e0b; margin-bottom: 15px;">مرحباً بك في يلا فلفل</h2>
             
@@ -45,10 +46,10 @@
             <!-- نموذج العميل -->
             <div id="form-client" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
-                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
-                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px;">
+                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px;">
                 
                 <button onclick="loginClient()" class="btn">دخول التطبيق 🚀</button>
             </div>
@@ -56,36 +57,27 @@
             <!-- نموذج الكابتن -->
             <div id="form-captain" class="hidden" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
-                <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف (فودافون كاش):</label>
-                <input type="tel" id="captain-phone" placeholder="01xxxxxxxx0" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <input type="tel" id="captain-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">نوع المركبة:</label>
-                <select id="captain-vehicle" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <select id="captain-vehicle" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                    <option value="سيارة / عربية">سيارة / عربية</option>
                     <option value="مكنة / موتوسيكل">مكنة / موتوسيكل</option>
                     <option value="توكتوك">توكتوك</option>
-                    <option value="سيارة / عربية">سيارة / عربية</option>
                     <option value="عجلة توصيل">عجلة توصيل</option>
                 </select>
 
-                <label class="file-label">
-                    📷 رفع <b>صورة البطاقة الشخصية</b>
-                    <input type="file" id="id-card-img" accept="image/*" style="display: none;">
-                </label>
-
-                <label class="file-label">
-                    🛵 رفع <b>صورة المركبة</b>
-                    <input type="file" id="vehicle-img" accept="image/*" style="display: none;">
-                </label>
-
-                <label class="file-label">
-                    👤 رفع <b>الصورة الشخصية</b>
-                    <input type="file" id="personal-img" accept="image/*" style="display: none;">
-                </label>
+                <label class="file-label">📷 رفع صورة البطاقة الشخصية<input type="file" id="id-card-img" accept="image/*" style="display: none;"></label>
+                <label class="file-label">🛵 رفع صورة المركبة<input type="file" id="vehicle-img" accept="image/*" style="display: none;"></label>
+                <label class="file-label">👤 رفع الصورة الشخصية<input type="file" id="personal-img" accept="image/*" style="display: none;"></label>
 
                 <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال الطلب والمستندات عبر واتساب 💬</button>
             </div>
+
+            <p onclick="closeAuthScreen()" style="color: #9ca3af; font-size: 12px; margin-top: 15px; cursor: pointer; text-decoration: underline;">التخطي والدخول كزائر ⏩</p>
         </div>
     </div>
 
@@ -101,7 +93,7 @@
     <!-- قسم الرئيسية (العميل) -->
     <div id="tab-home" class="view-section">
         <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل ملوي وقراها</h1>
-        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: -5px;">عربية (10ج/كم) | مكنة (7ج/كم) | توكتوك (6ج/كم) | عجلة (4ج/كم)</p>
+        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: 4px; margin-bottom: 8px;">عربية (10ج/كم) | مكنة (7ج/كم) | توكتوك (6ج/كم) | عجلة (4ج/كم)</p>
         
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold;">🚗 اختر نوع وسيلة التوصيل:</p>
@@ -113,14 +105,14 @@
             </div>
 
             <!-- مكان الانطلاق والوصول اليدوي -->
-            <div class="space-y-2" style="margin-bottom: 15px; text-align: right;">
+            <div style="margin-bottom: 15px; text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل:</label>
-                <input type="text" id="pickup-location" placeholder="اكتب مكان الانطلاق أو الشارع بالتفصيل..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 10px;">
+                <input type="text" id="pickup-location" placeholder="اكتب مكان الانطلاق أو الشارع بالتفصيل..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 10px;">
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول والمسافة:</label>
-                <div style="display: flex; gap: 8px;">
-                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 2; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
-                    <input type="number" id="custom-place-km" placeholder="المسافة (كم)" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
+                <div style="display: flex; gap: 8px; width: 100%;">
+                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 3; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
+                    <input type="number" id="custom-place-km" placeholder="المسافة" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
                 </div>
             </div>
 
@@ -202,14 +194,21 @@
                 const auth = document.getElementById('auth-screen');
                 if (splash) {
                     splash.style.opacity = '0';
-                    setTimeout(() => splash.style.display = 'none', 700);
+                    setTimeout(() => splash.style.display = 'none', 500);
                 }
                 if (auth) {
                     auth.classList.remove('hidden');
                 }
                 updatePrice();
-            }, 500);
+            }, 800);
         });
+
+        function closeAuthScreen() {
+            const auth = document.getElementById('auth-screen');
+            if (auth) {
+                auth.classList.add('hidden');
+            }
+        }
 
         function switchAuthTab(tab) {
             if (tab === 'client') {
@@ -236,21 +235,13 @@
                 <p><strong>المدينة:</strong> ملوي - المنيا</p>
             `;
 
-            const auth = document.getElementById('auth-screen');
-            if (auth) {
-                auth.style.opacity = '0';
-                setTimeout(() => auth.classList.add('hidden'), 500);
-            }
+            closeAuthScreen();
         }
 
         function sendCaptainRequestToWhatsApp() {
             const name = document.getElementById('captain-name').value;
             const phone = document.getElementById('captain-phone').value;
             const vehicle = document.getElementById('captain-vehicle').value;
-            
-            const idImg = document.getElementById('id-card-img').files[0];
-            const vehImg = document.getElementById('vehicle-img').files[0];
-            const persImg = document.getElementById('personal-img').files[0];
 
             if(!name || !phone) {
                 alert('الرجاء إدخال الاسم ورقم الهاتف على الأقل!');
@@ -258,17 +249,11 @@
             }
 
             const myWhatsAppNumber = "201156605200"; 
-            
-            let message = `مرحباً إدارة يلا فلفل ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n\n`;
-            
-            if(idImg) message += `📄 تم رفع صورة البطاقة الشخصية.\n`;
-            if(vehImg) message += `🚗 تم رفع صورة المركبة.\n`;
-            if(persImg) message += `📸 تم رفع الصورة الشخصية.\n`;
-            
-            message += `\nبرجاء مراجعة بياناتي وتفعيلي.`;
+            let message = `مرحباً إدارة يلا فلفل ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n\nبرجاء مراجعة بياناتي وتفعيلي.`;
 
             const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
+            closeAuthScreen();
         }
 
         let isCaptainMode = false;
