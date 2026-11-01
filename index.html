@@ -9,8 +9,9 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; text-align: center; padding-bottom: 90px; }
-        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-top: 10px; text-align: right; }
-        .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 18px; margin-top: 10px; text-align: right; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; transition: 0.2s; }
+        .btn:active { transform: scale(0.98); }
         .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: #111827; border-top: 1px solid #1f2937; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
         .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; }
@@ -18,7 +19,7 @@
         .hidden { display: none !important; }
         .view-section { display: none; }
         .view-section:not(.hidden) { display: block; }
-        .auth-tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 6px; font-weight: bold; text-align: center; }
+        .auth-tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 8px; font-weight: bold; text-align: center; font-size: 14px; }
         .auth-tab.active { background: #f59e0b; color: #030712; }
         .auth-tab.inactive { background: #1f2937; color: #9ca3af; }
         input, select { box-sizing: border-box; width: 100%; }
@@ -29,29 +30,31 @@
 
     <!-- شاشة السبلاش -->
     <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:99999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.5s ease;">
-        <h1 style="color: #f59e0b; font-size: 28px; margin-bottom: 5px;">⚡ يلا فلفل</h1>
-        <p style="color: #9ca3af; font-size: 14px;">منصتك الذكية لخدمات النقل والتوصيل في ملوي وقراها</p>
+        <h1 style="color: #f59e0b; font-size: 32px; margin-bottom: 8px;">⚡ يلا فلفل</h1>
+        <p style="color: #9ca3af; font-size: 14px;">بوابتك الذكية لخدمات النقل ومراكزها</p>
     </div>
 
     <!-- شاشة الدخول والتسجيل -->
-    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.95); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
+    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.96); z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
         <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
-            <h2 style="color: #f59e0b; margin-bottom: 15px;">مرحباً بك في يلا فلفل</h2>
+            <div style="width: 60px; height: 60px; background: #f59e0b; color: #030712; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 15px auto;">ف.ك</div>
+            <h2 style="color: #f59e0b; margin-bottom: 5px; font-size: 22px;">YALLA FELFEL</h2>
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 20px;">بوابتك الذكية لخدمات محافظة المنيا ومراكزها</p>
             
             <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                 <div id="btn-tab-client" class="auth-tab active" onclick="switchAuthTab('client')">دخول عميل</div>
-                <div id="btn-tab-captain" class="auth-tab inactive" onclick="switchAuthTab('captain')">تسجيل كابتن</div>
+                <div id="btn-tab-captain" class="auth-tab inactive" onclick="switchAuthTab('captain')">تسجيل كابتن جديد</div>
             </div>
 
             <!-- نموذج العميل -->
             <div id="form-client" style="text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
-                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                <input type="text" id="client-name" placeholder="اكتب اسمك الكريم..." style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 12px; font-size: 14px;">
                 
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
-                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px;">
+                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
                 
-                <button onclick="loginClient()" class="btn">دخول التطبيق 🚀</button>
+                <button onclick="loginClient()" class="btn">دخول كعميل فوراً 🚀</button>
             </div>
 
             <!-- نموذج الكابتن -->
@@ -77,48 +80,48 @@
                 <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال الطلب والمستندات عبر واتساب 💬</button>
             </div>
 
-            <p onclick="closeAuthScreen()" style="color: #9ca3af; font-size: 12px; margin-top: 15px; cursor: pointer; text-decoration: underline;">التخطي والدخول كزائر ⏩</p>
+            <p onclick="closeAuthScreen()" style="color: #9ca3af; font-size: 13px; margin-top: 18px; cursor: pointer; text-decoration: underline;">التخطي والدخول السريع ⏩</p>
         </div>
     </div>
 
     <!-- الهيدر العلوي -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
-            <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
+            <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:6px 12px; border-radius:8px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
         </div>
-        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك 🛵</span></span>
+        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك، زائر 🛵</span></span>
     </div>
 
     <!-- قسم الرئيسية (العميل) -->
     <div id="tab-home" class="view-section">
-        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل ملوي وقراها</h1>
-        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: 4px; margin-bottom: 8px;">عربية (10ج/كم) | مكنة (7ج/كم) | توكتوك (6ج/كم) | عجلة (4ج/كم)</p>
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل المنيا وقراها</h1>
+        <p style="color: #9ca3af; font-size: 12px; text-align: right; margin-top: 4px; margin-bottom: 10px;">عربية (10ج/كم) | مكنة (7ج/كم) | توكتوك (6ج/كم) | عجلة (4ج/كم)</p>
         
         <div class="card">
-            <p style="margin-bottom: 8px; font-weight: bold;">🚗 اختر نوع وسيلة التوصيل:</p>
-            <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:8px 10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">عربية</button>
-                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">مكنة</button>
-                <button onclick="setVehicleType('tuk')" id="btn-tuk" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">توكتوك</button>
-                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">عجلة</button>
+            <p style="margin-bottom: 8px; font-weight: bold; font-size: 14px;">🚗 اختر نوع وسيلة التوصيل:</p>
+            <div style="display: flex; gap: 6px; justify-content: center; margin-bottom: 15px;">
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة</button>
+                <button onclick="setVehicleType('tuk')" id="btn-tuk" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">توكتوك</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة</button>
             </div>
 
             <!-- مكان الانطلاق والوصول اليدوي -->
             <div style="margin-bottom: 15px; text-align: right;">
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل:</label>
-                <input type="text" id="pickup-location" placeholder="اكتب مكان الانطلاق أو الشارع بالتفصيل..." style="background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 10px;">
+                <input type="text" id="pickup-location" placeholder="اكتب مكان الانطلاق أو الشارع بالتفصيل..." style="background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; margin-bottom: 12px;">
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 وجهة الوصول والمسافة:</label>
                 <div style="display: flex; gap: 8px; width: 100%;">
-                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 3; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
-                    <input type="number" id="custom-place-km" placeholder="المسافة" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
+                    <input type="text" id="custom-place-name" placeholder="اكتب المكان أو القرية هنا..." style="flex: 3; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px;">
+                    <input type="number" id="custom-place-km" placeholder="كم" value="5" min="1" oninput="updatePrice()" style="flex: 1; background: #1f2937; color: white; padding: 12px; border-radius: 8px; border: 1px solid #374151; font-size: 14px; text-align: center;">
                 </div>
             </div>
 
-            <div style="background: #030712; border: 1px solid #374151; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
-                <span style="font-size: 13px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب المسافة والوسيلة:</span>
-                <div id="price-display" style="font-size: 24px; color: #f59e0b; font-weight: bold; margin-top: 5px;">50 ج.م</div>
+            <div style="background: #030712; border: 1px solid #374151; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
+                <span style="font-size: 12px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب المسافة والوسيلة:</span>
+                <div id="price-display" style="font-size: 28px; color: #f59e0b; font-weight: bold; margin-top: 5px;">50 ج.م</div>
             </div>
 
             <button onclick="publishOrder()" class="btn">نشر الطلب في التطبيق 🚀</button>
@@ -127,7 +130,27 @@
 
     <!-- لوحة تحكم الكابتن -->
     <div id="tab-captain-view" class="view-section hidden">
-        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">🛵 لوحة الكابتن (الطلبات المتاحة)</h1>
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right; margin-bottom: 10px;">🛵 الملف الشخصي للكابتن</h1>
+        <div class="card" style="text-align: center;">
+            <div style="width: 70px; height: 70px; background: #f59e0b; color: #030712; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; margin: 0 auto 10px auto;">د.ك</div>
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">بيانات الكابتن المسؤول عن الرحلة 🛵</p>
+            
+            <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 14px;">
+                🚗 نوع المركبة: <span id="captain-veh-display" style="color: #f59e0b;">عربية (10 ج/كم)</span>
+            </div>
+            <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-bottom: 10px; font-size: 14px;">
+                📞 رقم تواصل الكابتن: <span style="color: #fff;">01156605200</span>
+            </div>
+            
+            <a href="https://wa.me/201156605200" target="_blank" style="display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 12px; font-size: 14px;">انضم لجروب واتساب الكابتن 🚀💬</a>
+
+            <div style="background: #1f2937; padding: 12px; border-radius: 8px; text-align: right; margin-top: 15px; font-size: 14px;">
+                <p style="color: #9ca3af; margin-bottom: 5px;">منطقة الخدمة: محافظة المنيا ومراكزها</p>
+                <p style="color: #6ee7b7; font-weight: bold;">حالة الكابتن: معتمد من الأدمن ✅</p>
+            </div>
+        </div>
+
+        <h2 style="color: #f59e0b; font-size: 17px; text-align: right; margin: 15px 0 8px 0;">📋 الطلبات المتاحة للكابتن</h2>
         <div class="card">
             <div id="captain-orders-list">
                 <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً.</p>
@@ -306,6 +329,9 @@
             else if (type === 'moto') { selectedRate = 7; vehicleName = 'موتوسيكل'; }
             else if (type === 'tuk') { selectedRate = 6; vehicleName = 'توكتوك'; }
             else if (type === 'bicycle') { selectedRate = 4; vehicleName = 'عجلة'; }
+
+            const vehDisp = document.getElementById('captain-veh-display');
+            if(vehDisp) vehDisp.innerText = `${vehicleName} (${selectedRate} ج/كم)`;
 
             updatePrice();
         }
