@@ -36,8 +36,6 @@
         .fancy-sidebar-card:hover { background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; transform: translateX(-3px); }
         
         .fancy-main-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #030712; font-weight: 900; padding: 14px; border-radius: 12px; text-align: center; cursor: pointer; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5); font-size: 13px; border: 1px solid #ffedd5; }
-        
-        .market-item { background: #1f2937; border: 1px solid #374151; border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
@@ -141,18 +139,21 @@
         </div>
     </div>
 
-    <!-- الهيدر العلوي -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+    <!-- الهيدر العلوي (تم تكبير لوجو يلا فلفل وإزالة إيموجي الاسكوتر) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 5px 0;">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span class="badge">متصل 🟢</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="brand-logo" style="font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:10px; color:#9ca3af; -webkit-text-fill-color: #9ca3af;">فلفل 🛵</span></span>
-            <button onclick="toggleSidebar()" style="background: #1f2937; border: 1px solid #f59e0b; color: #f59e0b; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 16px;">☰</button>
+            <div style="text-align: left;">
+                <span class="brand-logo" style="font-size: 18px; font-weight: 900; display: block; letter-spacing: 1px;">YALLA FELFEL</span>
+                <span id="user-welcome" style="font-size:11px; color:#9ca3af; display: block;">فلفل</span>
+            </div>
+            <button onclick="toggleSidebar()" style="background: #1f2937; border: 1px solid #f59e0b; color: #f59e0b; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 16px;">☰</button>
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للعميل (التوصيل والنقل) -->
+    <!-- الشاشة الرئيسية للعميل -->
     <div id="tab-home" class="view-section">
         <div class="card" style="text-align: center; border: 1px dashed #f59e0b; padding: 12px; margin-bottom: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -168,9 +169,9 @@
         <div class="card">
             <p style="margin-bottom: 8px; font-weight: bold; font-size: 14px;">🚗 اختر وسيلة التوصيل:</p>
             <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 15px;">
-                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_1](start_span)[span_1](end_span)</button>
-                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_2](start_span)[span_2](end_span)</button>
-                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_3](start_span)[span_3](end_span)</button>
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:10px; border-radius:8px; font-weight:bold; flex:1; cursor:pointer; font-size:13px;">عربية (10ج/كم)[span_0](start_span)[span_0](end_span)</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">مكنة (7ج/كم)[span_1](start_span)[span_1](end_span)</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:10px; border-radius:8px; flex:1; cursor:pointer; font-size:13px;">عجلة (4ج/كم)[span_2](start_span)[span_2](end_span)</button>
             </div>
 
             <div style="margin-bottom: 15px; text-align: right;">
@@ -203,49 +204,30 @@
         </div>
     </div>
 
-    <!-- قسم الماركت الجديد (Yalla Felfel Market) -->
+    <!-- قسم الماركت المزغرف والمطور (خانة كتابة الطلبات الحرة) -->
     <div id="tab-market" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">🛒 يلا فلفل ماركت (سوبر ماركت وخضار)</h1>
+        <h1 class="brand-logo" style="font-size: 19px; text-align: right; margin-bottom: 10px;">🛒 يلا فلفل ماركت (اكتب طلباتك بحرية)</h1>
         
-        <div class="card">
-            <p style="color: #f59e0b; font-weight: bold; margin-bottom: 10px; font-size: 14px;">🛍️ اختر المنتجات المطلوبة:</p>
-            
-            <div class="market-item">
-                <div style="text-align: right;">
-                    <p style="font-weight: bold; font-size: 14px;">عبوة مياه معدنية (كبيرة)</p>
-                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 10 ج.م</p>
-                </div>
-                <button onclick="addToCart('مياه معدنية', 10)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
+        <div class="card" style="border: 2px solid rgba(245, 158, 11, 0.4);">
+            <div style="text-align: right; margin-bottom: 12px;">
+                <label style="font-size: 14px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 6px;">✍️ اكتب طلبات السوبر ماركت أو الأدوية أو الخضار بالتفصيل:</label>
+                <p style="color: #9ca3af; font-size: 11px; margin-bottom: 10px;">اكتب كل اللي محتاجه، والكابتن هيجيبهولك لحد باب البيت مع حساب سعر التوصيل المناسب.</p>
+                
+                <textarea id="custom-market-order" placeholder="مثال: عاوز 2 زجاجة مياه كبيرة، كيلو طماطم، ودواء من الصيدلية..." style="background: #1f2937; color: white; padding: 14px; border-radius: 10px; border: 1px solid #f59e0b; font-size: 14px; height: 110px; resize: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);"></textarea>
             </div>
 
-            <div class="market-item">
-                <div style="text-align: right;">
-                    <p style="font-weight: bold; font-size: 14px;">كيلو طماطم وخضار طازج</p>
-                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 15 ج.م</p>
-                </div>
-                <button onclick="addToCart('خضار طازج', 15)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
+            <div style="background: #030712; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: right;">
+                <p style="color: #6ee7b7; font-weight: bold; font-size: 13px;">💵 نظام الدفع: كاش عند الاستلام للكابتن</p>
+                <p style="color: #9ca3af; font-size: 11px; margin-top: 3px;">سعر الطلبات يُحاسب به الكابتن عند التوصيل مضافاً إليه قيمة التوصيل العادلة.</p>
             </div>
 
-            <div class="market-item">
-                <div style="text-align: right;">
-                    <p style="font-weight: bold; font-size: 14px;">علبة جبن ريفي بلدي (نصف كيلو)</p>
-                    <p style="color: #6ee7b7; font-size: 12px;">السعر: 40 ج.م</p>
-                </div>
-                <button onclick="addToCart('جبن ريفي', 40)" style="background: #f59e0b; color: #030712; border:none; padding:8px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:12px;">إضافة ➕</button>
-            </div>
-
-            <div style="background: #030712; border: 1px solid #1f2937; padding: 12px; border-radius: 8px; margin-top: 15px; text-align: right;">
-                <p style="font-size: 13px; color: #9ca3af;">مشترياتك الحالية في السلة: <strong style="color: #f59e0b;" id="cart-summary">لا توجد منتجات</strong></p>
-                <p style="font-size: 14px; color: #6ee7b7; margin-top: 5px;">الإجمالي: <strong id="cart-total">0 ج.م</strong></p>
-            </div>
-
-            <button onclick="checkoutMarketOrder()" class="btn" style="background: #25d366; color: #fff; margin-top: 12px;">إرسال طلب الماركت عبر واتساب 🛒💬</button>
+            <button onclick="sendCustomMarketOrderToWhatsApp()" class="btn" style="background: #25d366; color: #fff; font-size: 16px; padding: 14px;">إرسال طلب الماركت عبر واتساب 💬🛒</button>
         </div>
     </div>
 
     <!-- الشاشة الرئيسية للكابتن -->
     <div id="tab-captain-view" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">🛵 الشاشة الرئيسية للكابتن</h1>
+        <h1 class="brand-logo" style="font-size: 18px; text-align: right; margin-bottom: 10px;">الشاشة الرئيسية للكابتن</h1>
         
         <div class="card" style="text-align: center;">
             <div style="position: relative; width: 85px; height: 85px; margin: 0 auto 10px auto;">
@@ -256,7 +238,7 @@
             </div>
 
             <h3 style="color: #fff; font-size: 16px; margin-bottom: 4px;" id="profile-captain-name">فادي ناصر (فلفل)</h3>
-            <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">كابتن معتمد بخدمات التوصيل والسوبر ماركت 🛵</p>
+            <p style="color: #9ca3af; font-size: 12px; margin-bottom: 12px;">كابتن معتمد بخدمات التوصيل والسوبر ماركت</p>
             
             <div style="background: #030712; border: 1px solid #f59e0b; padding: 12px; border-radius: 10px; margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -354,7 +336,7 @@
         <div id="sidebar-dynamic-body"></div>
     </div>
 
-    <!-- شريط التنقل السفلي المحدث (مع زر الماركت الجديد) -->
+    <!-- شريط التنقل السفلي -->
     <div class="nav-bar">
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
             <div style="font-size: 16px;">👤</div>
@@ -385,8 +367,8 @@
         let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فادي (فلفل)';
         let isCaptainMode = false;
-        let cartItems = [];
-        let cartTotal = 0;
+        let captainBalance = 0;
+        const MAX_DEBT = -50;
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -400,21 +382,14 @@
             }, 800);
         });
 
-        function addToCart(itemName, price) {
-            cartItems.push(itemName);
-            cartTotal += price;
-            document.getElementById('cart-summary').innerText = cartItems.join(', ');
-            document.getElementById('cart-total').innerText = cartTotal + ' ج.م';
-            alert(`تم إضافة (${itemName}) إلى سلة الماركت بنجاح! 🛒`);
-        }
-
-        function checkoutMarketOrder() {
-            if(cartItems.length === 0) {
-                alert('سلة الماركت فارغة! أضف منتجات أولاً.');
+        function sendCustomMarketOrderToWhatsApp() {
+            const orderText = document.getElementById('custom-market-order').value;
+            if(!orderText.trim()) {
+                alert('الرجاء كتابة الطلبات المطلوبة في خانة الماركت أولاً!');
                 return;
             }
             const adminWhatsApp = "201156605200";
-            let msg = `طلب جديد من YALLA FELFEL MARKET 🛒:\nالعميل: ${clientGlobalName}\nالهاتف: ${clientGlobalPhone}\nالمنتجات: ${cartItems.join(', ')}\nالإجمالي: ${cartTotal} ج.م\nالدفع: كاش عند الاستلام`;
+            let msg = `🛒 طلب ماركت جديد من YALLA FELFEL:\n👤 العميل: ${clientGlobalName}\n📱 الهاتف: ${clientGlobalPhone}\n\n📝 تفاصيل الطلبات:\n${orderText}\n\n💵 الدفع: كاش عند الاستلام للكابتن`;
             let url = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
@@ -433,7 +408,7 @@
                 roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة العميل ⦘ 👤";
                 switchTab('captain-view');
             } else {
-                roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة الكابتن ⦘ 🛵";
+                roleBtn.innerHTML = "⚡ ⦗ التبديل إلى لوحة الكابتن ⦘";
                 switchTab('home');
             }
         }
@@ -452,7 +427,7 @@
                 bodyEl.innerHTML = `<div class="card" style="text-align: right;"><a href="https://wa.me/201156605200" class="btn" style="background:#25d366; color:#fff; text-decoration:none;">مراسلة الدعم عبر واتساب 💬</a></div>`;
             } else if (section === 'settings') {
                 titleEl.innerText = "⚙️ إعدادات التطبيق العامة";
-                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p>📱 إصدار التطبيق: النسخة الشاملة 4.4</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
+                bodyEl.innerHTML = `<div class="card" style="text-align: right;"><p style="margin-bottom:6px;">📱 إصدار التطبيق: النسخة الشاملة 4.5</p><p>📍 نطاق العمل: ملوي - المنيا وقراها</p></div>`;
             }
         }
 
@@ -519,7 +494,7 @@
             const phone = document.getElementById('client-phone').value || '01156605200';
             clientGlobalName = name;
             clientGlobalPhone = phone;
-            document.getElementById('user-welcome').innerText = `${name} 🛵`;
+            document.getElementById('user-welcome').innerText = `${name}`;
             document.getElementById('acc-name-display').innerText = name;
             document.getElementById('acc-phone').innerText = phone;
             document.getElementById('auth-screen').style.display = 'none';
