@@ -1,602 +1,352 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>يلا فلفل - Yalla Felfel</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23f59e0b%22/><text x=%2250%%22 y=%2255%%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2250%22 font-weight=%22900%22 fill=%22%23030712%22>فـ</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يلا فلفل - Yalla Felfel</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#f59e0b">
+    <style>
+        body { background-color: #030712; color: #ffffff; font-family: Tahoma, sans-serif; padding: 15px; margin: 0; text-align: center; padding-bottom: 80px; }
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 15px; margin-top: 10px; text-align: right; }
+        .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
+        .badge { background: #065f46; color: #6ee7b7; padding: 4px 10px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: #111827; border-top: 1px solid #1f2937; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
+        .nav-item { text-align: center; color: #9ca3af; font-size: 11px; cursor: pointer; }
+        .nav-item.active { color: #f59e0b; font-weight: bold; }
+        .hidden { display: none !important; }
+        .view-section { display: none; }
+        .view-section:not(.hidden) { display: block; }
+        .auth-tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 6px; font-weight: bold; text-align: center; }
+        .auth-tab.active { background: #f59e0b; color: #030712; }
+        .auth-tab.inactive { background: #1f2937; color: #9ca3af; }
+        input, select { box-sizing: border-box; }
+        .file-label { display: block; background: #1f2937; color: #9ca3af; padding: 10px; border-radius: 8px; border: 1px dashed #374151; margin-bottom: 10px; font-size: 13px; text-align: center; cursor: pointer; }
+    </style>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col font-sans pb-24 text-base">
+<body>
 
-<!-- Splash Screen -->
-<div id="splash-screen" class="fixed inset-0 bg-gray-950 z-50 flex flex-col items-center justify-center transition-opacity duration-700">
-  <div class="bg-amber-500 text-gray-950 font-black w-24 h-24 rounded-3xl flex items-center justify-center text-4xl shadow-2xl mb-4 animate-bounce">فـ</div>
-  <h1 class="text-3xl font-black text-amber-500 tracking-wider mb-1">YALLA FELFEL</h1>
-  <p class="text-sm text-gray-400 mb-6">تطبيق أهالي المنيا ومراكزها للرحلات 🛵</p>
-  <div class="w-36 h-1 bg-gray-800 rounded-full overflow-hidden">
-    <div class="bg-amber-500 h-full w-full animate-pulse"></div>
-  </div>
-</div>
-
-<!-- Auth Screen -->
-<div id="auth-screen" class="fixed inset-0 bg-gray-950 z-40 flex flex-col items-center justify-center p-4 overflow-y-auto hidden opacity-0 transition-opacity duration-500">
-  <div class="max-w-md w-full bg-gray-900 p-6 rounded-3xl border border-gray-800 shadow-2xl text-center space-y-4">
-    <div class="bg-amber-500 text-gray-950 font-black w-20 h-20 rounded-2xl flex items-center justify-center text-3xl shadow-lg mx-auto">فـ</div>
-    <div>
-      <h1 class="text-2xl font-black text-amber-500 tracking-wider">YALLA FELFEL</h1>
-      <p class="text-sm text-gray-400 mt-1">بوابتك الذكية لخدمات محافظة المنيا ومراكزها</p>
+    <!-- شاشة السبلاش -->
+    <div id="splash-screen" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center; transition: opacity 0.7s ease;">
+        <h1 style="color: #f59e0b; font-size: 28px; margin-bottom: 5px;">⚡ يلا فلفل</h1>
+        <p style="color: #9ca3af; font-size: 14px;">منصتك الذكية لخدمات النقل والتوصيل في ملوي وقراها</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-2 bg-gray-800 p-1.5 rounded-xl">
-      <button onclick="switchAuthTab('client')" id="btn-tab-client" class="bg-amber-500 text-gray-950 py-2.5 rounded-lg text-sm font-bold transition">دخول عميل</button>
-      <button onclick="switchAuthTab('captain')" id="btn-tab-captain" class="text-gray-300 py-2.5 rounded-lg text-sm font-bold transition">تسجيل كابتن جديد</button>
-    </div>
+    <!-- شاشة الدخول والتسجيل المشتركة -->
+    <div id="auth-screen" class="hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:#030712; z-index:9998; display:flex; flex-direction:column; justify-content:center; align-items:center; padding: 20px; overflow-y: auto;">
+        <div class="card" style="width: 100%; max-width: 400px; text-align: center; margin: auto;">
+            <h2 style="color: #f59e0b; margin-bottom: 15px;">مرحباً بك في يلا فلفل</h2>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                <div id="btn-tab-client" class="auth-tab active" onclick="switchAuthTab('client')">دخول عميل</div>
+                <div id="btn-tab-captain" class="auth-tab inactive" onclick="switchAuthTab('captain')">تسجيل كابتن</div>
+            </div>
 
-    <!-- Client Form -->
-    <div id="form-client" class="space-y-3 text-right pt-2">
-      <div>
-        <label class="text-sm text-gray-300 font-bold block mb-1">اسم العميل:</label>
-        <input type="text" id="client-name" placeholder="اكتب اسمك الكريم..." class="w-full p-3.5 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500">
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 font-bold block mb-1">رقم الهاتف:</label>
-        <input type="tel" id="client-phone" placeholder="01xxxxxxxx" class="w-full p-3.5 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500">
-      </div>
-      <button onclick="loginClient()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black p-4 rounded-xl text-base transition shadow-lg">دخول كعميل فوراً 🚀</button>
-    </div>
+            <!-- نموذج العميل (الاسم ورقم التليفون الأساسي) -->
+            <div id="form-client" style="text-align: right;">
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
+                <input type="text" id="client-name" placeholder="أدخل اسمك الكريم (مثال: فلفل)..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
+                <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px;">
+                
+                <button onclick="loginClient()" class="btn">دخول التطبيق 🚀</button>
+            </div>
 
-    <!-- Captain Form -->
-    <div id="form-captain" class="hidden space-y-3 text-right pt-2 max-h-[60vh] overflow-y-auto px-1">
-      <div>
-        <label class="text-sm text-gray-300 font-bold block mb-1">اسم الكابتن:</label>
-        <input type="text" id="cap-name" placeholder="اسمك الثلاثي..." class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white">
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 font-bold block mb-1">رقم الهاتف (هنا):</label>
-        <input type="tel" id="cap-phone" placeholder="01156605200" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white">
-      </div>
-      <div>
-        <label class="text-sm text-gray-300 font-bold block mb-1">اختر نوع وسيلة التوصيل للتسجيل:</label>
-        <select id="reg-vehicle-type" onchange="updateRegDocuments()" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 font-bold">
-          <option value="car">🚗 عربية (سيارة) - 6ج/كم</option>
-          <option value="moto">🛵 دراجة نارية (موتوسيكل) - 4ج/كم</option>
-          <option value="tuk-tuk">🛺 توكتوك - 4ج/كم</option>
-          <option value="bicycle">🚲 دراجة هوائية (عجلة) - 3ج/كم</option>
-        </select>
-      </div>
-      <div class="bg-gray-800/60 p-3.5 rounded-xl border border-gray-700 space-y-2.5 text-sm" id="dynamic-docs-box"></div>
-      <button onclick="registerCaptain()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3.5 rounded-xl text-sm transition shadow flex items-center justify-center space-x-2 space-x-reverse">
-        <i class="fa-brands fa-whatsapp text-lg ml-1"></i>
-        <span>إرسال طلب الانضمام للأدمن عبر واتساب ⏳</span>
-      </button>
-    </div>
+            <!-- نموذج الكابتن مع رفع المستندات والصور -->
+            <div id="form-captain" class="hidden" style="text-align: right;">
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
+                <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف (فودافون كاش):</label>
+                <input type="tel" id="captain-phone" placeholder="01xxxxxxxx0" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">نوع المركبة:</label>
+                <select id="captain-vehicle" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 10px;">
+                    <option value="مكنة / موتوسيكل">مكنة / موتوسيكل</option>
+                    <option value="توكتوك">توكتوك</option>
+                    <option value="سيارة / عربية">سيارة / عربية</option>
+                    <option value="عجلة توصيل">عجلة توصيل</option>
+                </select>
 
-    <!-- Pending Msg -->
-    <div id="pending-msg" class="hidden py-6 space-y-3">
-      <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center mx-auto text-2xl animate-spin"><i class="fa-solid fa-spinner"></i></div>
-      <h3 class="text-base font-bold text-amber-400">طلبك قيد المراجعة لدى الأدمن (فلفل)</h3>
-      <p class="text-sm text-gray-400">جاري فحص مستنداتك عبر الواتساب، سيتم تفعيل حسابك قريباً.</p>
-      <button onclick="simulateAdminApproval()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold mt-2">🛠️ [محاكاة قبول الأدمن الآن]</button>
-    </div>
-  </div>
-</div>
+                <label class="file-label">
+                    📷 رفع <b>صورة البطاقة الشخصية</b>
+                    <input type="file" id="id-card-img" accept="image/*" style="display: none;">
+                </label>
 
-<!-- Header -->
-<header class="bg-gray-900 border-b border-gray-800 p-4 sticky top-0 z-30 shadow-md">
-  <div class="flex justify-between items-center max-w-md mx-auto">
-    <div class="flex items-center space-x-3 space-x-reverse">
-      <button onclick="toggleSidebar()" class="bg-gray-800 hover:bg-gray-700 text-amber-400 px-3 py-2 rounded-xl text-sm font-bold transition shadow"><i class="fa-solid fa-bars text-lg"></i></button>
-      <div>
-        <h1 class="text-lg font-black text-amber-500 tracking-wider">YALLA FELFEL</h1>
-        <p id="user-welcome" class="text-xs text-gray-400">تطبيق أهالي المنيا ومراكزها 🛵</p>
-      </div>
-    </div>
-    <div class="flex items-center space-x-2 space-x-reverse">
-      <button onclick="toggleOnlineStatus()" id="online-status-btn" class="bg-green-500/20 border border-green-500 text-green-400 px-2.5 py-2 rounded-xl text-xs font-bold transition flex items-center shadow">
-        <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-green-500 ml-1.5 animate-pulse"></span>
-        <span id="status-text">متصل</span>
-      </button>
-      <button onclick="toggleMode()" id="mode-btn" class="bg-amber-500/10 border border-amber-500 text-amber-400 px-3 py-2 rounded-xl text-xs font-bold transition hover:bg-amber-500 hover:text-gray-950 shadow">الكابتن</button>
-    </div>
-  </div>
-</header>
+                <label class="file-label">
+                    🛵 رفع <b>صورة المركبة (مكنة/عربية/توكتوك/عجلة)</b>
+                    <input type="file" id="vehicle-img" accept="image/*" style="display: none;">
+                </label>
 
-<!-- Sidebar -->
-<div id="sidebar-drawer" class="fixed inset-y-0 right-0 w-72 bg-gray-900 border-l border-gray-800 z-50 transform translate-x-full transition-transform duration-300 flex flex-col p-5 shadow-2xl">
-  <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
-    <div class="flex items-center space-x-2.5 space-x-reverse">
-      <div class="bg-amber-500 text-gray-950 font-black p-2 rounded-xl text-base">فـ</div>
-      <span class="text-base font-bold text-amber-400">قائمة الخدمات الجانبية</span>
-    </div>
-    <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
-  </div>
-  <div class="space-y-3 text-sm flex-grow overflow-y-auto">
-    <a href="#" onclick="toggleSidebar(); switchTab('home');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-house w-6 text-amber-400 text-base"></i> الرئيسية وطلب رحلة</a>
-    <a href="#" onclick="toggleSidebar(); switchTab('orders');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-list-check w-6 text-amber-400 text-base"></i> سجل الطلبات والرحلات</a>
-    <a href="#" onclick="toggleSidebar(); switchTab('wallet');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-wallet w-6 text-amber-400 text-base"></i> محفظة الكاش والأرباح</a>
-    <a href="#" onclick="toggleSidebar(); switchTab('profile');" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-gray-800 hover:bg-amber-500 hover:text-gray-950 transition font-bold"><i class="fa-solid fa-user w-6 text-amber-400 text-base"></i> ملف الكابتن والتقييمات</a>
-    <a href="https://chat.whatsapp.com/K97dyonCjWMAdLmphuDfEf?s=cl&p=a&iam=2" target="_blank" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-emerald-900/30 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-600 hover:text-white transition font-bold"><i class="fa-brands fa-whatsapp w-6 text-base"></i> جروب واتساب الكباتن</a>
-    <a href="#" onclick="toggleSidebar(); openSupport();" class="flex items-center space-x-3 space-x-reverse p-3 rounded-xl bg-blue-900/30 border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white transition font-bold"><i class="fa-solid fa-headset w-6 text-base"></i> خدمة العملاء والدعم الفني 🎧</a>
-  </div>
-  <div class="border-t border-gray-800 pt-3 text-center"><span class="text-xs text-gray-500">يلا فلفل - النسخة الشاملة لمحافظة المنيا 🛵</span></div>
-</div>
-<div id="sidebar-backdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity"></div>
+                <label class="file-label">
+                    👤 رفع <b>الصورة الشخصية</b>
+                    <input type="file" id="personal-img" accept="image/*" style="display: none;">
+                </label>
 
-<!-- Main Container -->
-<main class="max-w-md w-full mx-auto p-4 flex-grow space-y-4">
-  
-  <!-- Home Tab -->
-  <div id="tab-home" class="space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4">
-      <div class="text-center">
-        <h2 class="text-xl font-bold text-amber-400">⚡ طلب رحلة جديدة داخل المنيا وقراها</h2>
-        <p class="text-sm text-gray-400 mt-1">عربية (6ج) | مكنة وتوكتوك (4ج) | عجلة (3ج)</p>
-      </div>
-
-      <div class="space-y-1.5">
-        <label class="text-xs text-amber-300 font-bold block">🚗 اختر نوع وسيلة التوصيل:</label>
-        <div class="grid grid-cols-4 gap-1 bg-gray-800 p-1 rounded-xl">
-          <button onclick="setVehicleType('car')" id="btn-car" class="bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-car ml-1"></i> عربية</button>
-          <button onclick="setVehicleType('moto')" id="btn-moto" class="text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-motorcycle ml-1"></i> مكنة</button>
-          <button onclick="setVehicleType('tuk-tuk')" id="btn-tuk" class="text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-taxi ml-1"></i> توكتوك</button>
-          <button onclick="setVehicleType('bicycle')" id="btn-bicycle" class="text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse"><i class="fa-solid fa-bicycle ml-1"></i> عجلة</button>
+                <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال الطلب والمستندات عبر واتساب 💬</button>
+            </div>
         </div>
-      </div>
-
-
-
-
-      <div id="custom-location-box" class="space-y-2">
-    
-        <label class="text-xs text-amber-400 font-bold block">اكتب اسم القرية أو المركز أو الشارع غير الموجود:</label>
-        <div class="flex space-x-2 space-x-reverse">
-          <input type="text" id="custom-place-name" placeholder="اكتب اسم المكان هنا..." class="w-2/3 p-3 bg-gray-800 border border-gray-700 rounded-xl text-xs text-white">
-          <input type="number" id="custom-place-km" placeholder="المسافة (كم)" value="10" oninput="updatePrice()" class="w-1/3 p-3 bg-gray-800 border border-gray-700 rounded-xl text-xs text-white">
-        </div>
-      </div>
-
-      <div class="bg-gray-800 p-4 rounded-xl border border-amber-500/30 text-center">
-        <span class="text-xs text-gray-400 block">السعر الاقتصادي المستنتج حسب وسيلة التوصيل:</span>
-        <div id="price-display" class="text-4xl font-black text-green-400 mt-1">18 ج.م</div>
-      </div>
-
-      <button onclick="publishOrder()" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-gray-950 font-black p-4 rounded-xl shadow-lg hover:from-amber-400 hover:to-amber-500 transition text-base">🚀 نشر الطلب في التطبيق</button>
     </div>
 
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-3">
-      <div class="flex justify-between items-center">
-        <h3 class="text-sm font-bold text-amber-400 flex items-center"><i class="fa-solid fa-bell ml-2 text-amber-400"></i> مركز التنبيهات والإشعارات</h3>
-        <span class="bg-amber-500 text-gray-950 text-xs font-black px-2.5 py-0.5 rounded-full">نشط</span>
-      </div>
-      <div id="notifications-box" class="space-y-2">
-        <div class="bg-gray-800 p-3 rounded-xl border-r-4 border-amber-500 text-sm">
-          <p class="font-bold text-white">🔥 تطبيق يلا فلفل: جاهز ومحدث بالكامل!</p>
-          <span class="text-xs text-gray-400">عربية (6ج/كم) وموتوسيكل وتوكتوك وعجلة.</span>
+    <!-- الهيدر العلوي -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge">متصل 🟢</span>
+            <button onclick="toggleRole()" id="btn-role-switch" style="background:#1f2937; color:#f59e0b; border:1px solid #f59e0b; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer;">الكابتن</button>
         </div>
-      </div>
+        <span style="color: #f59e0b; font-weight: bold; font-size: 15px;">YALLA FELFEL <span id="user-welcome" style="font-size:11px; color:#9ca3af;">أهلاً بك، Felfel 🛵</span></span>
     </div>
-  </div>
 
-  <!-- Orders Tab -->
-  <div id="tab-orders" class="hidden space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-3">
-      <h2 class="text-xl font-bold text-amber-400">📋 سجل الطلبات والرحلات</h2>
-      <p class="text-sm text-gray-400">الرحلات النشطة والسابقة بمراكز المنيا</p>
-      <div id="client-orders-list" class="space-y-3">
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 text-sm space-y-2">
-          <div class="flex justify-between text-gray-400">
-            <span>📍 من: المنيا</span>
-            <span id="order-listed-price" class="text-green-400 font-bold text-base"> ج.م</span>
-          </div>
-          <div id="order-listed-dest" class="font-bold text-white text-base">🎯إلى:</div>
-          <span class="inline-block bg-amber-500/20 text-amber-400 px-2.5 py-1 rounded text-xs font-bold">حالة الطلب: جاري البحث عن كابتن...</span>
+    <!-- قسم الرئيسية (العميل) -->
+    <div id="tab-home" class="view-section">
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">⚡ طلب رحلة جديدة داخل ملوي وقراها</h1>
+        <p style="color: #9ca3af; font-size: 13px; text-align: right; margin-top: -5px;">عربية (6ج) | مكنة وتوكتوك (4ج) | عجلة (3ج)</p>
+        
+        <div class="card">
+            <p style="margin-bottom: 8px; font-weight: bold;">🚗 اختر نوع وسيلة التوصيل:</p>
+            <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 15px;">
+                <button onclick="setVehicleType('car')" id="btn-car" style="background:#f59e0b; color:#030712; border:none; padding:8px 10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">عربية</button>
+                <button onclick="setVehicleType('moto')" id="btn-moto" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">مكنة</button>
+                <button onclick="setVehicleType('tuk')" id="btn-tuk" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">توكتوك</button>
+                <button onclick="setVehicleType('bicycle')" id="btn-bicycle" style="background:#1f2937; color:#fff; border:none; padding:8px 10px; border-radius:6px; flex:1; cursor:pointer;">عجلة</button>
+            </div>
+
+            <p style="margin-bottom: 8px; font-weight: bold;">📍 اختر وجهة الوصول أو اكتبها:</p>
+            <select id="dropoff-location" onchange="updatePrice()" style="width: 100%; background: #1f2937; color: white; padding: 10px; border-radius: 8px; border: 1px solid #374151; margin-bottom: 15px; font-size: 14px;">
+                <option value="3">ملوي - المحطة وقرية سمالوط (~3 كم)</option>
+                <option value="6">ملوي - العقر والمنشية (~6 كم)</option>
+                <option value="10">ملوي - القوصية ودير مواس (~10 كم)</option>
+            </select>
+
+            <div style="background: #030712; border: 1px solid #374151; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+                <span style="font-size: 13px; color: #9ca3af;">السعر الاقتصادي المستنتج حسب وسيلة التوصيل:</span>
+                <div id="price-display" style="font-size: 24px; color: #f59e0b; font-weight: bold; margin-top: 5px;">18 ج.م</div>
+            </div>
+
+            <button onclick="publishOrder()" class="btn">نشر الطلب في التطبيق 🚀</button>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Wallet Tab -->
-  <div id="tab-wallet" class="hidden space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4">
-      <div class="text-center">
-        <div class="bg-amber-500/15 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 text-2xl"><i class="fa-solid fa-wallet"></i></div>
-        <h2 class="text-xl font-bold text-amber-400">محفظة الكابتن</h2>
-        <p class="text-sm text-gray-400">إدارة الأرباح والشحن عبر الكاش</p>
-      </div>
-      <div class="bg-gray-800 p-4 rounded-xl border border-amber-500/30 text-center">
-        <span class="text-sm text-gray-400 block">الرصيد المتاح حالياً:</span>
-        <div id="wallet-balance" class="text-4xl font-black text-green-400 mt-1">0,0 ج.م</div>
-      </div>
-      <div class="bg-gray-800 p-4 rounded-xl border border-red-500/30 space-y-3">
-        <div class="flex items-center justify-between border-b border-gray-700 pb-2">
-          <span class="text-sm font-bold text-red-400 flex items-center"><i class="fa-solid fa-mobile-screen ml-2"></i> التحويل والاستقبال عبر الكاش</span>
-          <span class="bg-red-500/20 text-red-300 text-xs px-2.5 py-0.5 rounded font-bold"> فادي ناصر علي</span>
+    <!-- لوحة تحكم الكابتن -->
+    <div id="tab-captain-view" class="view-section hidden">
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">🛵 لوحة الكابتن (الطلبات المتاحة)</h1>
+        <div class="card">
+            <div id="captain-orders-list">
+                <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً.</p>
+            </div>
         </div>
-        <div class="bg-gray-900 p-3 rounded-xl flex items-center justify-between text-sm">
-          <div>
-            <span class="text-gray-400 block text-xs">رقم استقبال التحويلات (الكابتن):</span>
-            <span id="cash-number" class="text-amber-400 font-mono font-bold text-base">01156605200</span>
-          </div>
-          <button onclick="copyCashNumber()" class="bg-amber-500/20 hover:bg-amber-500 text-amber-400 hover:text-gray-950 px-3 py-1.5 rounded-lg text-xs font-bold transition">نسخ الرقم</button>
-        </div>
-        <div class="space-y-2 pt-1">
-          <label class="text-xs text-gray-300 font-bold block">تأكيد تحويل مبلغ لشحن المحفظة:</label>
-          <div class="flex space-x-2 space-x-reverse">
-            <input type="number" id="transfer-amount" placeholder="المبلغ (ج.م)" class="w-1/2 p-3 bg-gray-900 border border-gray-700 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
-            <input type="text" id="sender-number" placeholder="رقم المحول منه" class="w-1/2 p-3 bg-gray-900 border border-gray-700 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500">
-          </div>
-          <button onclick="submitCashTransfer()" class="w-full bg-red-600 hover:bg-red-500 text-white font-bold p-3 rounded-xl text-sm transition flex items-center justify-center"><i class="fa-solid fa-paper-plane ml-2"></i> تأكيد إرسال التحويل</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Profile Tab -->
-  <div id="tab-profile" class="hidden space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl text-center space-y-4">
-      <div class="w-16 h-16 bg-amber-500 text-gray-950 font-black text-2xl rounded-full flex items-center justify-center mx-auto shadow-lg">د.ك</div>
-      <div>
-        <h2 id="profile-name-view" class="text-xl font-bold text-white">الملف الشخصي للكابتن</h2>
-        <p class="text-sm text-amber-400">بيانات الكابتن المسؤول عن الرحلة 🛵</p>
-      </div>
-      <div class="space-y-2.5">
-        <div class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl text-sm text-amber-300 font-bold flex items-center justify-center space-x-2 space-x-reverse">
-          <i class="fa-solid fa-motorcycle ml-1.5"></i>
-          <span id="profile-bike-view">نوع المركبة:</span>
+    <!-- قسم الطلبات -->
+    <div id="tab-orders" class="view-section hidden">
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">📦 تتبع الطلبات</h1>
+        <div class="card">
+            <div id="client-orders-list">
+                <p style="color: #9ca3af; text-align: center; padding: 15px;">ليس لديك طلبات نشطة حالياً.</p>
+            </div>
         </div>
-        <div class="bg-gray-800 border border-gray-700 p-3 rounded-xl text-sm text-gray-200 font-bold flex items-center justify-center space-x-2 space-x-reverse">
-          <i class="fa-solid fa-phone ml-1.5 text-green-400"></i>
-          <span>رقم تواصل الكابتن: </span>
-        </div>
-      </div>
-      <a href="https://chat.whatsapp.com/K97dyonCjWMAdLmphuDfEf?s=cl&p=a&iam=2" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3.5 rounded-xl text-sm transition flex items-center justify-center space-x-2 space-x-reverse shadow">
-        <i class="fa-brands fa-whatsapp text-lg ml-1.5"></i>
-        <span>انضم لجروب واتساب الكباتن 🚀</span>
-      </a>
-      <div class="space-y-2 text-right text-sm bg-gray-800 p-3.5 rounded-xl border border-gray-700">
-        <div class="flex justify-between py-1.5 border-b border-gray-700"><span class="text-gray-400">منطقة الخدمة:</span><span class="text-white font-bold">محافظة المنيا ومراكزها</span></div>
-        <div class="flex justify-between py-1.5"><span class="text-gray-400">حالة الكابتن:</span><span class="text-green-400 font-bold">معتمد من الأدمن ✅</span></div>
-      </div>
     </div>
-  </div>
 
-  <!-- Captain View -->
-  <div id="captain-view" class="hidden space-y-4 view-section">
-    <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 shadow-xl space-y-4">
-      <div>
-        <h2 class="text-xl font-bold text-amber-400">📋 لوحة طلبات الكباتن المتاحة</h2>
-        <p class="text-sm text-gray-400 mt-1">الطلبات الواردة من عملاء مراكز المنيا</p>
-      </div>
-      <a href="https://chat.whatsapp.com/K97dyonCjWMAdLmphuDfEf?s=cl&p=a&iam=2" target="_blank" class="w-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 font-bold p-3 rounded-xl text-sm transition flex items-center justify-center space-x-2 space-x-reverse hover:bg-emerald-600 hover:text-white">
-        <i class="fa-brands fa-whatsapp text-base ml-1.5"></i>
-        <span>جروب واتساب الكباتن الرسمي 💬</span>
-      </a>
-      <div id="orders-list" class="space-y-3">
-        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 space-y-3">
-          <div class="flex justify-between items-center text-sm text-gray-400">
-            <span>📍 من: المنيا</span>
-            <span id="captain-order-price" class="text-green-400 font-bold text-base"> ج.م</span>
-          </div>
-          <div id="captain-dest-view" class="text-base font-bold text-white">🎯 إلى: المحطة وقرية سمالوط</div>
-          <button onclick="acceptOrder()" class="w-full bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl text-sm font-bold transition shadow">قبول الرحلة كابتن 🛵</button>
+    <!-- قسم المحفظة -->
+    <div id="tab-wallet" class="view-section hidden">
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">💰 المحفظة</h1>
+        <div class="card" style="text-align: center;">
+            <p style="color: #9ca3af; font-size: 13px;">رصيدك الحالي</p>
+            <h2 style="color: #6ee7b7; font-size: 30px; margin: 5px 0;">0.00 ج.م</h2>
         </div>
-      </div>
     </div>
-  </div>
-</main>
 
-<!-- Bottom Navigation -->
-<nav class="bg-gray-900 border-t border-gray-800 py-3 fixed bottom-0 left-0 right-0 z-30 shadow-lg">
-  <div class="max-w-md mx-auto flex justify-around text-center">
-    <button onclick="switchTab('home')" id="nav-home" class="text-amber-500 text-xs font-bold flex flex-col items-center transition"><i class="fa-solid fa-house text-lg mb-1"></i> الرئيسية</button>
-    <button onclick="switchTab('orders')" id="nav-orders" class="text-gray-400 text-xs font-bold flex flex-col items-center hover:text-amber-400 transition"><i class="fa-solid fa-list-check text-lg mb-1"></i> الطلبات</button>
-    <button onclick="switchTab('wallet')" id="nav-wallet" class="text-gray-400 text-xs font-bold flex flex-col items-center hover:text-amber-400 transition"><i class="fa-solid fa-wallet text-lg mb-1"></i> المحفظة</button>
-    <button onclick="switchTab('profile')" id="nav-profile" class="text-gray-400 text-xs font-bold flex flex-col items-center hover:text-amber-400 transition"><i class="fa-solid fa-user text-lg mb-1"></i> حسابي</button>
-  </div>
-</nav>
+    <!-- قسم حسابي -->
+    <div id="tab-account" class="view-section hidden">
+        <h1 style="color: #f59e0b; font-size: 19px; text-align: right;">👤 حسابي</h1>
+        <div class="card" style="text-align: right;" id="account-details">
+            <p><strong>الاسم:</strong> فادي (فلفل)</p>
+            <p><strong>الهاتف:</strong> 01000000000</p>
+            <p><strong>المدينة:</strong> ملوي - المنيا</p>
+        </div>
+    </div>
 
-<script>
-  let isCaptainMode = false;
-  let isOnline = true;
-  let vehicleRate = 6;
-  let currentPriceNum = 18;
+    <!-- شريط التنقل السفلي -->
+    <div class="nav-bar">
+        <div class="nav-item" id="nav-account" onclick="switchTab('account')">
+            <div style="font-size: 16px;">👤</div>
+            حسابي
+        </div>
+        <div class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
+            <div style="font-size: 16px;">💰</div>
+            المحفظة
+        </div>
+        <div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
+            <div style="font-size: 16px;">📦</div>
+            الطلبات
+        </div>
+        <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
+            <div style="font-size: 16px;">🏠</div>
+            الرئيسية
+        </div>
+    </div>
 
-  window.onload = function() {
-    updatePrice();
-    updateRegDocuments();
-    setTimeout(() => {
-      const splash = document.getElementById('splash-screen');
-      const auth = document.getElementById('auth-screen');
-      if(splash && auth) {
-        splash.style.opacity = '0';
-        setTimeout(() => { splash.remove(); auth.classList.remove('hidden'); setTimeout(() => auth.classList.remove('opacity-0'), 50); }, 600);
-      }
-    }, 1500);
-  };
+    <script>
+        let selectedRate = 6;
+        let vehicleName = 'عربية';
 
-  function setVehicleType(type) {
-    const btnCar = document.getElementById('btn-car');
-    const btnMoto = document.getElementById('btn-moto');
-    const btnTuk = document.getElementById('btn-tuk');
-    const btnBicycle = document.getElementById('btn-bicycle');
-    
-    btnCar.className = "text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    btnMoto.className = "text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    btnTuk.className = "text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    btnBicycle.className = "text-gray-300 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                const auth = document.getElementById('auth-screen');
+                if (splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.style.display = 'none', 700);
+                }
+                if (auth) {
+                    auth.classList.remove('hidden');
+                }
+            }, 1500);
+        });
 
-    if(type === 'car') {
-      vehicleRate = 6;
-      btnCar.className = "bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    } else if(type === 'moto') {
-      vehicleRate = 4;
-      btnMoto.className = "bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    } else if(type === 'tuk-tuk') {
-      vehicleRate = 4;
-      btnTuk.className = "bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    } else {
-      vehicleRate = 3;
-      btnBicycle.className = "bg-amber-500 text-gray-950 py-2 rounded-lg text-[11px] font-bold transition flex items-center justify-center space-x-0.5 space-x-reverse";
-    }
-    updatePrice();
-  }
+        function switchAuthTab(tab) {
+            if (tab === 'client') {
+                document.getElementById('form-client').classList.remove('hidden');
+                document.getElementById('form-captain').classList.add('hidden');
+                document.getElementById('btn-tab-client').className = 'auth-tab active';
+                document.getElementById('btn-tab-captain').className = 'auth-tab inactive';
+            } else {
+                document.getElementById('form-client').classList.add('hidden');
+                document.getElementById('form-captain').classList.remove('hidden');
+                document.getElementById('btn-tab-client').className = 'auth-tab inactive';
+                document.getElementById('btn-tab-captain').className = 'auth-tab active';
+            }
+        }
 
-  function updateRegDocuments() {
-    const type = document.getElementById('reg-vehicle-type').value;
-    const box = document.getElementById('dynamic-docs-box');
-    if(type === 'car') {
-      box.innerHTML = `
-        <span class="text-amber-400 font-bold block">🚗 مستندات كابتن العربية (السيارة):</span>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">الصورة الشخصية</span><input type="file" id="doc-photo" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">صورة البطاقة الشخصية</span><input type="file" id="doc-id" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">رخصة السيارة + صورة العربية</span><input type="file" id="doc-car" class="text-xs text-gray-400 w-40"></div>`;
-    } else if(type === 'bicycle') {
-      box.innerHTML = `
-        <span class="text-amber-400 font-bold block">🚲 مستندات الكابتن بالعجلة:</span>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">الصورة الشخصية</span><input type="file" id="doc-photo" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">صورة البطاقة الشخصية</span><input type="file" id="doc-id" class="text-xs text-gray-400 w-40"></div>`;
-    } else if(type === 'moto') {
-      box.innerHTML = `
-        <span class="text-amber-400 font-bold block">🛵 مستندات كابتن الموتوسيكل:</span>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">الصورة الشخصية</span><input type="file" id="doc-photo" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">صورة البطاقة الشخصية</span><input type="file" id="doc-id" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">رخصة المكنة فقط</span><input type="file" id="doc-bike-license" class="text-xs text-gray-400 w-40"></div>`;
-    } else if(type === 'tuk-tuk') {
-      box.innerHTML = `
-        <span class="text-amber-400 font-bold block">🛺 مستندات كابتن التوكتوك:</span>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">الصورة الشخصية</span><input type="file" id="doc-photo" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">صورة البطاقة الشخصية</span><input type="file" id="doc-id" class="text-xs text-gray-400 w-40"></div>
-        <div class="flex justify-between items-center bg-gray-900 p-2.5 rounded-lg"><span class="text-gray-300 text-xs">صورة التوكتوك</span><input type="file" id="doc-tuktuk" class="text-xs text-gray-400 w-40"></div>`;
-    }
-  }
+        function loginClient() {
+            const name = document.getElementById('client-name').value || 'فلفل';
+            const phone = document.getElementById('client-phone').value || '01000000000';
+            
+            document.getElementById('user-welcome').innerText = `أهلاً بك، ${name} 🛵`;
+            document.getElementById('account-details').innerHTML = `
+                <p><strong>الاسم:</strong> ${name}</p>
+                <p><strong>الهاتف:</strong> ${phone}</p>
+                <p><strong>المدينة:</strong> ملوي - المنيا</p>
+            `;
 
-  function handleLocationChange() {
-    const select = document.getElementById('dropoff-location');
-    const customBox = document.getElementById('custom-location-box');
-    if(select.value === 'other') { customBox.classList.remove('hidden'); } else { customBox.classList.add('hidden'); }
-    updatePrice();
-  }
+            const auth = document.getElementById('auth-screen');
+            auth.style.opacity = '0';
+            setTimeout(() => auth.classList.add('hidden'), 500);
+        }
 
-  function updatePrice() {
-    const select = document.getElementById('dropoff-location');
-    let km = 3;
-    if(select.value === 'other') {
-      const kmInput = document.getElementById('custom-place-km').value;
-      km = parseFloat(kmInput) || 5;
-    } else {
-      const selectedOption = select.options[select.selectedIndex];
-      km = parseFloat(selectedOption.getAttribute('data-km')) || 3;
-    }
-    currentPriceNum = Math.round(km * vehicleRate);
-    document.getElementById('price-display').innerText = currentPriceNum + " ج.م";
-  }
+        function sendCaptainRequestToWhatsApp() {
+            const name = document.getElementById('captain-name').value;
+            const phone = document.getElementById('captain-phone').value;
+            const vehicle = document.getElementById('captain-vehicle').value;
+            
+            const idImg = document.getElementById('id-card-img').files[0];
+            const vehImg = document.getElementById('vehicle-img').files[0];
+            const persImg = document.getElementById('personal-img').files[0];
 
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar-drawer');
-    const backdrop = document.getElementById('sidebar-backdrop');
-    if (sidebar.classList.contains('translate-x-full')) {
-      sidebar.classList.remove('translate-x-full');
-      backdrop.classList.remove('hidden');
-    } else {
-      sidebar.classList.add('translate-x-full');
-      backdrop.classList.add('hidden');
-    }
-  }
+            if(!name || !phone) {
+                alert('الرجاء إدخال الاسم ورقم الهاتف على الأقل!');
+                return;
+            }
 
-  function toggleOnlineStatus() {
-    isOnline = !isOnline;
-    const btn = document.getElementById('online-status-btn');
-    const dot = document.getElementById('status-dot');
-    const text = document.getElementById('status-text');
-    if(isOnline) {
-      btn.className = "bg-green-500/20 border border-green-500 text-green-400 px-2.5 py-2 rounded-xl text-xs font-bold transition flex items-center shadow";
-      dot.className = "w-2.5 h-2.5 rounded-full bg-green-500 ml-1.5 animate-pulse";
-      text.innerText = "متصل";
-      addNotification("🟢 تم تحويل حالتك إلى متصل (جاهز للطلبات).");
-    } else {
-      btn.className = "bg-red-500/20 border border-red-500 text-red-400 px-2.5 py-2 rounded-xl text-xs font-bold transition flex items-center shadow";
-      dot.className = "w-2.5 h-2.5 rounded-full bg-red-500 ml-1.5";
-      text.innerText = "أوفلاين";
-      addNotification("🔴 تم تحويل حالتك إلى غير متصل (أوفلاين).");
-    }
-  }
+            // استبدل الرقم ده برقم واتسابك الحقيقي (مثلاً 201xxxxxxxxx)
+            const myWhatsAppNumber = "201000000000"; 
+            
+            let message = `مرحباً إدارة يلا فلفل ⚡\nأرغب في الانضمام ككابتن جديد:\n\n👤 الاسم: ${name}\n📱 الهاتف: ${phone}\n🛵 المركبة: ${vehicle}\n\n`;
+            
+            if(idImg) message += `📄 تم رفع صورة البطاقة الشخصية.\n`;
+            if(vehImg) message += `🚗 تم رفع صورة المركبة.\n`;
+            if(persImg) message += `📸 تم رفع الصورة الشخصية.\n`;
+            
+            message += `\nبرجاء مراجعة بياناتي وتفعيلي.`;
 
-  function openSupport() {
-    window.open('https://wa.me/201156605200?text=سلام عليكم يا دعم يلا فلفل محتاج استفسار', '_blank');
-  }
+            const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
 
-  function switchAuthTab(type) {
-    const btnClient = document.getElementById('btn-tab-client');
-    const btnCaptain = document.getElementById('btn-tab-captain');
-    const formClient = document.getElementById('form-client');
-    const formCaptain = document.getElementById('form-captain');
-    const pendingMsg = document.getElementById('pending-msg');
-    pendingMsg.classList.add('hidden');
-    if(type === 'client') {
-      btnClient.className = "bg-amber-500 text-gray-950 py-2.5 rounded-lg text-sm font-bold transition";
-      btnCaptain.className = "text-gray-300 py-2.5 rounded-lg text-sm font-bold transition";
-      formClient.classList.remove('hidden');
-      formCaptain.classList.add('hidden');
-    } else {
-      btnCaptain.className = "bg-amber-500 text-gray-950 py-2.5 rounded-lg text-sm font-bold transition";
-      btnClient.className = "text-gray-300 py-2.5 rounded-lg text-sm font-bold transition";
-      formCaptain.classList.remove('hidden');
-      formClient.classList.add('hidden');
-    }
-  }
+        let isCaptainMode = false;
+        function toggleRole() {
+            isCaptainMode = !isCaptainMode;
+            const btn = document.getElementById('btn-role-switch');
+            if (isCaptainMode) {
+                btn.innerText = "العميل";
+                switchTab('captain-view');
+            } else {
+                btn.innerText = "الكابتن";
+                switchTab('home');
+            }
+        }
 
-  function loginClient() {
-    const name = document.getElementById('client-name').value;
-    const phone = document.getElementById('client-phone').value;
-    if(!name || !phone) { alert('من فضلك اكتب اسمك ورقم هاتفك للدخول!'); return; }
-    document.getElementById('user-welcome').innerText = "أهلاً بك، " + name + " 🛵";
-    const auth = document.getElementById('auth-screen');
-    auth.style.opacity = '0';
-    setTimeout(() => auth.remove(), 500);
-  }
+        function switchTab(tab) {
+            ['home', 'captain-view', 'orders', 'wallet', 'account'].forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if(el) el.classList.add('hidden');
+            });
+            ['home', 'orders', 'wallet', 'account'].forEach(t => {
+                const nav = document.getElementById('nav-' + t);
+                if(nav) nav.classList.remove('active');
+            });
 
-  function registerCaptain() {
-    const name = document.getElementById('cap-name').value;
-    const phone = document.getElementById('cap-phone').value;
-    const vType = document.getElementById('reg-vehicle-type').value;
-    if(!name || !phone) { alert('من فضلك املأ اسمك ورقم هاتفك!'); return; }
-    const whatsappMsg = `سلام عليكم يا فلفل، أنا كابتن جديد (${vType}) وعايز أنضم لتطبيق يلا فلفل:\n\n👤 الاسم: ${name}\n📱 رقم الهاتف (كاش): ${phone}\n\nبرجاء مراجعة مستنداتي وتفعيل حسابي.`;
-    const whatsappUrl = `https://wa.me/201156605200?text=` + encodeURIComponent(whatsappMsg);
-    window.open(whatsappUrl, '_blank');
-    document.getElementById('form-captain').classList.add('hidden');
-    document.getElementById('btn-tab-client').parentElement.classList.add('hidden');
-    document.getElementById('pending-msg').classList.remove('hidden');
-  }
+            if(tab === 'captain-view') {
+                document.getElementById('tab-captain-view').classList.remove('hidden');
+            } else {
+                document.getElementById('tab-' + tab).classList.remove('hidden');
+                const activeNav = document.getElementById('nav-' + tab);
+                if(activeNav) activeNav.classList.add('active');
+            }
+        }
 
-  function simulateAdminApproval() {
-    const name = document.getElementById('cap-name').value || "الكابتن فادي (فلفل)";
-    document.getElementById('user-welcome').innerText = "الكابتن: " + name + " 🛵";
-    document.getElementById('profile-name-view').innerText = name;
-    const auth = document.getElementById('auth-screen');
-    auth.style.opacity = '0';
-    setTimeout(() => auth.remove(), 500);
-    alert('✅ تمت موافقة الأدمن (فلفل) بنجاح! تم تفعيل حسابك ككابتن.');
-  }
+        function setVehicleType(type) {
+            ['car', 'moto', 'tuk', 'bicycle'].forEach(t => {
+                const b = document.getElementById('btn-' + t);
+                if(b) {
+                    b.style.background = '#1f2937';
+                    b.style.color = '#fff';
+                }
+            });
+            const activeBtn = document.getElementById('btn-' + type);
+            if(activeBtn) {
+                activeBtn.style.background = '#f59e0b';
+                activeBtn.style.color = '#030712';
+            }
 
-  function toggleMode() {
-    isCaptainMode = !isCaptainMode;
-    const btn = document.getElementById('mode-btn');
-    if (isCaptainMode) {
-      btn.innerText = "العميل";
-      btn.className = "bg-green-500/10 border border-green-500 text-green-400 px-3 py-2 rounded-xl text-xs font-bold transition hover:bg-green-500 hover:text-gray-950 shadow";
-      hideAllViews();
-      document.getElementById('captain-view').classList.remove('hidden');
-      addNotification("🛠️ تم التبديل إلى لوحة تحكم الكباتن.");
-    } else {
-      btn.innerText = "الكابتن";
-      btn.className = "bg-amber-500/10 border border-amber-500 text-amber-400 px-3 py-2 rounded-xl text-xs font-bold transition hover:bg-amber-500 hover:text-gray-950 shadow";
-      switchTab('home');
-      addNotification("👤 تم التبديل إلى واجهة العميل.");
-    }
-  }
+            if (type === 'car') { selectedRate = 6; vehicleName = 'عربية'; }
+            if (type === 'moto') { selectedRate = 4; vehicleName = 'مكنة'; }
+            if (type === 'tuk') { selectedRate = 4; vehicleName = 'توكتوك'; }
+            if (type === 'bicycle') { selectedRate = 3; vehicleName = 'عجلة'; }
 
-  function hideAllViews() {
-    document.getElementById('tab-home').classList.add('hidden');
-    document.getElementById('tab-orders').classList.add('hidden');
-    document.getElementById('tab-wallet').classList.add('hidden');
-    document.getElementById('tab-profile').classList.add('hidden');
-    document.getElementById('captain-view').classList.add('hidden');
-  }
+            updatePrice();
+        }
 
-  function publishOrder() {
-    const select = document.getElementById('dropoff-location');
-    let destText = "";
-    if(select.value === 'other') {
-      const customName = document.getElementById('custom-place-name').value;
-      if(!customName) { alert('من فضلك اكتب اسم المكان أو القرية المطلوب!'); return; }
-      destText = "المنيا - " + customName;
-    } else {
-      destText = select.value;
-    }
-    const priceText = currentPriceNum + " ج.م";
-    document.getElementById('captain-dest-view').innerText = "🎯 إلى: " + destText;
-    document.getElementById('captain-order-price').innerText = priceText;
-    document.getElementById('order-listed-dest').innerText = "🎯 إلى: " + destText;
-    document.getElementById('order-listed-price').innerText = priceText;
-    addNotification("✅ تم نشر رحلتك بنجاح (" + priceText + ").");
-    switchTab('orders');
-  }
+        function updatePrice() {
+            const select = document.getElementById('dropoff-location');
+            if(!select) return;
+            const km = parseFloat(select.value) || 3;
+            const price = km * selectedRate;
+            const priceEl = document.getElementById('price-display');
+            if(priceEl) priceEl.innerText = price + ' ج.م';
+        }
 
-  function acceptOrder() { addNotification("🛵 قبلت الرحلة بنجاح، توكل على الله يا كابتن."); }
+        function publishOrder() {
+            const select = document.getElementById('dropoff-location');
+            const dest = select ? select.options[select.selectedIndex].text : 'ملوي';
+            const priceEl = document.getElementById('price-display');
+            const price = priceEl ? priceEl.innerText : '18 ج.م';
 
-  function copyCashNumber() {
-    const num = document.getElementById('cash-number').innerText;
-    navigator.clipboard.writeText(num);
-    addNotification("📋 تم نسخ رقم كاش الكابتن (01156605200) بنجاح.");
-  }
-
-  function submitCashTransfer() {
-    const amount = document.getElementById('transfer-amount').value;
-    const sender = document.getElementById('sender-number').value;
-    !amount || !sender ? alert('من فضلك اكتب المبلغ ورقم المحول منه!') : addNotification("💸 تم إرسال طلب شحن " + amount + " ج.م بنجاح.");
-  }
-
-  function addNotification(text) {
-    const box = document.getElementById('notifications-box');
-    if(!box) return;
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const item = document.createElement('div');
-    item.className = "bg-gray-800 p-3 rounded-xl border-r-4 border-green-500 text-sm";
-    item.innerHTML = `<p class="font-bold text-white">${text}</p><span class="text-xs text-gray-400">${time}</span>`;
-    box.prepend(item);
-  }
-
-  function switchTab(tabName) {
-    if(isCaptainMode) {
-      isCaptainMode = false;
-      document.getElementById('mode-btn').innerText = "الكابتن";
-      document.getElementById('mode-btn').className = "bg-amber-500/10 border border-amber-500 text-amber-400 px-3 py-2 rounded-xl text-xs font-bold transition hover:bg-amber-500 hover:text-gray-950 shadow";
-    }
-    hideAllViews();
-    document.getElementById('nav-home').className = "text-gray-400 text-xs font-bold flex flex-col items-center transition";
-    document.getElementById('nav-orders').className = "text-gray-400 text-xs font-bold flex flex-col items-center transition";
-    document.getElementById('nav-wallet').className = "text-gray-400 text-xs font-bold flex flex-col items-center transition";
-    document.getElementById('nav-profile').className = "text-gray-400 text-xs font-bold flex flex-col items-center transition";
-
-    if(tabName === 'home') {
-      document.getElementById('tab-home').classList.remove('hidden');
-      document.getElementById('nav-home').className = "text-amber-500 text-xs font-bold flex flex-col items-center transition";
-    } else if(tabName === 'orders') {
-      document.getElementById('tab-orders').classList.remove('hidden');
-      document.getElementById('nav-orders').className = "text-amber-500 text-xs font-bold flex flex-col items-center transition";
-    } else if(tabName === 'wallet') {
-      document.getElementById('tab-wallet').classList.remove('hidden');
-      document.getElementById('nav-wallet').className = "text-amber-500 text-xs font-bold flex flex-col items-center transition";
-    } else if(tabName === 'profile') {
-      document.getElementById('tab-profile').classList.remove('hidden');
-      document.getElementById('nav-profile').className = "text-amber-500 text-xs font-bold flex flex-col items-center transition";
-    }
-  }
-</script>
-<script>
-function handleLocationChange() {
-    const select = document.getElementById('dropoff-location');
-    const customBox = document.getElementById('custom-location-box');
-    const selectedOption = select.options[select.selectedIndex];
-    
-    if (select.value === 'other') {
-        customBox.classList.remove('hidden');
-    } else {
-        customBox.classList.add('hidden');
-    }
-
-    let km = parseFloat(selectedOption.getAttribute('data-km')) || 5; 
-    let basePrice = 10; 
-    let pricePerKm = 4;  
-    let totalPrice = basePrice + (km * pricePerKm);
-
-    const priceDisplay = document.getElementById('total-price') || document.getElementById('calculated-price');
-    if (priceDisplay) {
-        priceDisplay.innerText = totalPrice + " ج.م";
-    }
-}
-</script>
+            const capList = document.getElementById('captain-orders-list');
+            if(capList) {
+                capList.innerHTML = `
+                    <div style="background:#1f2937; padding:12px; border-radius:8px; margin-bottom:10px; text-align:right;">
+                        <p><strong>الوسيلة:</strong> ${vehicleName}</p>
+                        <p><strong>الوجهة:</strong> ${dest}</p>
+                        <p><strong>السعر:</strong> <span style="color:#f59e0b;">${price}</span></p>
+                        <button onclick="alert('تم قبول الرحلة بنجاح!')" class="btn" style="margin-top:8px; padding:8px;">قبول الرحلة 🎯</button>
+                    </div>
+                `;
+            }
+            alert('🚀 تم نشر طلبك بنجاح!');
+            switchTab('orders');
+        }
+    </script>
 </body>
 </html>
