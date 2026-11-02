@@ -13,21 +13,22 @@
         .btn { background: #f59e0b; color: #030712; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 15px; margin-top: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
         .btn:active { transform: scale(0.98); }
         
+        /* الخانات المزغرفة والفخمة */
         .fancy-input { background: rgba(31, 41, 55, 0.8); color: white; padding: 13px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 13px; outline: none; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); width: 100%; }
         .fancy-input:focus { border-color: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), inset 0 2px 5px rgba(0,0,0,0.5); }
         
         .status-toggle-btn { background: #065f46; color: #6ee7b7; border: 1px solid #10b981; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
         .status-toggle-btn.offline { background: #7f1d1d; color: #fca5a5; border-color: #ef4444; }
 
-        /* شريط الأذكار ووسائل التوصيل المدمجة فوق */
+        /* البانر العلوي (الأذكار مع وسائل التوصيل المصغرة) */
         .top-banner-box { background: linear-gradient(135deg, rgba(6, 95, 70, 0.4), rgba(17, 24, 39, 0.9)); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .athkar-ticker { font-size: 12px; color: #6ee7b7; text-align: center; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
         
-        /* أزرار وسائل التوصيل المصغرة */
         .mini-vehicle-container { display: flex; gap: 6px; justify-content: center; }
         .mini-vehicle-btn { background: #1f2937; color: #fff; border: 1px solid #374151; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; flex: 1; cursor: pointer; transition: 0.2s; text-align: center; }
         .mini-vehicle-btn.active { background: #f59e0b; color: #030712; border-color: #f59e0b; }
 
+        /* شريط التنقل السفلي (تم إزالة أيقونة الطلبات منه لنقلها للقائمة الجانبية) */
         .nav-bar { position: fixed; bottom: 0; right: 0; left: 0; background: linear-gradient(180deg, #111827, #030712); border-top: 2px solid #f59e0b; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1000; box-shadow: 0 -5px 20px rgba(245, 158, 11, 0.2); }
         .nav-item { text-align: center; color: #9ca3af; font-size: 10px; cursor: pointer; padding: 4px 8px; border-radius: 12px; transition: 0.2s; }
         .nav-item.active { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -44,6 +45,7 @@
         
         .brand-logo { font-family: 'Courier New', Courier, monospace; font-weight: 900; background: linear-gradient(45deg, #f59e0b, #ef4444, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3); letter-spacing: 2px; }
 
+        /* القائمة الجانبية المطورة والفخمة */
         #sidebar { position: fixed; top: 0; right: -290px; width: 290px; height: 100%; background: linear-gradient(180deg, #111827, #030712); border-left: 2px solid #f59e0b; z-index: 10000; transition: right 0.3s ease; padding: 20px; text-align: right; box-shadow: -8px 0 25px rgba(0,0,0,0.8); overflow-y: auto; }
         #sidebar.open { right: 0; }
         
@@ -61,7 +63,7 @@
         <p style="color: #9ca3af; font-size: 14px;">المنصة الذكية الأولى للنقل والتوصيل في المنيا وقراها</p>
     </div>
 
-    <!-- القائمة الجانبية -->
+    <!-- القائمة الجانبية المطورة (تم نقل أيقونة الطلبات وسجل التقييمات إليها) -->
     <div id="sidebar">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 2px dashed #f59e0b; padding-bottom: 12px;">
             <h2 class="brand-logo" style="font-size: 15px;">YALLA FELFEL 🌶️</h2>
@@ -72,18 +74,23 @@
             ⚡ ⦗ التبديل إلى لوحة الكابتن ⦘
         </div>
 
+        <div class="fancy-sidebar-card" onclick="toggleSidebar(); switchTab('orders');">
+            <span>📦 ⦗ سجل الطلبات والرحلات ⦘</span>
+            <span style="color: #f59e0b;">❯</span>
+        </div>
+
         <div class="fancy-sidebar-card" onclick="openSidebarSection('ratings')">
-            <span>⭐ سجل التقييمات (6 نجوم)</span>
+            <span>⭐ ⦗ سجل التقييمات (5 نجوم) ⦘</span>
             <span style="color: #f59e0b;">❯</span>
         </div>
 
         <div class="fancy-sidebar-card" onclick="openSidebarSection('support')">
-            <span>📞 الدعم الفني وخدمة العملاء</span>
+            <span>📞 ⦗ الدعم الفني وخدمة العملاء ⦘</span>
             <span style="color: #f59e0b;">❯</span>
         </div>
 
         <div class="fancy-sidebar-card" onclick="toggleSidebar(); switchTab('account');" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);">
-            <span style="color: #f59e0b;">👤 الملف الشخصي وحسابي</span>
+            <span style="color: #f59e0b;">👤 ⦗ الملف الشخصي وحسابي ⦘</span>
             <span style="color: #f59e0b;">❯</span>
         </div>
     </div>
@@ -100,20 +107,20 @@
             </div>
 
             <div id="form-client" style="text-align: right;">
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم العميل:</label>
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">👑 اسم العميل:</label>
                 <input type="text" id="client-name" placeholder="اكتب اسمك الكريم..." class="fancy-input" style="margin-bottom: 12px;">
                 
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">📱 رقم الهاتف:</label>
                 <input type="tel" id="client-phone" placeholder="01xxxxxxxx0" class="fancy-input" style="margin-bottom: 15px;">
                 
                 <button onclick="loginClient()" class="btn">دخول كعميل وبدء الطلب 🚀</button>
             </div>
 
             <div id="form-captain" class="hidden" style="text-align: right;">
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">👑 اسم الكابتن الخماسي:</label>
                 <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." class="fancy-input" style="margin-bottom: 10px;">
                 
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">📱 رقم الهاتف:</label>
                 <input type="tel" id="captain-phone" placeholder="01156605200" class="fancy-input" style="margin-bottom: 10px;">
                 
                 <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال طلب الانضمام عبر واتساب 💬</button>
@@ -121,7 +128,7 @@
         </div>
     </div>
 
-    <!-- البانر العلوي المدمج (الأذكار مع وسائل التوصيل المصغرة بدون سعر كيلو) -->
+    <!-- البانر العلوي المزغرف (الأذكار ووسائل التوصيل المصغرة) -->
     <div class="top-banner-box">
         <div class="athkar-ticker">
             <span>📿</span>
@@ -226,7 +233,7 @@
 
     <!-- قسم الطلبات النشطة -->
     <div id="tab-orders" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">📦 سجل الطلبات والرحلات النشطة</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">📦 ⦗ سجل الطلبات والرحلات ⦘</h1>
         <div class="card">
             <div id="client-orders-list">
                 <p style="color: #9ca3af; text-align: center; padding: 15px;">ليس لديك طلبات نشطة حالياً.</p>
@@ -236,7 +243,7 @@
 
     <!-- قسم المحفظة -->
     <div id="tab-wallet" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأرباح</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">💰 ⦗ المحفظة واستقبال الأرباح ⦘</h1>
         <div class="card" style="text-align: center;">
             <p style="color: #9ca3af; font-size: 13px;">رصيد المحفظة الحالي</p>
             <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;" id="wallet-balance-val">0.00 ج.م</h2>
@@ -258,7 +265,7 @@
         </div>
     </div>
 
-    <!-- قسم الملف الشخصي للكابتن -->
+    <!-- قسم الملف الشخصي للكابتن (نظام 5 نجوم) -->
     <div id="tab-account" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">👤 ⦗ الملف الشخصي للكابتن ⦘</h1>
         
@@ -271,7 +278,7 @@
                 <div>
                     <h3 id="acc-name-display" style="color: #fff; font-size: 16px;">فادي ناصر فلفل</h3>
                     <p style="color: #6ee7b7; font-size: 12px;">كابتن معتمد بمنصة يلا فلفل</p>
-                    <p style="color: #f59e0b; font-size: 13px; margin-top: 4px;" id="profile-stars-view">⭐⭐⭐⭐⭐⭐ (6.0 / 6)</p>
+                    <p style="color: #f59e0b; font-size: 13px; margin-top: 4px;" id="profile-stars-view">⭐⭐⭐⭐⭐ (5.0 / 5)</p>
                 </div>
             </div>
 
@@ -289,10 +296,10 @@
         </div>
     </div>
 
-    <!-- نافذة تقييم الرحلة -->
+    <!-- نافذة تقييم الرحلة (5 نجوم) -->
     <div id="rating-modal" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.95); z-index:99999; display:none; flex-direction:column; justify-content:center; align-items:center; padding:20px;">
         <div class="card" style="width: 100%; max-width: 380px; text-align: center;">
-            <h2 style="color: #f59e0b; font-size: 20px; margin-bottom: 10px;">⭐ تقييم الرحلة (نظام 6 نجوم)</h2>
+            <h2 style="color: #f59e0b; font-size: 20px; margin-bottom: 10px;">⭐ ⦗ تقييم الرحلة (5 نجوم) ⦘</h2>
             <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">اختر عدد النجوم لتقييم وتحديث المعدل:</p>
             <div style="font-size: 28px; margin-bottom: 15px; cursor: pointer;">
                 <span onclick="submitRating(1)">⭐</span>
@@ -300,13 +307,12 @@
                 <span onclick="submitRating(3)">⭐</span>
                 <span onclick="submitRating(4)">⭐</span>
                 <span onclick="submitRating(5)">⭐</span>
-                <span onclick="submitRating(6)">⭐</span>
             </div>
             <button onclick="closeRatingModal()" class="btn" style="background: #1f2937; color: #fff;">إغلاق</button>
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
+    <!-- شريط التنقل السفلي (بدون أيقونة الطلبات التي انتقلت للقائمة الجانبية) -->
     <div class="nav-bar">
         <div class="nav-item" id="nav-account" onclick="switchTab('account')">
             <div style="font-size: 16px;">👤</div>
@@ -315,10 +321,6 @@
         <div class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
             <div style="font-size: 16px;">💰</div>
             <span>المحفظة</span>
-        </div>
-        <div class="nav-item" id="nav-orders" onclick="switchTab('orders')">
-            <div style="font-size: 16px;">📦</div>
-            <span>الطلبات</span>
         </div>
         <div class="nav-item" id="nav-market" onclick="switchTab('market')">
             <div style="font-size: 16px;">🛒</div>
@@ -350,7 +352,7 @@
         let clientGlobalName = 'فلفل';
         let isCaptainMode = false;
         let isOnlineState = true;
-        let totalScore = 6.0;
+        let totalScore = 5.0;
         let ratingCount = 1;
 
         window.addEventListener('load', () => {
@@ -431,7 +433,7 @@
 
             const orderHtml = `
                 <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
-                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👤 العميل: ${clientGlobalName}</p>
+                    <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👑 العميل: ${clientGlobalName}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>📍 مكان الانطلاق:</strong> ${pickup}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>🎯 مكان الوصول:</strong> ${dest}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>🚗 الوسيلة:</strong> ${vehicleName}</p>
@@ -495,13 +497,13 @@
             const roundedScore = totalScore.toFixed(1);
             
             let starString = '';
-            for(let i=1; i<=6; i++) {
+            for(let i=1; i<=5; i++) {
                 starString += (i <= Math.round(totalScore)) ? '⭐' : '☆';
             }
-            document.getElementById('profile-stars-view').innerText = `${starString} (${roundedScore} / 6)`;
+            document.getElementById('profile-stars-view').innerText = `${starString} (${roundedScore} / 5)`;
             
             closeRatingModal();
-            alert(`✅ تم إرسال التقييم (${stars} نجوم) وتحديث المعدل العام بنجاح!`);
+            alert(`✅ تم إرسال التقييم (${stars} نجوم) وتحديث المعدل العام (5 نجوم) بنجاح!`);
             switchTab('home');
         }
 
@@ -535,7 +537,7 @@
         function openSidebarSection(section) {
             toggleSidebar();
             if(section === 'ratings') {
-                alert(`سجل التقييمات: المعدل العام ${totalScore.toFixed(1)} من 6 نجوم.`);
+                alert(`⭐ سجل التقييمات: المعدل العام الحالي ${totalScore.toFixed(1)} من 5 نجوم.`);
             } else {
                 window.open('https://wa.me/201156605200', '_blank');
             }
