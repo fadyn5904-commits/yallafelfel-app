@@ -32,9 +32,6 @@
         .auth-tab.active { background: #f59e0b; color: #030712; }
         .auth-tab.inactive { background: #1f2937; color: #9ca3af; }
         
-        .file-label { display: block; background: #1f2937; color: #f59e0b; padding: 12px; border-radius: 12px; border: 1px dashed #f59e0b; margin-bottom: 10px; font-size: 13px; text-align: center; cursor: pointer; font-weight: bold; transition: 0.2s; }
-        .file-label:hover { background: rgba(245, 158, 11, 0.1); }
-        
         .brand-logo { font-family: 'Courier New', Courier, monospace; font-weight: 900; background: linear-gradient(45deg, #f59e0b, #ef4444, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3); letter-spacing: 2px; }
 
         #sidebar { position: fixed; top: 0; right: -290px; width: 290px; height: 100%; background: linear-gradient(180deg, #111827, #030712); border-left: 2px solid #f59e0b; z-index: 10000; transition: right 0.3s ease; padding: 20px; text-align: right; box-shadow: -8px 0 25px rgba(0,0,0,0.8); overflow-y: auto; }
@@ -76,11 +73,6 @@
             <span style="color: #f59e0b;">❯</span>
         </div>
 
-        <div class="fancy-sidebar-card" onclick="openSidebarSection('settings')">
-            <span>⚙️ إعدادات التطبيق العامة</span>
-            <span style="color: #f59e0b;">❯</span>
-        </div>
-
         <div class="fancy-sidebar-card" onclick="toggleSidebar(); switchTab('account');" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);">
             <span style="color: #f59e0b;">👤 الملف الشخصي وحسابي</span>
             <span style="color: #f59e0b;">❯</span>
@@ -113,17 +105,10 @@
                 <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">اسم الكابتن الخماسي:</label>
                 <input type="text" id="captain-name" placeholder="الاسم رباعي أو خماسي..." class="fancy-input" style="margin-bottom: 10px;">
                 
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف (فودافون كاش للاستقبال):</label>
+                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">رقم الهاتف:</label>
                 <input type="tel" id="captain-phone" placeholder="01156605200" class="fancy-input" style="margin-bottom: 10px;">
                 
-                <label style="font-size: 13px; color: #f59e0b; display: block; margin-bottom: 5px;">نوع المركبة:</label>
-                <select id="captain-vehicle" class="fancy-input" style="margin-bottom: 10px;">
-                    <option value="موتوسيكل">موتوسيكل</option>
-                    <option value="سيارة / عربية">سيارة / عربية</option>
-                    <option value="عجلة توصيل">عجلة توصيل</option>
-                </select>
-
-                <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال طلب الانضمام والتفعيل عبر واتساب 💬</button>
+                <button onclick="sendCaptainRequestToWhatsApp()" class="btn" style="background: #25d366; color: #fff; margin-top: 10px;">إرسال طلب الانضمام عبر واتساب 💬</button>
             </div>
         </div>
     </div>
@@ -158,7 +143,7 @@
             </div>
             <div style="width: 100%; height: 75px; background: #1f2937; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: 18px; margin-bottom: 2px;">📍 ⇄ 🎯</div>
-                <p style="color: #f59e0b; font-weight: bold; font-size: 12px;" id="gps-status-text">جاري تحديد مسار الرحلة تلقائياً عبر الـ GPS...</p>
+                <p style="color: #f59e0b; font-weight: bold; font-size: 12px;">جاري تحديد مسار الرحلة تلقائياً عبر الـ GPS...</p>
             </div>
         </div>
 
@@ -171,18 +156,11 @@
             </div>
 
             <div style="margin-bottom: 15px; text-align: right;">
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل (موقعك الحالي):</label>
-                <input type="text" id="pickup-location" placeholder="حدد مكان الانطلاق..." class="fancy-input" style="margin-bottom: 12px;">
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان انطلاق العميل:</label>
+                <input type="text" id="pickup-location" value="ملوي - الشارع الرئيسي" class="fancy-input" style="margin-bottom: 12px;">
 
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 مكان الوصول (الوجهة):</label>
-                <input type="text" id="dropoff-location" placeholder="حدد وجهة الوصول..." class="fancy-input" style="margin-bottom: 12px;">
-
-                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📝 ملاحظات للكابتن:</label>
-                <textarea id="trip-notes" placeholder="تفاصيل إضافية..." class="fancy-input" style="height: 50px; resize: none;"></textarea>
-            </div>
-
-            <div style="background: #030712; border: 1px solid #1f2937; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
-                <div id="price-display" style="font-size: 28px; color: #f59e0b; font-weight: bold;">50 ج.م</div>
+                <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">🎯 مكان الوصول:</label>
+                <input type="text" id="dropoff-location" value="محطة قطار المنيا" class="fancy-input" style="margin-bottom: 12px;">
             </div>
 
             <button onclick="publishOrder()" class="btn">نشر الطلب للكباتن 🚀</button>
@@ -198,11 +176,11 @@
         
         <div class="card" style="border: 2px solid rgba(245, 158, 11, 0.4);">
             <div style="text-align: right; margin-bottom: 12px;">
-                <label style="font-size: 14px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 6px;">✍️ تفاصيل طلبات الماركت أو الأدوية:</label>
-                <textarea id="custom-market-order" placeholder="مثال: عاوز 2 زجاجة مياه، كيلو طماطم..." class="fancy-input" style="height: 80px; resize: none; margin-bottom: 12px;"></textarea>
+                <label style="font-size: 14px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 6px;">✍️ تفاصيل طلبات الماركت:</label>
+                <textarea id="custom-market-order" placeholder="اكتب طلباتك هنا..." class="fancy-input" style="height: 80px; resize: none; margin-bottom: 12px;"></textarea>
                 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">📍 مكان توصيل الطلب:</label>
-                <input type="text" id="market-delivery-location" placeholder="عنوان الاستلام والتوصيل..." class="fancy-input" style="margin-bottom: 12px;">
+                <input type="text" id="market-delivery-location" placeholder="عنوان التوصيل..." class="fancy-input" style="margin-bottom: 12px;">
 
                 <label style="font-size: 13px; color: #f59e0b; font-weight: bold; display: block; margin-bottom: 5px;">💰 سعر المشوار المقترح (ج.م):</label>
                 <input type="number" id="market-trip-price" placeholder="30" class="fancy-input" style="margin-bottom: 5px;">
@@ -212,32 +190,24 @@
         </div>
     </div>
 
-    <!-- الشاشة الرئيسية للكابتن (رادار الطلبات والتحكم بالـ GPS وبدء/إنهاء الرحلة) -->
+    <!-- الشاشة الرئيسية للكابتن (رادار الطلبات وبدء/إنهاء الرحلة GPS) -->
     <div id="tab-captain-view" class="view-section hidden">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 2px solid #1f2937; padding-bottom: 10px;">
             <h1 class="brand-logo" style="font-size: 20px; font-weight: 900; letter-spacing: 2px; text-align: right;">RADAR الكباتن</h1>
             <button id="status-btn" onclick="toggleOnlineStatus()" class="status-toggle-btn">
-                <span id="status-dot" style="width: 7px; height: 7px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #34d399;"></span>
+                <span id="status-dot" style="width: 7px; height: 7px; background: #34d399; border-radius: 50%; display: inline-block;"></span>
                 <span id="status-text">أونلاين</span>
             </button>
         </div>
         
-        <div class="card" style="text-align: center;">
-            <h3 style="color: #fff; font-size: 16px; margin-bottom: 4px;" id="profile-captain-name">فادي ناصر (فلفل)</h3>
-            <div style="color: #f59e0b; font-size: 14px; margin-bottom: 10px;">
-                التقييم العام: <span id="captain-stars-display">⭐⭐⭐⭐⭐⭐</span> (<span id="captain-rating-num">6.0</span>/6)
-            </div>
-        </div>
-
-        <h2 class="brand-logo" style="font-size: 16px; font-weight: 900; text-align: right; margin: 15px 0 8px 0;">📍 الرحلات والطلبات الواردة (GPS مفعّل):</h2>
         <div class="card">
             <div id="captain-orders-list">
-                <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً. انتظر طلبات العملاء...</p>
+                <p style="color: #9ca3af; text-align: center; padding: 15px;">لا توجد طلبات متاحة حالياً. انتظر طلبات العملاء عبر الـ GPS...</p>
             </div>
         </div>
     </div>
 
-    <!-- قسم الطلبات النشطة والرحلات -->
+    <!-- قسم الطلبات النشطة -->
     <div id="tab-orders" class="view-section hidden">
         <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">📦 سجل الطلبات والرحلات النشطة</h1>
         <div class="card">
@@ -249,50 +219,54 @@
 
     <!-- قسم المحفظة -->
     <div id="tab-wallet" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">💰 المحفظة واستقبال الأرباح</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">💰 المحفظة والأرباح</h1>
         <div class="card" style="text-align: center;">
-            <p style="color: #9ca3af; font-size: 13px;">رصيد الاستقبال عبر فودافون كاش</p>
-            <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;">0.00 ج.م</h2>
+            <p style="color: #9ca3af; font-size: 13px;">رصيد المحفظة الحالي</p>
+            <h2 style="color: #6ee7b7; font-size: 32px; margin: 8px 0;" id="wallet-balance-val">0.00 ج.م</h2>
             <div style="background: #1f2937; padding: 12px; border-radius: 10px; margin-top: 10px; text-align: right; border: 1px solid #f59e0b;">
-                <p style="color: #f59e0b; font-weight: bold; font-size: 13px;">📱 رقم فودافون كاش المعتمد:</p>
+                <p style="color: #f59e0b; font-weight: bold; font-size: 13px;">📱 فودافون كاش الشحن:</p>
                 <p style="color: #fff; font-size: 16px; font-weight: bold;">01156605200</p>
             </div>
         </div>
     </div>
 
-    <!-- قسم الملف الشخصي (6 نجوم ومعدل التقييمات) -->
+    <!-- قسم الملف الشخصي المزغرف للكابتن (بالبيانات الجديدة كاملة) -->
     <div id="tab-account" class="view-section hidden">
-        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">👤 الملف الشخصي</h1>
+        <h1 class="brand-logo" style="font-size: 22px; font-weight: 900; text-align: right; margin-bottom: 10px;">👤 ⦗ الملف الشخصي للكابتن ⦘</h1>
         
         <div class="card" style="text-align: right;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 12px;">
                 <div style="width: 55px; height: 55px; background: #f59e0b; color: #030712; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold;">🌶️</div>
                 <div>
-                    <h3 id="acc-name-display" style="color: #fff; font-size: 16px;">فادي (فلفل)</h3>
-                    <p style="color: #6ee7b7; font-size: 12px;">عضو معتمد بمنصة يلا فلفل ✅</p>
+                    <h3 id="acc-name-display" style="color: #fff; font-size: 16px;">فادي ناصر فلفل</h3>
+                    <p style="color: #6ee7b7; font-size: 12px;">كابتن معتمد بمنصة يلا فلفل ✅</p>
                 </div>
             </div>
 
-            <div style="background: #1f2937; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center;">
-                <p style="color: #9ca3af; font-size: 12px; margin-bottom: 5px;">تقييمك الشخصي (نظام 6 نجوم):</p>
-                <div id="user-stars-display" style="font-size: 18px; color: #f59e0b; margin-bottom: 3px;">⭐⭐⭐⭐⭐⭐</div>
-                <p style="font-size: 13px; font-weight: bold; color: #6ee7b7;"><span id="user-rating-score">6.0</span> من 6 نجوم (<span id="user-ratings-count">0</span> تقييمات)</p>
-            </div>
-
-            <div style="display: grid; gap: 8px; font-size: 13px;">
-                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📱 الهاتف:</strong> <span id="acc-phone" style="color: #f59e0b;">01156605200</span></p>
-                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 نطاق العمل:</strong> ملوي - المنيا</p>
+            <!-- تفاصيل الملف الشخصي المزغرفة كاملة -->
+            <div style="display: grid; gap: 10px; font-size: 13px;">
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>👑 الاسم الخماسي:</strong> <span style="color: #f59e0b;">فادي ناصر فلفل</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📱 رقم التليفون:</strong> <span style="color: #f59e0b;">01156605200</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🪪 الرقم القومي:</strong> <span style="color: #6ee7b7;">29905012345678</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🏍️ نوع المكنة:</strong> <span style="color: #f59e0b;">فيجوري</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>⚙️ موديل المكنة:</strong> <span style="color: #f59e0b;">٢٦ (١٥٠ سي سي)</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🔢 رقم لوحات المكنه:</strong> <span style="color: #6ee7b7;">ن ي أ 1234</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>💰 رصيد المحفظة:</strong> <span style="color: #6ee7b7; font-weight: bold;">0.00 ج.م</span> (حد السلف: -50ج.م)</p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🚀 إجمالي الرحلات:</strong> <span style="color: #f59e0b;">142 رحلة ناجحة</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>⭐ التقييم العام (6 نجوم):</strong> <span style="color: #f59e0b;" id="profile-stars-view">⭐⭐⭐⭐⭐⭐ (6.0 / 6)</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🎖️ شارة التوثيق:</strong> <span style="color: #34d399;">كابتن VIP أسطوري موثق ✅</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>🟢 زر الحالة:</strong> <span style="color: #34d399; font-weight: bold;">أونلاين (جاهز للطلبات)</span></p>
+                <p style="background: #1f2937; padding: 10px; border-radius: 8px;"><strong>📍 مكان العمل:</strong> <span style="color: #f59e0b;">ملوي - المنيا وقراها</span></p>
             </div>
         </div>
     </div>
 
-    <!-- نافذة تقييم الرحلة بعد انتهائها -->
+    <!-- نافذة تقييم الرحلة -->
     <div id="rating-modal" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(3, 7, 18, 0.95); z-index:99999; display:none; flex-direction:column; justify-content:center; align-items:center; padding:20px;">
         <div class="card" style="width: 100%; max-width: 380px; text-align: center;">
-            <h2 style="color: #f59e0b; font-size: 20px; margin-bottom: 10px;">⭐ تقييم الرحلة</h2>
-            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">قيم الخدمة بناءً على نظام 6 نجوم:</p>
-            
-            <div style="font-size: 28px; margin-bottom: 15px; cursor: pointer;" id="interactive-stars">
+            <h2 style="color: #f59e0b; font-size: 20px; margin-bottom: 10px;">⭐ تقييم الرحلة (نظام 6 نجوم)</h2>
+            <p style="color: #9ca3af; font-size: 13px; margin-bottom: 15px;">اختر عدد النجوم لتقييم وتحديث المعدل:</p>
+            <div style="font-size: 28px; margin-bottom: 15px; cursor: pointer;">
                 <span onclick="submitRating(1)">⭐</span>
                 <span onclick="submitRating(2)">⭐</span>
                 <span onclick="submitRating(3)">⭐</span>
@@ -300,7 +274,6 @@
                 <span onclick="submitRating(5)">⭐</span>
                 <span onclick="submitRating(6)">⭐</span>
             </div>
-            
             <button onclick="closeRatingModal()" class="btn" style="background: #1f2937; color: #fff;">إغلاق</button>
         </div>
     </div>
@@ -330,7 +303,6 @@
     </div>
 
     <script>
-        // 📿 الأذكار
         const athkarList = [
             "سبحان الله وبحمده، سبحان الله العظيم",
             "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد",
@@ -346,14 +318,11 @@
 
         let selectedRate = 10;
         let vehicleName = 'عربية';
-        let clientGlobalPhone = '01156605200';
         let clientGlobalName = 'فلفل';
         let isCaptainMode = false;
         let isOnlineState = true;
-
-        // نظام التقييم (6 نجوم) وتأثير المعدل
         let totalScore = 6.0;
-        let ratingCount = 0;
+        let ratingCount = 1;
 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -362,10 +331,6 @@
                     splash.style.opacity = '0';
                     setTimeout(() => splash.style.display = 'none', 800);
                 }
-                const pickupInput = document.getElementById('pickup-location');
-                if(pickupInput) pickupInput.value = "ملوي - الشارع الرئيسي (عبر GPS)";
-                const dropoffInput = document.getElementById('dropoff-location');
-                if(dropoffInput) dropoffInput.value = "محطة قطار المنيا";
             }, 1000);
         });
 
@@ -393,23 +358,21 @@
             document.getElementById('btn-' + type).style.background = '#f59e0b';
             document.getElementById('btn-' + type).style.color = '#030712';
             if (type === 'car') { selectedRate = 10; vehicleName = 'عربية'; }
-            else if (type === 'moto') { selectedRate = 7; vehicleName = 'مكنة'; }
+            else if (type === 'moto') { selectedRate = 7; vehicleName = 'مكنة فيجوري ٢٦'; }
             else if (type === 'bicycle') { selectedRate = 4; vehicleName = 'عجلة'; }
         }
 
         function publishOrder() {
-            const pickup = document.getElementById('pickup-location').value || 'ملوي';
-            const dest = document.getElementById('dropoff-location').value || 'المنيا';
-            const notes = document.getElementById('trip-notes').value || 'بدون';
+            const pickup = document.getElementById('pickup-location').value;
+            const dest = document.getElementById('dropoff-location').value;
 
             const orderHtml = `
-                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;" id="active-trip-card">
+                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
                     <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">👤 العميل: ${clientGlobalName}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>📍 مكان العميل (الإنطلاق):</strong> ${pickup}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>🎯 مكان الوصول:</strong> ${dest}</p>
                     <p style="font-size:13px; margin:3px 0;"><strong>🚗 الوسيلة:</strong> ${vehicleName}</p>
-                    <p style="font-size:13px; margin:3px 0;"><strong>📝 ملاحظات:</strong> ${notes}</p>
-                    <p style="color:#6ee7b7; font-size:13px; margin:6px 0;"><strong>🛰️ GPS:</strong> يتم تتبع مسار العميل والوصول بدقة.</p>
+                    <p style="color:#6ee7b7; font-size:13px; margin:6px 0;"><strong>🛰️ GPS:</strong> يتم تتبع موقع الكابتن والوصول بدقة.</p>
                     
                     <div style="margin-top: 12px;" id="trip-action-container">
                         <button onclick="startTripGPS()" class="btn" style="background:#065f46; color:#6ee7b7; margin-top:0;">بدء الرحلة عبر GPS 🛰️▶️</button>
@@ -419,19 +382,19 @@
 
             document.getElementById('captain-orders-list').innerHTML = orderHtml;
             document.getElementById('client-orders-list').innerHTML = orderHtml;
-            alert('🚀 تم نشر الطلب ورصده في شاشة الكابتن بنجاح!');
+            alert('🚀 تم نشر الطلب في رادار الكباتن بنجاح!');
             switchTab('orders');
         }
 
         function publishMarketOrder() {
             const orderText = document.getElementById('custom-market-order').value;
-            const deliveryLoc = document.getElementById('market-delivery-location').value || 'ملوي';
-            const tripPrice = document.getElementById('market-trip-price').value || '35';
+            const deliveryLoc = document.getElementById('market-delivery-location').value;
+            const tripPrice = document.getElementById('market-trip-price').value || '30';
 
             if(!orderText.trim()) { alert('اكتب طلب الماركت أولاً!'); return; }
 
             const orderHtml = `
-                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;" id="active-trip-card">
+                <div style="background:#1f2937; padding:14px; border-radius:10px; margin-bottom:10px; text-align:right; border:1px solid #f59e0b;">
                     <p style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">🛒 طلب ماركت حر من: ${clientGlobalName}</p>
                     <p style="font-size:13px; color:#fff; background:#030712; padding:8px; border-radius:6px;">${orderText}</p>
                     <p style="font-size:13px; margin:4px 0;"><strong>📍 التوصيل إلى:</strong> ${deliveryLoc}</p>
@@ -449,17 +412,15 @@
             switchTab('orders');
         }
 
-        // زر بدء الرحلة GPS
         function startTripGPS() {
-            const container = document.getElementById('trip-action-container') || event.target.parentElement;
+            const container = event.target.parentElement;
             container.innerHTML = `
                 <p style="color:#f59e0b; font-size:12px; margin-bottom:6px; font-weight:bold;">🛰️ الرحلة جارٍ تنفيذها الآن عبر الـ GPS...</p>
                 <button onclick="endTripGPS()" class="btn" style="background:#7f1d1d; color:#fca5a5; margin-top:0; border:1px solid #ef4444;">إنهاء الرحلة 🏁⏹️</button>
             `;
-            alert('🛰️ تم بدء تتبع الرحلة وتوجيه الكابتن عبر GPS بنجاح!');
+            alert('🛰️ تم بدء تتبع مسار الرحلة عبر GPS بنجاح!');
         }
 
-        // زر إنهاء الرحلة وفتح التقييم
         function endTripGPS() {
             alert('🏁 تم إنهاء الرحلة بنجاح!');
             document.getElementById('rating-modal').style.display = 'flex';
@@ -468,21 +429,16 @@
         function submitRating(stars) {
             ratingCount++;
             totalScore = ((totalScore * (ratingCount - 1)) + stars) / ratingCount;
-            
             const roundedScore = totalScore.toFixed(1);
-            document.getElementById('user-rating-score').innerText = roundedScore;
-            document.getElementById('user-ratings-count').innerText = ratingCount;
-            document.getElementById('captain-rating-num').innerText = roundedScore;
-
+            
             let starString = '';
             for(let i=1; i<=6; i++) {
                 starString += (i <= Math.round(totalScore)) ? '⭐' : '☆';
             }
-            document.getElementById('user-stars-display').innerText = starString;
-            document.getElementById('captain-stars-display').innerText = starString;
-
+            document.getElementById('profile-stars-view').innerText = `${starString} (${roundedScore} / 6)`;
+            
             closeRatingModal();
-            alert(`✅ تم إرسال تقييمك (${stars} من 6 نجوم) بنجاح وتحديث معدل التقييمات!`);
+            alert(`✅ تم إرسال التقييم (${stars} نجوم) وتحديث المعدل العام بنجاح!`);
             switchTab('home');
         }
 
@@ -510,11 +466,9 @@
         function openSidebarSection(section) {
             toggleSidebar();
             if(section === 'ratings') {
-                alert(`سجل التقييمات الحالي بناءً على نظام 6 نجوم: المعدل العام ${totalScore.toFixed(1)} من 6 (${ratingCount} تقييم)`);
-            } else if(section === 'support') {
-                window.open('https://wa.me/201156605200', '_blank');
+                alert(`سجل التقييمات: المعدل العام ${totalScore.toFixed(1)} من 6 نجوم.`);
             } else {
-                alert('منصة يلا فلفل - النسخة المحدثة 6.0');
+                window.open('https://wa.me/201156605200', '_blank');
             }
         }
 
@@ -534,17 +488,13 @@
 
         function loginClient() {
             const name = document.getElementById('client-name').value || 'فلفل';
-            const phone = document.getElementById('client-phone').value || '01156605200';
             clientGlobalName = name;
-            clientGlobalPhone = phone;
             document.getElementById('user-welcome').innerText = name;
-            document.getElementById('acc-name-display').innerText = name;
-            document.getElementById('acc-phone').innerText = phone;
             document.getElementById('auth-screen').style.display = 'none';
         }
 
         function sendCaptainRequestToWhatsApp() {
-            window.open('https://wa.me/201156605200?text=' + encodeURIComponent('طلب انضمام كابتن'), '_blank');
+            window.open('https://wa.me/201156605200?text=' + encodeURIComponent('طلب انضمام كابتن جديد'), '_blank');
             document.getElementById('auth-screen').style.display = 'none';
         }
 
